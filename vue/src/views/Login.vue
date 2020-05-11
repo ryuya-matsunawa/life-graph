@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <router-link to="/top">
+      <p>サインアップ</p>
+    </router-link>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
