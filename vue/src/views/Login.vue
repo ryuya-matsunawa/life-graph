@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-link to="/about">
+    <router-link to="/top">
       <p>サインアップ</p>
     </router-link>
     <img alt="Vue logo" src="../assets/logo.png">
