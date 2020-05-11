@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
+import Search from '../views/Search.vue'
+import Edit from '../views/Edit.vue'
+import Show from '../views/Show.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +22,21 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/Top.vue')
     }
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: Edit
+  },
+  {
+    path: '/show',
+    name: 'Show',
+    component: Show
   }
 ]
 
