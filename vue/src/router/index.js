@@ -34,11 +34,6 @@ const routes = [
     component: Edit
   },
   {
-    path: '/edit',
-    name: 'Edit',
-    component: Edit
-  },
-  {
     path: '/show',
     name: 'Show',
     component: Show
