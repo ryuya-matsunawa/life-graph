@@ -5,5 +5,5 @@ CREATE   TABLE `child_graphs` (
 `score` int NOT NULL,
 `comment` varchar(255) default null,
 UNIQUE (parent_id,age),PRIMARY KEY (`id`)
-) ENGINE=InnoDB   AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
