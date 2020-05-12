@@ -26,7 +26,7 @@ export default new Vuex.Store({
   actions: {
     // TODO: delete because of test
     fetchLogin ({ commit }) {
-      const url = '/api/auth/login'
+      const url = '/api/demo/login'
       axios.get(url, config).then((res) => {
         commit('setLogin', res.data)
       })
