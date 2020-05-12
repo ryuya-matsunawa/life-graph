@@ -1,5 +1,6 @@
 <template>
   <div class="top">
+    <Header />
     <router-link to="/">
       Home
     </router-link>
@@ -22,10 +23,12 @@
 
 <script>
 import Chart from '../views/Chart.vue'
+import Header from '../views/Header.vue'
 export default {
   name: 'Top',
   components: {
-    Chart
+    Chart,
+    Header
   }
 }
 </script>
@@ -38,3 +41,4 @@ export default {
 
 
 </style>
+
