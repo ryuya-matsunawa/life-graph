@@ -1,10 +1,18 @@
 <template>
   <div class="header">
-    <div class="btnWrap">
-      <button type="button" class="btn">ユーザー名</button>
-      <button type="button" class="btn">権限名</button>
-      <button type="button" class="btn">ログアウト</button>
-    </div>
+    <ul class="acount">
+      <li class="personalinfo">
+        ユーザー名：manato
+      </li>
+      <li class="personalinfo">
+        権限名:一般ユーザー
+      </li>
+      <li>
+        <button type="button" class="btn">
+          ログアウト
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -18,19 +26,25 @@
     height: 70px;
     background-color:lemonchiffon
   }
-  div.btnWrap{
+  .acount{
     text-align: right;
-    line-height: 70px;
   }
+  .acount li{
+    display:inline-block;
+    line-height: 70px;
+    margin-right: 10px;
+  }
+  .personalinfo{
+    color:black
+  }
+
   .btn{
     margin-right: 10px;
-    display: inline-block;
     font-size: 16px;
     position: relative;
     background-color: #f7d034;
     border-radius: 4px;
     color: #fff;
-    line-height: 30px;
     -webkit-transition: none;
     transition: none;
     box-shadow: 0 3px 0 #f7ba59;
