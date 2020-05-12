@@ -1,18 +1,16 @@
 <script>
-import { Line } from 'vue-chartjs';
+import { Line } from 'vue-chartjs'
 
 export default {
   name: 'chart',
   extends: Line,
-  name: 'chart',
   data () {
     return {
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        labels: ['0', '5', '10', '15', '20', '25'],
         datasets: [
           {
-            label: 'Bar Dataset',
-            data: [10, 20, 30, 40, 50, 30],
+            data: [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -33,11 +31,11 @@ export default {
           },
           {
             label: 'Line Dataset',
-            data: [10, 50, 20, 30, 30, 40],
+            data: [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
             borderColor: '#CFD8DC',
             fill: false,
             type: 'line',
-            lineTension: 0.3,
+            lineTension: 0.3
           }
         ]
       },
@@ -52,7 +50,7 @@ export default {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              stepSize: 10,
+              stepSize: 10
             }
           }]
         }

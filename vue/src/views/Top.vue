@@ -13,14 +13,29 @@
       Show
     </router-link>
     <h1>This is an about page</h1>
+
+    <div class="chart">
+      <Chart />
+    </div>
+
   </div>
+
 </template>
 
 <script>
-import Chart from '../Chart.vue';
+import Chart from '../views/Chart.vue'
 export default {
-  components:{
+  name: 'Top',
+  components: {
     Chart
   }
 }
 </script>
+
+<style>
+
+.chart{
+  width: 600px;
+}
+
+</style>
