@@ -8,9 +8,11 @@
         権限名:一般ユーザー
       </li>
       <li>
-        <button type="button" class="btn">
-          ログアウト
-        </button>
+        <router-link to="/">
+          <button type="button" class="btn">
+            ログアウト
+          </button>
+        </router-link>
       </li>
     </ul>
   </div>
