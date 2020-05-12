@@ -1,65 +1,85 @@
 <template>
-  <div class="form-container container" id="app">
-  <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">ユーザー名</label>
-      <div class="form-row">
-        <div class="col">
-          <input v-model="form.lastName" type="text" class="form-control" placeholder="名前">
-          <small v-bind:class="{'is-hide':validation.lastName}"  class="form-text text-info">{{ errorMessage.lastName }}</small>
-        </div>
-      </div>
+  <div>
+    <div id="search">
+      検索条件
+      <ul id="searchList">
+        <li class="username">
+          ユーザー名
+          <input v-model="textInput" type="text">
+        </li>
+        <li class="update">
+          更新日時
+          <input v-model="textInput" type="text">
+        </li>
+        <li class="view">
+          表示順
+          <input v-model="textInput" type="text">
+        </li>
+      </ul>
+      <button>検索</button>
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">更新日時</label>
-      <input v-model="form.tel" type="tel" class="form-control" id="exampleInputEmail1" placeholder="電話番号">
-      <small v-bind:class="{'is-hide':validation.tel}" class="form-text text-info">{{ errorMessage.tel }}</small>
+    <!--  -->
+    <div id="result">
+      <ul id="resultUser">
+        <li>
+          oneくん
+          <button class="viewButton">
+            参照
+          </button>
+        </li>
+        <li>
+          twoくん
+          <button class="viewButton">
+            参照
+          </button>
+        </li>
+      </ul>
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">表示順</label>
-      <input v-model="form.email" type="email" class="form-control" id="exampleInputEmail1" placeholder="メールアドレス">
-      <small v-bind:class="{'is-hide':validation.email}" class="form-text text-info">{{ errorMessage.email }}</small>
-    </div>
-    <div class="btn-container"><button type="submit" v-bind:disabled="!isValid" class="btn btn-primary">参照</button></div>
-  </form>
-</div>
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'Search',
-  data () {
-    return {
-      search: ''
-    }
-  }
-}
 </script>
 
-  <!-- Add "scoped" attribute to limit CSS to this component only -->
-// <style scoped lang="scss">
-// .scene1{
-//   font-size: 1.8rem;
-//   text-align: center;
-//   a div p{
-//     display: block;
-//     margin: 0 auto;
-//     height:30pt;
-//   }
-// }
-// .input{
-//   width: 130pt;
-//   height:30pt;
-// }
-// .button {
-//   display: block;
-//   position: relative;
-//   margin: 0 auto;
-//   width: 70pt;
-//   border: solid 1px silver;
-//   border-radius: 0.5rem 0.5rem;
-//   padding: 0.5rem 1.5rem;
-//   margin-top: 1rem;
-//   text-decoration: none;
-// }
-// </style>
+<style>
+#search{
+  text-align: center;
+  padding: 0.5em 1em;
+  margin: 50px;
+  font-weight: bold;
+  border: solid 3px #000000;
+  width: auto;
+  height: 300px;
+  display: inline-block;
+}
+#searchList{
+  list-style: none;
+}
+.username{
+  margin: 40px;
+}
+.update{
+  margin: 40px;
+}
+.view{
+  margin: 40px;
+}
+#result{
+  padding: 1em 1em;
+  font-weight: bold;
+  border: solid 3px #000000;
+}
+#resultUser{
+  list-style: none;
+}
+button:hover {
+  background-color: #59b1eb;
+  cursor: pointer;
+}
+.viewButton{
+  float: right;
+}
+.viewButton + * {
+  clear: both;;
+}
+</style>
