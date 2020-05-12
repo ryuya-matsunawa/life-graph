@@ -1,7 +1,7 @@
 <template>
   <div class="Login">
     <h1>Sign In</h1>
-    <form>
+    <form action="<%=request.getContextPath()%>/login" method="get">
       <div class="form-item">
         <label for="email" />
         <input type="email" name="email" required="required" placeholder="Email Address">
@@ -29,8 +29,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing:
-  border-box;
+  box-sizing: border-box;
 }
 
 /* body */
