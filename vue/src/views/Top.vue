@@ -17,9 +17,7 @@
     <div class="chart">
       <Chart />
     </div>
-
   </div>
-
 </template>
 
 <script>
