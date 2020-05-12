@@ -12,7 +12,6 @@
 </script>
 <style scoped>
     .header{
-    margin-top: 20px;
     top: 0;
     left: 0;
     width: 100%;
