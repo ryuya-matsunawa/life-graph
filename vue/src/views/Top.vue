@@ -17,8 +17,7 @@
 </template>
 
 <script>
-import { Line } from 'vue-chartjs';
-import Chart from './Chart';
+import Chart from '../Chart.vue';
 export default {
   components:{
     Chart
