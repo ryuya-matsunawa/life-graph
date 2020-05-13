@@ -25,6 +25,18 @@ export default {
       },
       // チャート図の詳細設定
       options: {
+        // hover時に
+        tooltips: {
+          mode: 'point',
+          callbacks: {
+            afterBody: function (data) {
+              var multistringText = ['コメント１', 'コメント２', 'コメント3', 'コメント4']
+              return multistringText
+            }
+          }
+        },
+        // スコアに欠損(null)があっても線が繋がるようにしてる
+        spanGaps: true,
         // ボタンみたいなやつ消してる
         legend: {
           display: false
