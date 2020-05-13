@@ -26,7 +26,9 @@
     left: 0;
     width: 100%;
     height: 70px;
-    background-color:lemonchiffon
+    background-color:lemonchiffon;
+    position:fixed;
+    opacity: 0.7;
   }
   .acount{
     text-align: right;
