@@ -7,10 +7,10 @@ export default {
   data () {
     return {
       data: {
-        labels: ['0', '5', '10', '15', '20', '25'],
+        labels: ['0', '5', '10', '15', '20', '25', '30'],
         datasets: [
           {
-            data: [0, 30, 30, 40, -20, 50],
+            data: [0, 30, 30, 40, -20, 50, 70],
             borderColor: '#CFD8DC',
             // 線の中に色つけるかどうか
             fill: false,
