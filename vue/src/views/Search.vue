@@ -1,55 +1,66 @@
 <template>
   <div>
+    <Header />
+    <!-- 上部 -->
     <div id="search">
       検索条件
       <ul id="searchList">
         <li class="username">
           ユーザー名
-          <input v-model="textInput" type="text">
+          <input type="text">
         </li>
         <li class="update">
           更新日時
-          <input v-model="textInput" type="text">
+          <input type="text">
         </li>
         <li class="view">
           表示順
-          <input v-model="textInput" type="text">
+          <input type="text">
         </li>
       </ul>
       <button>検索</button>
     </div>
-    <!--  -->
-    <div id="result">
-      <ul id="resultUser">
-        <li>
-          oneくん
-          <button class="viewButton">
-            参照
-          </button>
-        </li>
-        <li>
-          twoくん
-          <button class="viewButton">
-            参照
-          </button>
-        </li>
-      </ul>
+    <!-- 下部 -->
+    <div class="result1">
+      bbb
+      <router-link to="/show">
+        <button class="viewButton">
+          参照
+        </button>
+      </router-link>
+    </div>
+    <div class="result2">
+      bbb
+      <router-link to="/show">
+        <button class="viewButton">
+          参照
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import Header from '../views/Header.vue'
+
+export default {
+  name: 'Search',
+  components: {
+    Header
+  }
+}
 </script>
 
 <style>
+/* 上部 */
 #search{
   text-align: center;
   padding: 0.5em 1em;
-  margin: 50px;
+  margin: 100px;
   font-weight: bold;
   border: solid 3px #000000;
   width: auto;
-  height: 300px;
+  height: auto;
   display: inline-block;
 }
 #searchList{
@@ -64,13 +75,25 @@
 .view{
   margin: 40px;
 }
-#result{
+/* 下部 */
+.result1{
   padding: 1em 1em;
   font-weight: bold;
-  border: solid 3px #000000;
+  text-align: center;
+  box-shadow: 0 0 8px black;
+  width: 80%;
+  height: auto;
+  margin: 20px auto;
 }
-#resultUser{
-  list-style: none;
+.result2{
+  padding: 1em 1em;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 0 8px black;
+  width: 80%;
+  height: auto;
+  margin: 20px auto;
+
 }
 button:hover {
   background-color: #59b1eb;
@@ -78,8 +101,8 @@ button:hover {
 }
 .viewButton{
   float: right;
-}
-.viewButton + * {
-  clear: both;;
+  clear: both;
+  display: block;
+  text-decoration: none;
 }
 </style>
