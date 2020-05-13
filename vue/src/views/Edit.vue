@@ -1,6 +1,8 @@
 <template>
   <div>
+    <div>
     <Header />
+    </div>
     <div class="formOut">
       <!-- formではなくbindで書き換えてJSに渡す -->
     <form action="#" method="post">
@@ -58,7 +60,7 @@ export default {
   display: inline-block;
   text-align: center;
   width: 250px;
-
+  margin: 100px 0px 0px 0px;
 }
 
 ul {
