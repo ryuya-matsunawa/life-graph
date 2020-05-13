@@ -27,9 +27,10 @@ export default {
 </script>
 
 <style scoped>
-.toTop {
+  /* App.vueに移動させました！
+  .toTop {
   background: #f16272;
   border: none;
   color: #fff;
-}
+} */
 </style>
