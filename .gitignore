@@ -26,3 +26,4 @@ hs_err_pid*
 Servers
 Servers2
 docker/mysql/db
+.DS_Store
