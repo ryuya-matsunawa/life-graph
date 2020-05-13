@@ -1,17 +1,15 @@
 <template>
   <div class="Login">
     <h1>Sign In</h1>
-    <form>
-      <div class="form-item">
-        <label for="email" />
-        <input type="email" name="email" required="required" placeholder="Email Address">
-        <label for="password" />
-        <input type="password" name="password" required="required" placeholder="Password">
-      </div>
-      <div class="button-panel">
-        <input type="submit" class="button" title="Sign In" value="Sign In">
-      </div>
-    </form>
+    <div class="form-item">
+      <label for="email" />
+      <input type="email" name="email" required="required" placeholder="Email Address">
+      <label for="password" />
+      <input type="password" name="password" required="required" placeholder="Password">
+    </div>
+    <div class="button-panel">
+      <input type="submit" class="button" title="Sign In" value="Sign In">
+    </div>
     <div class="form-footer">
       <p><a href="#">Create an account</a></p>
       <p><a href="#">Forgot password?</a></p>

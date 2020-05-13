@@ -1,42 +1,49 @@
 <template>
   <div>
-    <Header />
-    <form action="/my-handling-form-page" method="post">
+    <div>
+      <Header />
+    </div>
+    <div class="formOut">
+      <!-- formではなくbindで書き換えてJSに渡す -->
       <ul>
         <li>
-          <label class="tag" for="age">年齢</label>
-          <input id="age" type="int" name="age">
+          <label class="tag" for="editAge">年齢</label>
+          <input id="editAge" type="number" name="editAge">
         </li>
         <li>
-          <label class="tag" for="score">スコア</label>
-          <input id="score" type="int" name="score">
+          <label class="tag" for="editScore">スコア</label>
+          <input id="editScore" type="number" name="editScore">
         </li>
         <li>
-          <label class="tag" for="comment">コメント</label>
-          <input id="comment" type="varchar(255)" name="comment">
+          <label class="tag" for="editComment">コメント</label>
+          <input id="editComment" type="text" name="editComment">
         </li>
       </ul>
-      <button type="submit">
+      <button class="graphRegister" type="submit">
         登録
       </button>
-      <button type="submit">
+      <button class="graphEdit" type="submit">
         編集
       </button>
-    </form>
-    <button onclick="location.href='./">
-      遷移
-    </button>
+    </div>
     <div class="chart">
       <Chart />
     </div>
+    <router-link to="/top">
+      <button class="toTop">
+        TOPへ
+      </button>
+    </router-link>
   </div>
 </template>
 
 <script>
+// これを参考にしながらstoreとの連携かく
+// https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
 export default {
-  name: 'Top',
+  name: 'Edit',
   components: {
     Chart,
     Header
@@ -44,15 +51,48 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.formOut{
+  display: inline-block;
+  text-align: center;
+  width: 250px;
+  margin: 100px 0px 0px 0px;
+}
+
 ul {
   list-style: none;
+  text-align: center;
+  width: 240px;
 }
+
+ul li{
+  margin: 10px 5px 10px 5px;
+}
+
+button{
+  margin: 10px 5px 10px 5px;
+}
+
+/* ラベルを枠で囲みたい
+ボックスデザイン集:https://saruwakakun.com/html-css/reference/box */
 label{
-  width: 40;
+  display:inline-block;
+  vertical-align: middle;
+  text-align: left;
+  /* float:left; */
+  width:80px;
 }
-.tag{
-  width: 40;
+
+.graphRegister {
+  background: #f16272;
+  border: none;
+  color: #fff;
+}
+
+.graphEdit {
+  background: #f16272;
+  border: none;
+  color: #fff;
 }
 
 </style>
