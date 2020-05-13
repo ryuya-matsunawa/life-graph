@@ -26,7 +26,7 @@
         編集
       </button>
     </div>
-    <div class="chart">
+    <div v-if="loaded" class="chart">
       <Chart />
     </div>
     <router-link to="/top">
@@ -47,6 +47,15 @@ export default {
   components: {
     Chart,
     Header
+  },
+  computed: {
+    loaded () {
+      // console.log(this.$store.state.chart.age)
+      return this.$store.state.chart.loaded
+    }
+  },
+  mounted () {
+    this.$store.dispatch('chart/load')
   }
 }
 </script>
