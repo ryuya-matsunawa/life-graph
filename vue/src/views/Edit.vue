@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div class="formOut">
-    <form action="/my-handling-form-page" method="post">
+    <form action="#" method="post">
       <ul>
         <li>
           <label class="tag" for="editAge">年齢</label>
