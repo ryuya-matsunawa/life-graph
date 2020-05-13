@@ -1,11 +1,10 @@
 <template>
   <div>
     <div>
-    <Header />
+      <Header />
     </div>
     <div class="formOut">
       <!-- formではなくbindで書き換えてJSに渡す -->
-    <form action="#" method="post">
       <ul>
         <li>
           <label class="tag" for="editAge">年齢</label>
@@ -26,24 +25,21 @@
       <button class="graphEdit" type="submit">
         編集
       </button>
-    </form>
     </div>
     <div class="chart">
       <Chart />
     </div>
-        <router-link to="/top">
+    <router-link to="/top">
       <button class="toTop">
         TOPへ
       </button>
     </router-link>
-
   </div>
 </template>
 
 <script>
 // これを参考にしながらstoreとの連携かく
 // https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
-
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
 export default {
@@ -73,7 +69,7 @@ ul li{
   margin: 10px 5px 10px 5px;
 }
 
-form button{
+button{
   margin: 10px 5px 10px 5px;
 }
 
