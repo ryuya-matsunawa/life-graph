@@ -2,6 +2,7 @@
   <div>
     <Header />
     <div class="formOut">
+      <!-- formではなくbindで書き換えてJSに渡す -->
     <form action="#" method="post">
       <ul>
         <li>
