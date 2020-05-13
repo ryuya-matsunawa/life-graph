@@ -38,6 +38,9 @@
 </template>
 
 <script>
+// これを参考にしながらstoreとの連携かく
+// https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
+
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
 export default {
