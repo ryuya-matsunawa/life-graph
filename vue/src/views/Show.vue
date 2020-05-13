@@ -28,6 +28,7 @@ export default {
 
 <style scoped>
   /* App.vueに移動させました！
+  理解できたら、消しておいてください！
   .toTop {
   background: #f16272;
   border: none;
