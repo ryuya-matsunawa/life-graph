@@ -53,12 +53,4 @@ export default {
 
 <style>
 
-.chart{
-  width: 600px;
-  margin: auto;
-}
-
-.searchButton,.editButton{
-  margin: 10px;
-}
 </style>

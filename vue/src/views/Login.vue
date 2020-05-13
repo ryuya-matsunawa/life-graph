@@ -1,7 +1,7 @@
 <template>
   <div class="Login">
     <h1>Sign In</h1>
-    <form action="<%=request.getContextPath()%>/login" method="get">
+    <form>
       <div class="form-item">
         <label for="email" />
         <input type="email" name="email" required="required" placeholder="Email Address">

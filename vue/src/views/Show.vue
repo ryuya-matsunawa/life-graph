@@ -1,7 +1,11 @@
 <template>
   <div class="show">
+    <Header />
     <h1>User Name</h1>
-    <router-link to="/Top">
+    <div class="chart">
+      <Chart />
+    </div>
+    <router-link to="/top">
       <button class="toTop">
         TOPへ
       </button>
@@ -10,14 +14,14 @@
 </template>
 
 <script>
-// import Header from "../views/Header"
-// import Chart from "../views/";
+import Header from '../views/Header.vue'
+import Chart from '../views/Chart.vue'
 
 export default {
   name: 'Show',
   components: {
-    // Header
-    // Chart
+    Header,
+    Chart
   }
 }
 </script>

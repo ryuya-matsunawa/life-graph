@@ -12,4 +12,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+.chart{
+  width: 600px;
+  margin: 0 auto;
+}
 </style>
