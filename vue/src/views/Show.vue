@@ -2,10 +2,10 @@
   <div class="show">
     <Header />
     <h1>User Name</h1>
-    <div class="Chart">
+    <div class="chart">
       <Chart />
     </div>
-    <router-link to="/Top">
+    <router-link to="/top">
       <button class="toTop">
         TOPへ
       </button>
@@ -27,14 +27,11 @@ export default {
 </script>
 
 <style scoped>
-.toTop {
+  /* App.vueに移動させました！
+  理解できたら、消しておいてください！
+  .toTop {
   background: #f16272;
   border: none;
   color: #fff;
-}
-.Chart {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-}
+} */
 </style>
