@@ -27,9 +27,9 @@ export default {
 </script>
 
 <style scoped>
-.toTop {
+/* .toTop {
   background: #f16272;
   border: none;
   color: #fff;
-}
+} */
 </style>
