@@ -95,10 +95,4 @@ label{
   color: #fff;
 }
 
-.toTop {
-  float: left;
-  margin: 50px;
-  padding: 5px 10px 5px 10px !important;
-}
-
 </style>
