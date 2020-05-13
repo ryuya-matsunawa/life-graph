@@ -7,10 +7,14 @@ export default {
   data () {
     return {
       data: {
-        labels: ['0', '5', '10', '15', '20', '25'],
+        // 年齢
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'],
         datasets: [
           {
-            data: [0, 30, 30, 40, -20, 50],
+            // スコア
+            data: [0, 30, 30, 40, -20, 50, 50, 60, 70, 0,
+              0, 2, 20, 40, 22, 0, 8, 0, 2, 2,
+              70, 70, 70, 70, 0],
             borderColor: '#CFD8DC',
             // 線の中に色つけるかどうか
             fill: false,
@@ -20,20 +24,29 @@ export default {
           }
         ]
       },
+      // チャート図の詳細設定
       options: {
-        // グラフ軸の詳細
+        // ボタンみたいなやつ消してる
+        legend: {
+          display: false
+        },
         scales: {
           // x軸
           xAxes: [{
+            // 34-37で背景の縦線を消す
+            stacked: false,
+            gridLines: {
+              display: false
+            },
             scaleLabel: {
-              display: true,
-              labelString: '年齢'
+              display: true
             }
           }],
           // y軸
           yAxes: [{
-            scaleLabel: {
-              labelString: ''
+            stacked: false,
+            gridLines: {
+              display: false
             },
             ticks: {
               // 軸の最大値
@@ -43,10 +56,7 @@ export default {
               // 軸の刻み幅
               stepSize: 10
             }
-          }],
-          legend: {
-            display: false
-          }
+          }]
         }
       }
     }

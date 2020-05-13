@@ -1,7 +1,7 @@
 <template>
   <div class="top">
     <Header />
-    <router-link to="/">
+    <!-- <router-link to="/">
       Home
     </router-link>
     <router-link to="/search">
@@ -13,7 +13,25 @@
     <router-link to="/show">
       Show
     </router-link>
-    <h1>This is an about page</h1>
+    <h1>This is an about page</h1> -->
+
+    <router-link to="/search">
+      <button type="button" class="searchButton">
+        検索
+      </button>
+    </router-link>
+
+    <router-link to="/edit">
+      <button type="button" class="editButton">
+        登録
+      </button>
+    </router-link>
+
+    <router-link to="/edit">
+      <button type="button" class="editButton">
+        編集
+      </button>
+    </router-link>
 
     <div class="chart">
       <Chart />
@@ -37,6 +55,10 @@ export default {
 
 .chart{
   width: 600px;
+  margin: auto;
 }
 
+.searchButton,.editButton{
+  margin: 10px;
+}
 </style>
