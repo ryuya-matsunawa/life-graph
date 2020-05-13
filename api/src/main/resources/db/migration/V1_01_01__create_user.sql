@@ -7,4 +7,4 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail_address` (`mail_address`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
----UTF8MB4を検討してっていう警告が出るが無視でいい？
+
