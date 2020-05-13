@@ -4,15 +4,15 @@
     <form action="/my-handling-form-page" method="post">
       <ul>
         <li>
-          <label class=tag for="age">年齢</label>
+          <label class="tag" for="age">年齢</label>
           <input id="age" type="int" name="age">
         </li>
         <li>
-          <label class=tag for="score">スコア</label>
+          <label class="tag" for="score">スコア</label>
           <input id="score" type="int" name="score">
         </li>
         <li>
-          <label class=tag for="comment">コメント</label>
+          <label class="tag" for="comment">コメント</label>
           <input id="comment" type="varchar(255)" name="comment">
         </li>
       </ul>
