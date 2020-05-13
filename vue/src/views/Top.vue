@@ -35,8 +35,4 @@ export default {
 
 <style>
 
-.chart{
-  width: 600px;
-}
-
 </style>
