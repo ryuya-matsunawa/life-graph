@@ -1,5 +1,6 @@
 <script>
 import { Line } from 'vue-chartjs'
+// import { mapMutations } from 'vuex'
 
 export default {
   name: 'Chart',
@@ -8,13 +9,11 @@ export default {
     return {
       data: {
         // 年齢
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'],
+        labels: [],
         datasets: [
           {
             // スコア
-            data: [0, 30, 30, 40, -20, 50, 50, 60, 70, 0,
-              0, 2, 20, 40, 22, 0, 8, 0, 2, 2,
-              70, 70, 70, 70, 0],
+            data: [],
             borderColor: '#CFD8DC',
             // 線の中に色つけるかどうか
             fill: false,
@@ -26,6 +25,18 @@ export default {
       },
       // チャート図の詳細設定
       options: {
+        // hover時に
+        tooltips: {
+          mode: 'point',
+          callbacks: {
+            afterBody: function (data) {
+              var multistringText = ['コメント１', 'コメント２', 'コメント3', 'コメント4']
+              return multistringText
+            }
+          }
+        },
+        // スコアに欠損(null)があっても線が繋がるようにしてる
+        spanGaps: true,
         // ボタンみたいなやつ消してる
         legend: {
           display: false
@@ -62,7 +73,19 @@ export default {
     }
   },
   mounted () {
+    this.getAge()
+    this.getLifeScores()
     this.renderChart(this.data, this.options)
+  },
+  methods: {
+    getAge () {
+      const age = this.$store.state.age
+      this.data.labels = age
+    },
+    getLifeScores () {
+      const lifeScores = this.$store.state.lifeScores
+      this.data.datasets[0].data = lifeScores
+    }
   }
 }
 </script>
