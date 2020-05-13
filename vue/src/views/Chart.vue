@@ -1,5 +1,6 @@
 <script>
 import { Line } from 'vue-chartjs'
+// import { mapMutations } from 'vuex'
 
 export default {
   name: 'Chart',
@@ -7,10 +8,12 @@ export default {
   data () {
     return {
       data: {
-        labels: ['0', '5', '10', '15', '20', '25', '30'],
+        // 年齢
+        labels: [],
         datasets: [
           {
-            data: [0, 30, 30, 40, -20, 50, 70],
+            // スコア
+            data: [],
             borderColor: '#CFD8DC',
             // 線の中に色つけるかどうか
             fill: false,
@@ -20,20 +23,41 @@ export default {
           }
         ]
       },
+      // チャート図の詳細設定
       options: {
-        // グラフ軸の詳細
+        // hover時に
+        tooltips: {
+          mode: 'point',
+          callbacks: {
+            afterBody: function (data) {
+              var multistringText = ['コメント１', 'コメント２', 'コメント3', 'コメント4']
+              return multistringText
+            }
+          }
+        },
+        // スコアに欠損(null)があっても線が繋がるようにしてる
+        spanGaps: true,
+        // ボタンみたいなやつ消してる
+        legend: {
+          display: false
+        },
         scales: {
           // x軸
           xAxes: [{
+            // 34-37で背景の縦線を消す
+            stacked: false,
+            gridLines: {
+              display: false
+            },
             scaleLabel: {
-              display: true,
-              labelString: '年齢'
+              display: true
             }
           }],
           // y軸
           yAxes: [{
-            scaleLabel: {
-              labelString: ''
+            stacked: false,
+            gridLines: {
+              display: false
             },
             ticks: {
               // 軸の最大値
@@ -43,16 +67,25 @@ export default {
               // 軸の刻み幅
               stepSize: 10
             }
-          }],
-          legend: {
-            display: false
-          }
+          }]
         }
       }
     }
   },
   mounted () {
+    this.getAge()
+    this.getLifeScores()
     this.renderChart(this.data, this.options)
+  },
+  methods: {
+    getAge () {
+      const age = this.$store.state.age
+      this.data.labels = age
+    },
+    getLifeScores () {
+      const lifeScores = this.$store.state.lifeScores
+      this.data.datasets[0].data = lifeScores
+    }
   }
 }
 </script>
