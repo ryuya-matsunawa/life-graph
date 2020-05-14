@@ -5,8 +5,10 @@
     <div class="chart">
       <Chart />
     </div>
-    <router-link to="/top" tag="button" class="totop">
-      TOPへ
+    <router-link to="/top">
+      <button class="toTop">
+        TOPへ
+      </button>
     </router-link>
   </div>
 </template>

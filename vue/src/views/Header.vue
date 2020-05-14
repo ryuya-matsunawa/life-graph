@@ -8,8 +8,10 @@
         権限名:一般ユーザー
       </li>
       <li>
-        <router-link to="/" tag="button" class="btn">
-          ログアウト
+        <router-link to="/">
+          <button type="button" class="btn">
+            ログアウト
+          </button>
         </router-link>
       </li>
     </ul>
