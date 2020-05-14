@@ -3,29 +3,60 @@
     <div>
       <Header />
     </div>
+    <!-- パターン１ -->
+    <!-- フォームの中身を一括で送信するため -->
+    <!-- <form class="formOut" @submit="onSubmit"> -->
+    <!-- パターン２ -->
+    <!-- <form @submit.prevent="formSubmit"> -->
+    <!-- イベントリスナーを追加するときにキャプチャモードで使います
+        言い換えれば、内部要素を対象とするイベントは、その要素によって処理される前にここで処理されます
+        <div v-on:click.capture="doThis">...</div> -->
+    <!-- パターン３ -->
+    <!-- ただ、ディブで囲む -->
     <div class="formOut">
-      <!-- formではなくbindで書き換えてJSに渡す -->
       <ul>
         <li>
           <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" type="number" name="editAge">
+          <input id="editAge" v-model="editAge" type="number" name="editAge">
+        <!-- テスト用表示 -->
+        <!-- <p>{{ editAge }}</p> -->
         </li>
         <li>
           <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" type="number" name="editScore">
+          <input id="editScore" v-model="editScore" type="number" name="editScore">
+        <!-- テスト用表示 -->
+        <!-- <p>{{ editScore }}</p> -->
         </li>
         <li>
           <label class="tag" for="editComment">コメント</label>
-          <input id="editComment" type="text" name="editComment">
+          <input id="editComment" v-model="editComment" type="text" name="editComment">
+        <!-- テスト用表示 -->
+        <!-- <p>{{ editComment }}</p> -->
         </li>
       </ul>
-      <button class="graphRegister" type="submit">
+      <!-- 上の@submit="onSubmit"がる場合 -->
+      <!-- <button
+        href="#!"
+        class="graphRegister"
+        type="submit"
+      > -->
+      <button
+        class="graphRegister"
+        href="#!"
+        @click="register"
+      >
         登録
       </button>
-      <button class="graphEdit" type="submit">
+      <button
+        class="graphEdit"
+        href="#!"
+        @click="edit"
+      >
         編集
       </button>
     </div>
+    <!-- 上のフォームを消したので -->
+    <!-- </form> -->
     <div v-if="loaded" class="chart">
       <Chart />
     </div>
@@ -46,14 +77,55 @@ export default {
     Chart,
     Header
   },
+  data () {
+    return {
+      // storeにつなぐ代わりにここで値を管理
+      editAge: '',
+      editScore: '',
+      editComment: ''
+    }
+  },
   computed: {
+    // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
     loaded () {
       // console.log(this.$store.state.chart.age)
       return this.$store.state.chart.loaded
     }
+
   },
+  // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
   mounted () {
     this.$store.dispatch('chart/load')
+  },
+  methods: {
+    formSubmit (event) {
+      console.log(event)
+      console.log(this.age)
+      // this.$store.dispatch('chart/submit',event)
+    },
+    // @submit="onSubmit"パターンの時
+    // onSubmit () {
+    //   console.log('送信されました')
+    //   console.log(this.editAge)
+    //   console.log(this.editScore)
+    //   console.log(this.editComment)
+    // },
+    register () {
+      console.log('登録されました')
+      console.log(this.editAge)
+      console.log(this.editScore)
+      console.log(this.editComment)
+      // storeに送りたい
+      // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
+    },
+    edit () {
+      console.log('登録されました')
+      console.log(this.editAge)
+      console.log(this.editScore)
+      console.log(this.editComment)
+      // storeに送りたい
+      // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
+    }
   }
 }
 </script>
