@@ -29,10 +29,8 @@
     <div v-if="loaded" class="chart">
       <Chart />
     </div>
-    <router-link to="/top">
-      <button class="toTop">
-        TOPへ
-      </button>
+    <router-link to="/top" tag="button" class="toTop">
+      TOPへ
     </router-link>
   </div>
 </template>

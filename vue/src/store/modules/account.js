@@ -33,7 +33,7 @@ export default {
   actions: {
     // TODO: delete because of test
     fetchLogin ({ commit }) {
-      const url = '/api/demo/login'
+      const url = '/api/auth/login'
       axios.get(url, config).then((res) => {
         commit('setLogin', res.data)
       })

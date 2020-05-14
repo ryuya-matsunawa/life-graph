@@ -23,18 +23,14 @@
     <!-- 下部 -->
     <div class="result1">
       bbb
-      <router-link to="/show">
-        <button class="viewButton">
-          参照
-        </button>
+      <router-link to="/show" tag="button" class="viewButton">
+        参照
       </router-link>
     </div>
     <div class="result2">
       bbb
-      <router-link to="/show">
-        <button class="viewButton">
-          参照
-        </button>
+      <router-link to="/show" tag="button" class="viewButton">
+        参照
       </router-link>
     </div>
   </div>

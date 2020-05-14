@@ -30,71 +30,72 @@ export default {
   state: {
     contents: [
       {
-      age: 1,
-      lifeScores: 0,
-      comment: 'コメント１'
+        age: 1,
+        lifeScores: 0,
+        comment: 'コメント１'
       },
 
       {
-      age: 2,
-      lifeScores: 20,
-      comment: 'コメント２'
+        age: 2,
+        lifeScores: 20,
+        comment: 'コメント２'
       },
 
       {
-      age: 3,
-      lifeScores: 30,
-      comment: 'コメント3'
+        age: 3,
+        lifeScores: 30,
+        comment: 'コメント3'
       },
 
       {
-      age: 4,
-      lifeScores: 40,
-      comment: 'コメント4'
+        age: 4,
+        lifeScores: 40,
+        comment: 'コメント4'
       },
 
       {
-      age: 5,
-      lifeScores: -20,
-      comment: 'コメント5'
+        age: 5,
+        lifeScores: -20,
+        comment: 'コメント5'
       },
 
       {
-      age: 6,
-      lifeScores: 50,
-      comment: 'コメント6'
+        age: 6,
+        lifeScores: 50,
+        comment: 'コメント6'
       },
 
       {
-      age: 7,
-      lifeScores: 50,
-      comment: 'コメント7'
+        age: 7,
+        lifeScores: 50,
+        comment: 'コメント7'
       },
 
       {
-      age: 8,
-      lifeScores: 60,
-      comment: 'コメント8'
+        age: 8,
+        lifeScores: 60,
+        comment: 'コメント8'
       },
 
       {
-      age: 9,
-      lifeScores: 70,
-      comment: 'コメント9'
+        age: 9,
+        lifeScores: 70,
+        comment: 'コメント9'
       },
 
       {
-      age: 10,
-      lifeScores: 0,
-      comment: 'コメント10'
+        age: 10,
+        lifeScores: 0,
+        comment: 'コメント10'
       },
 
       {
-      age: 11,
-      lifeScores: 0,
-      comment: null
+        age: 11,
+        lifeScores: 0,
+        comment: null
       }
-      ],    load: false,
+    ],
+    load: false,
     loaded: false
   },
   mutations: {
