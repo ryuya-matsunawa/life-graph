@@ -73,19 +73,36 @@ export default {
     }
   },
   mounted () {
-    this.getAge()
-    this.getLifeScores()
+    this.setLabels()
+    this.setData()
     this.renderChart(this.data, this.options)
   },
   methods: {
-    getAge () {
-      const age = this.$store.state.age
+    setLabels () {
+      // こっちはなんかうまくいかないw
+      // const age = this.$store.state.chart.age
+      const age = this.$store.state.chart.age
       this.data.labels = age
     },
-    getLifeScores () {
-      const lifeScores = this.$store.state.lifeScores
+    setData () {
+      const lifeScores = this.$store.state.chart.lifeScores
       this.data.datasets[0].data = lifeScores
     }
   }
+  // mounted () {
+  //   this.getAge()
+  //   this.getLifeScores()
+  //   this.renderChart(this.data, this.options)
+  // },
+  // methods: {
+  //   getAge () {
+  //     const age = this.$store.state.age
+  //     this.data.labels = age
+  //   },
+  //   getLifeScores () {
+  //     const lifeScores = this.$store.state.lifeScores
+  //     this.data.datasets[0].data = lifeScores
+  //   }
+  // }
 }
 </script>
