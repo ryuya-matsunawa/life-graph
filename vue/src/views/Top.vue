@@ -15,22 +15,16 @@
     </router-link>
     <h1>This is an about page</h1> -->
 
-    <router-link to="/search" tag="button">
-      <button type="button" class="searchButton">
-        検索
-      </button>
+    <router-link to="/search" tag="button" class="searchButton">
+      検索
     </router-link>
 
-    <router-link to="/edit" tag="button">
-      <button type="button" class="editButton">
-        登録
-      </button>
+    <router-link to="/edit" tag="button" class="editButton">
+      登録
     </router-link>
 
-    <router-link to="/edit" tag="button">
-      <button type="button" class="editButton">
-        編集
-      </button>
+    <router-link to="/edit" tag="button" class="editButton">
+      編集
     </router-link>
 
     <div class="chart">
