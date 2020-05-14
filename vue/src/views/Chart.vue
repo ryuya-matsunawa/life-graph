@@ -78,9 +78,10 @@ export default {
     this.renderChart(this.data, this.options)
   },
   methods: {
-    async getAge () {
+    getAge () {
       // こっちはなんかうまくいかないw
       // const age = this.$store.state.chart.age
+
       const age = this.$store.state.chart.age
       this.data.labels = age
     },
