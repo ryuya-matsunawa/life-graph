@@ -30,7 +30,7 @@
       <Chart />
     </div>
     <router-link to="/top" tag="button" class="toTop">
-        TOPへ
+      TOPへ
     </router-link>
   </div>
 </template>
