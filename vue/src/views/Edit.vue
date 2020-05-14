@@ -98,11 +98,10 @@ export default {
     this.$store.dispatch('chart/load')
   },
   methods: {
-    formSubmit (event) {
-      console.log(event)
-      console.log(this.age)
-      // this.$store.dispatch('chart/submit',event)
-    },
+    // formSubmit (event) {
+    //   console.log(event)
+    //   console.log(this.age)
+    // this.$store.dispatch('chart/submit',event)
     // @submit="onSubmit"パターンの時
     // onSubmit () {
     //   console.log('送信されました')
@@ -119,7 +118,7 @@ export default {
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      console.log('登録されました')
+      console.log('編集されました')
       console.log(this.editAge)
       console.log(this.editScore)
       console.log(this.editComment)
