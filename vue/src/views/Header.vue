@@ -9,7 +9,7 @@
       </li>
       <li>
         <router-link to="/" tag="button" class="btn">
-            ログアウト
+          ログアウト
         </router-link>
       </li>
     </ul>
