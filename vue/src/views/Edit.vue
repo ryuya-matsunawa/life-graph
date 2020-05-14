@@ -110,18 +110,21 @@ export default {
     //   console.log(this.editComment)
     // },
     register () {
-      console.log('登録されました')
-      console.log(this.editAge)
-      console.log(this.editScore)
-      console.log(this.editComment)
+      // console.log('登録されました')
+      // console.log(this.editAge)
+      // console.log(this.editScore)
+      // console.log(this.editComment)
       // storeに送りたい
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      console.log('編集されました')
-      console.log(this.editAge)
-      console.log(this.editScore)
-      console.log(this.editComment)
+      // const age = this.editAge
+      // const age = this.editAge
+      // const age = this.editAge
+      // console.log('編集されました')
+      // console.log(this.editAge)
+      // console.log(this.editScore)
+      // console.log(this.editComment)
       // storeに送りたい
       // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
     }
