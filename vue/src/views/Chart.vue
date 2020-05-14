@@ -37,19 +37,21 @@ export default {
               return titleText
             },
             // ツールチップ内の各項目に表示するテキストを返す
-            label: function (data) {
-              var commentText = this.$store.state.lifeGraph[2]
-              var lifeScore = this.$store.state.lifeGraph[1]
-              for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
-                if (lifeScore[i] !== null) {
-                  return commentText[i]
-                }
-              }
-            }
             // label: function (data) {
-            //   var commentText = ['コメント１', 'コメント２', 'コメント3', 'コメント4', 'コメント5', 'コメント6', 'コメント7', 'コメント8', 'コメント9', 'コメント10']
-            //   return commentText
+            //   var commentText = this.$store.state.lifeGraph[2]
+            //   var lifeScore = this.$store.state.lifeGraph[1]
+            //   for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
+            //     if (lifeScore[i] !== null) {
+            //       return commentText[i]
+            //     }
+            //   }
             // }
+            label: function (data) {
+              // var commentText =
+              // // this.$store.state.chart.lifeGraph[2]
+              // ['コメント１', 'コメント２', 'コメント3', 'コメント4', 'コメント5', 'コメント6', 'コメント7', 'コメント8', 'コメント9', 'コメント10']
+              // return commentText
+            }
           }
         },
         // スコアに欠損(null)があっても線が繋がるようにしてる
@@ -90,25 +92,34 @@ export default {
     }
   },
   mounted () {
-    this.getAge()
-    this.getLifeScores()
-    // this.getComments()
+    this.setLabels()
+    this.setData()
+    this.getComments()
     this.renderChart(this.data, this.options)
     // console.log(this.$store.state.lifeGraph[2])
   },
   methods: {
-    getAge () {
-      const age = this.$store.state.lifeGraph[0]
+    setLabels () {
+      const age = this.$store.state.chart.lifeGraph.age
       this.data.labels = age
     },
-    getLifeScores () {
-      const lifeScores = this.$store.state.lifeGraph[1]
+    setData () {
+      const lifeScores = this.$store.state.chart.lifeGraph.scores
       this.data.datasets[0].data = lifeScores
+    },
+    getComments () {
+      const comment = this.$store.state.chart.lifeGraph[2]
+      this.options.tooltips.callbacks.label = function (data) {
+        // var commentText = this.$store.state.chart.lifeGraph[2]
+        //   var commentText = this.$store.state.lifeGraph[2]
+        //   var lifeScore = this.$store.state.lifeGraph[1]
+        //   for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
+        //     if (lifeScore[i] !== null) {
+        //       return commentText[i]
+        //     }
+        return comment
+      }
     }
-    // getComments () {
-    //   const comment = this.$store.state.lifeGraph[2]
-    //   this.options.tooltips.callbacks.label = comment
-    // }
   }
 }
 </script>
