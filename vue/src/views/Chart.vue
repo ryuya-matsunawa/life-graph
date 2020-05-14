@@ -1,6 +1,5 @@
 <script>
 import { Line } from 'vue-chartjs'
-// import { mapMutations } from 'vuex'
 
 export default {
   name: 'Chart',
@@ -47,10 +46,6 @@ export default {
             //   }
             // }
             label: function (data) {
-              // var commentText =
-              // // this.$store.state.chart.lifeGraph[2]
-              // ['コメント１', 'コメント２', 'コメント3', 'コメント4', 'コメント5', 'コメント6', 'コメント7', 'コメント8', 'コメント9', 'コメント10']
-              // return commentText
             }
           }
         },
@@ -94,32 +89,46 @@ export default {
   mounted () {
     this.setLabels()
     this.setData()
-    this.getComments()
+    // this.setComments()
     this.renderChart(this.data, this.options)
-    // console.log(this.$store.state.lifeGraph[2])
   },
   methods: {
     setLabels () {
-      const age = this.$store.state.chart.lifeGraph.age
-      this.data.labels = age
+      // const age = this.$store.state.chart.lifeGraph.age
+      const ages = []
+      this.$store.state.chart.contents.forEach((content) => {
+        ages.push(content.age)
+      })
+      this.data.labels = ages
     },
     setData () {
-      const lifeScores = this.$store.state.chart.lifeGraph.scores
+      // const lifeScores = this.$store.state.chart.lifeGraph.scores
+      // this.data.datasets[0].data = lifeScores
+      const lifeScores = []
+      this.$store.state.chart.contents.forEach((content) => {
+        lifeScores.push(content.lifeScores)
+      })
       this.data.datasets[0].data = lifeScores
-    },
-    getComments () {
-      const comment = this.$store.state.chart.lifeGraph[2]
-      this.options.tooltips.callbacks.label = function (data) {
-        // var commentText = this.$store.state.chart.lifeGraph[2]
-        //   var commentText = this.$store.state.lifeGraph[2]
-        //   var lifeScore = this.$store.state.lifeGraph[1]
-        //   for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
-        //     if (lifeScore[i] !== null) {
-        //       return commentText[i]
-        //     }
-        return comment
-      }
     }
+
+    // getComments () {
+    //   const comment = this.$store.state.chart.lifeGraph[2]
+    //   this.options.tooltips.callbacks.label = function (data) {
+    // var commentText = this.$store.state.chart.lifeGraph[2]
+    //   var commentText = this.$store.state.lifeGraph[2]
+    //   var lifeScore = this.$store.state.lifeGraph[1]
+    //   for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
+    //     if (lifeScore[i] !== null) {
+    //       return commentText[i]
+    //     }
+    // return comment
+    // setComments () {
+    //   const comments = []
+    //   this.$store.state.chart.contents.forEach((content) => {
+    //     comments.push(content.comment)
+    //   })
+    //   this.options.tooltips.callbacks.label = comments
+    // }
   }
 }
 </script>
