@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import chart from './stores/chart.js'
-import account from './stores/account.js'
+import chart from './modules/chart.js'
+import account from './modules/account.js.js'
 
 Vue.use(Vuex)
 
