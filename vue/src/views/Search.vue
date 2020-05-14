@@ -23,7 +23,7 @@
     <!-- 下部 -->
     <div class="result1">
       bbb
-      <router-link to="/show">
+      <router-link to="/show" tag="button">
         <button class="viewButton">
           参照
         </button>
@@ -31,7 +31,7 @@
     </div>
     <div class="result2">
       bbb
-      <router-link to="/show">
+      <router-link to="/show" tag="button">
         <button class="viewButton">
           参照
         </button>
