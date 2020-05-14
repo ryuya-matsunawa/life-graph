@@ -25,14 +25,31 @@ export default {
       },
       // チャート図の詳細設定
       options: {
-        // hover時に
+        // hover時にでるやつにどんなオプションつけられるか
+        // hover時のデザイン変える時はtooltips内で！このサイト見たらだいたいいけると思う
+        // https://tr.you84815.space/chartjs/configuration/tooltip.html
         tooltips: {
           mode: 'point',
           callbacks: {
-            afterBody: function (data) {
-              var multistringText = ['コメント１', 'コメント２', 'コメント3', 'コメント4']
-              return multistringText
+            // タイトルの後に表示するテキストを返す
+            afterTitle: function (data) {
+              var titleText = ['歳']
+              return titleText
+            },
+            // ツールチップ内の各項目に表示するテキストを返す
+            label: function (data) {
+              var commentText = this.$store.state.lifeGraph[2]
+              var lifeScore = this.$store.state.lifeGraph[1]
+              for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
+                if (lifeScore[i] !== null) {
+                  return commentText[i]
+                }
+              }
             }
+            // label: function (data) {
+            //   var commentText = ['コメント１', 'コメント２', 'コメント3', 'コメント4', 'コメント5', 'コメント6', 'コメント7', 'コメント8', 'コメント9', 'コメント10']
+            //   return commentText
+            // }
           }
         },
         // スコアに欠損(null)があっても線が繋がるようにしてる
@@ -75,17 +92,23 @@ export default {
   mounted () {
     this.getAge()
     this.getLifeScores()
+    // this.getComments()
     this.renderChart(this.data, this.options)
+    // console.log(this.$store.state.lifeGraph[2])
   },
   methods: {
     getAge () {
-      const age = this.$store.state.age
+      const age = this.$store.state.lifeGraph[0]
       this.data.labels = age
     },
     getLifeScores () {
-      const lifeScores = this.$store.state.lifeScores
+      const lifeScores = this.$store.state.lifeGraph[1]
       this.data.datasets[0].data = lifeScores
     }
+    // getComments () {
+    //   const comment = this.$store.state.lifeGraph[2]
+    //   this.options.tooltips.callbacks.label = comment
+    // }
   }
 }
 </script>
