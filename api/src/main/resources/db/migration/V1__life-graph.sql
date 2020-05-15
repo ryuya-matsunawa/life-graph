@@ -1,19 +1,32 @@
 CREATE TABLE `users` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `mail_address` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `authority` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `mail_address` (`mail_address`)
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
 
-INSERT INTO users(
-`mail_address`,`name`,`password`)VALUES
-('manato@example.com','manato','password'),
-('ryuya@example.com','ryuya','password'),
-('eisuke@example.com','eisuke','password'),
-('kaji@example.com','kaji','password');
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
+
+CREATE TABLE `user_roles` (
+  `user_id` bigint not null,
+  `role_id` int not null,
+  PRIMARY KEY (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
+
+INSERT INTO `roles` (
+  `name`
+)VALUES
+('ROLE_USER'),
+('ROLE_MODERATOR'),
+('ROLE_ADMIN');
 
 CREATE TABLE `parent_graphs` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -25,11 +38,7 @@ CREATE TABLE `parent_graphs` (
   CONSTRAINT `parent_graphs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
 
-INSERT INTO parent_graphs(
-`user_id`)VALUE
-('1'),
-('2'),
-('3');
+
 
 CREATE TABLE `child_graphs` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -42,10 +51,5 @@ CREATE TABLE `child_graphs` (
   CONSTRAINT `child_graphs_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `parent_graphs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-INSERT INTO child_graphs( 
-`parent_id`,`age`,`score`,`comment`)VALUE
-('1','18','30','まあまあ'),
-('1','15','50','いい感じ'),
-('2','18','30','まあまあ'),
-('3','18','30','まあまあ');
+
 
