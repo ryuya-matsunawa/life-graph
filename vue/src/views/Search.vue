@@ -18,20 +18,24 @@
           <input type="text">
         </li>
       </ul>
-      <button>検索</button>
+      <button @click="active()">
+        検索
+      </button>
     </div>
     <!-- 下部 -->
-    <div class="result1">
-      bbb
-      <router-link to="/show" tag="button" class="viewButton">
-        参照
-      </router-link>
-    </div>
-    <div class="result2">
-      bbb
-      <router-link to="/show" tag="button" class="viewButton">
-        参照
-      </router-link>
+    <div v-if="isActive">
+      <div class="result1">
+        bbb
+        <router-link to="/show" tag="button" class="viewButton">
+          参照
+        </router-link>
+      </div>
+      <div class="result2">
+        bbb
+        <router-link to="/show" tag="button" class="viewButton">
+          参照
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -43,6 +47,18 @@ export default {
   name: 'Search',
   components: {
     Header
+  },
+  // 最初は何も表示させないためにdataでfalseを返す
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  // クリックしたときにtrueになるようにする
+  methods: {
+    active () {
+      this.isActive = true
+    }
   }
 }
 </script>

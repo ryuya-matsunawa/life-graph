@@ -22,31 +22,74 @@ export default {
           }
         ]
       },
-      // チャート図の詳細設定
       options: {
-        // hover時にでるやつにどんなオプションつけられるか
-        // hover時のデザイン変える時はtooltips内で！このサイト見たらだいたいいけると思う
-        // https://tr.you84815.space/chartjs/configuration/tooltip.html
         tooltips: {
-          mode: 'point',
-          callbacks: {
-            // タイトルの後に表示するテキストを返す
-            afterTitle: function (data) {
-              var titleText = ['歳']
-              return titleText
-            },
-            // ツールチップ内の各項目に表示するテキストを返す
-            // label: function (data) {
-            //   var commentText = this.$store.state.lifeGraph[2]
-            //   var lifeScore = this.$store.state.lifeGraph[1]
-            //   for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
-            //     if (lifeScore[i] !== null) {
-            //       return commentText[i]
-            //     }
-            //   }
-            // }
-            label: function (data) {
+          // デフォルトであると思われるホバーを出すか出さないか
+          enabled: false,
+          // デフォルトのホバーじゃなくて自分で好きにホバーイベントを作る
+          custom: function (tooltipModel) {
+            // ツールチップ要素
+            var tooltipEl = document.getElementById('chartjs-tooltip')
+            // ホバーを出す（最初のレンダリング時に要素を作成する）
+            if (!tooltipEl) {
+              tooltipEl = document.createElement('div')
+              tooltipEl.id = 'chartjs-tooltip'
+              tooltipEl.innerHTML = '<table></table>'
+              document.body.appendChild(tooltipEl)
             }
+            // ツールチップがない場合は非表示にします
+            // なんかカーソルを外した後はホバーイベントが消えるようになる
+            if (tooltipModel.opacity === 0) {
+              tooltipEl.style.opacity = 0
+              return
+            }
+            // キャレット(ツールチップが指し示すもの)の位置を設定する
+            // なんかカーソルを外した後ホバーイベントが消えるようになる
+            // tooltipEl.classList.remove('above', 'below', 'no-transform')
+            // if (tooltipModel.yAlign) {
+            //   tooltipEl.classList.add(tooltipModel.yAlign)
+            // } else {
+            //   tooltipEl.classList.add('no-transform')
+            // }
+            function getBody (bodyItem) {
+              return bodyItem.lines
+            }
+            // テキストを設定する
+            if (tooltipModel.body) {
+              var titleLines = tooltipModel.title
+              var com = ['コメント１', 'コメント２', 'コメント3', 'コメント4', 'コメント5', 'コメント6', 'コメント7', 'コメント8', 'コメント9', 'コメント10']
+              var bodyLines = tooltipModel.body.map(getBody)
+              var innerHtml = '<thead>'
+              // x軸の値を返してくれる
+              titleLines.forEach(function (age) {
+                var comNum = age - 1
+                innerHtml += '<tr><th>' + age + '歳のとき' + '</th></tr>'
+                // innerHtml += '</thead><tbody>'
+                bodyLines.forEach(function (body, i) {
+                  var colors = tooltipModel.labelColors[i]
+                  var style = 'background:' + colors.backgroundColor
+                  style += '; border-color:' + colors.borderColor
+                  style += '; border-width: 2px'
+                  var span = '<span style="' + style + '"></span>'
+                  innerHtml += '<tr><td>' + span + '満足度：' + body + ' ポイント' + '</td></tr>' + '内容：' + com[comNum]
+                })
+              })
+              innerHtml += '</tbody>'
+              var tableRoot = tooltipEl.querySelector('table')
+              tableRoot.innerHTML = innerHtml
+            }
+            // `this` はツールチップ全体
+            var position = this._chart.canvas.getBoundingClientRect()
+            // 表示、配置、およびフォントスタイルの設定
+            tooltipEl.style.opacity = 1
+            tooltipEl.style.position = 'absolute'
+            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px'
+            tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px'
+            tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily
+            tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px'
+            tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle
+            tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px'
+            tooltipEl.style.pointerEvents = 'none'
           }
         },
         // スコアに欠損(null)があっても線が繋がるようにしてる
@@ -58,7 +101,7 @@ export default {
         scales: {
           // x軸
           xAxes: [{
-            // 34-37で背景の縦線を消す
+            // 背景の縦線を消す
             stacked: false,
             gridLines: {
               display: false
@@ -69,6 +112,7 @@ export default {
           }],
           // y軸
           yAxes: [{
+            // 背景の横線を消す
             stacked: false,
             gridLines: {
               display: false
@@ -94,7 +138,6 @@ export default {
   },
   methods: {
     setLabels () {
-      // const age = this.$store.state.chart.lifeGraph.age
       const ages = []
       this.$store.state.chart.contents.forEach((content) => {
         ages.push(content.age)
@@ -102,32 +145,18 @@ export default {
       this.data.labels = ages
     },
     setData () {
-      // const lifeScores = this.$store.state.chart.lifeGraph.scores
-      // this.data.datasets[0].data = lifeScores
       const lifeScores = []
       this.$store.state.chart.contents.forEach((content) => {
         lifeScores.push(content.lifeScores)
       })
       this.data.datasets[0].data = lifeScores
     }
-
-    // getComments () {
-    //   const comment = this.$store.state.chart.lifeGraph[2]
-    //   this.options.tooltips.callbacks.label = function (data) {
-    // var commentText = this.$store.state.chart.lifeGraph[2]
-    //   var commentText = this.$store.state.lifeGraph[2]
-    //   var lifeScore = this.$store.state.lifeGraph[1]
-    //   for (var i = 0; i < this.$store.state.lifeGraph[2].length; i++) {
-    //     if (lifeScore[i] !== null) {
-    //       return commentText[i]
-    //     }
-    // return comment
-    // setComments () {
-    //   const comments = []
+    // setCommnets () {
+    //   const comment = []
     //   this.$store.state.chart.contents.forEach((content) => {
-    //     comments.push(content.comment)
+    //     comment.push(content.comment)
     //   })
-    //   this.options.tooltips.callbacks.label = comments
+    //   this.options.tooltips.callbacks.label = comment
     // }
   }
 }
