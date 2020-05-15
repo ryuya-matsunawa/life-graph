@@ -17,19 +17,19 @@
       <ul>
         <li>
           <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" v-model="editAge" type="number" name="editAge">
+          <input id="editAge" v-model="editAge" type="number">
         <!-- テスト用表示 -->
         <!-- <p>{{ editAge }}</p> -->
         </li>
         <li>
           <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" v-model="editScore" type="number" name="editScore">
+          <input id="editScore" v-model="editScore" type="number">
         <!-- テスト用表示 -->
         <!-- <p>{{ editScore }}</p> -->
         </li>
         <li>
           <label class="tag" for="editComment">コメント</label>
-          <input id="editComment" v-model="editComment" type="text" name="editComment">
+          <input id="editComment" v-model="editComment" type="text">
         <!-- テスト用表示 -->
         <!-- <p>{{ editComment }}</p> -->
         </li>
@@ -43,7 +43,7 @@
       <button
         class="graphRegister"
         href="#!"
-        @click="register"
+        @click="add"
       >
         登録
       </button>
@@ -80,18 +80,28 @@ export default {
   data () {
     return {
       // storeにつなぐ代わりにここで値を管理
-      editAge: '',
-      editScore: '',
+      // intなので''ではなくnullにした
+      editAge: null,
+      editScore: null,
       editComment: ''
     }
   },
+  // 値が変わるたびに計算し直してくれるらしい
   computed: {
     // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
     loaded () {
       // console.log(this.$store.state.chart.age)
       return this.$store.state.chart.loaded
     }
-
+    // sotreからidを元にデータを引っ張ってくる（今はいらない）
+    // getId () {
+    // }
+    // 項目を入力するたび、$store.state.chart.contentsに要素（オブジェクト)を追加する
+    // postContent (editAge,editScore,editComment){
+    //   newContent = {age: editAge,lifeScores: editScore,comment: editComment}
+    //   // https://vuex.vuejs.org/ja/guide/mutations.html
+    //   this.$store.commit('chart/getComtent')
+    // }
   },
   // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
   mounted () {
@@ -109,23 +119,23 @@ export default {
     //   console.log(this.editScore)
     //   console.log(this.editComment)
     // },
-    register () {
+    add () {
+      // console.logはリントに怒られるのでpushの時には消す
       // console.log('登録されました')
       // console.log(this.editAge)
       // console.log(this.editScore)
       // console.log(this.editComment)
+      // console.log({ age: this.editAge, score: this.editScore, comment: this.editComment })
       // storeに送りたい
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      // const age = this.editAge
-      // const age = this.editAge
-      // const age = this.editAge
       // console.log('編集されました')
       // console.log(this.editAge)
       // console.log(this.editScore)
       // console.log(this.editComment)
-      // storeに送りたい
+      // console.log(this.editComment)
+      // // storeに送りたい
       // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
     }
   }
