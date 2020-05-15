@@ -121,21 +121,21 @@ export default {
     // },
     add () {
       // console.logはリントに怒られるのでpushの時には消す
-      console.log('登録されました')
-      console.log(this.editAge)
-      console.log(this.editScore)
-      console.log(this.editComment)
+      // console.log('登録されました')
+      // console.log(this.editAge)
+      // console.log(this.editScore)
+      // console.log(this.editComment)
       // console.log({ age: this.editAge, score: this.editScore, comment: this.editComment })
       // storeに送りたい
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      console.log('編集されました')
-      console.log(this.editAge)
-      console.log(this.editScore)
-      console.log(this.editComment)
-      console.log(this.editComment)
-      // storeに送りたい
+      // console.log('編集されました')
+      // console.log(this.editAge)
+      // console.log(this.editScore)
+      // console.log(this.editComment)
+      // console.log(this.editComment)
+      // // storeに送りたい
       // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
     }
   }
