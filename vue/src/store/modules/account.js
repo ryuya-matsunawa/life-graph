@@ -22,13 +22,6 @@ export default {
     setLogin (state, payload) {
       state.login = payload.login
     }
-    // setGraphScores(state,payload) {
-    //   state.age = payload;
-    //   state.lifeScores = payload;
-    //   // /* eslint-disable no-debugger */
-    //   // debugger
-    //   state.loaded = true;
-    // }
   },
   actions: {
     // TODO: delete because of test
