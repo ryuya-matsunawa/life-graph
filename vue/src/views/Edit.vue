@@ -116,7 +116,7 @@ export default {
     // onSubmit () {
     //   console.log('送信されました')
     //   console.log(this.editAge)
-    //   console.log(this.editScore)
+    //   console.log(this.editScore)pろ
     //   console.log(this.editComment)
     // },
     add () {
