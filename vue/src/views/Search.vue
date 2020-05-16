@@ -10,8 +10,8 @@
           <input type="text">
         </li>
         <li class="update">
-          更新日時
-          <input type="text">
+          更新日
+          <input type="date">
         </li>
         <li class="view">
           表示順
@@ -21,21 +21,25 @@
       <button @click="active()">
         検索
       </button>
+      <button @click="reset()">
+        リセット
+      </button>
     </div>
     <!-- 下部 -->
     <div v-if="isActive">
-      <div class="result1">
-        bbb
-        <router-link to="/show" tag="button" class="viewButton">
-          参照
-        </router-link>
-      </div>
-      <div class="result2">
-        bbb
-        <router-link to="/show" tag="button" class="viewButton">
-          参照
-        </router-link>
-      </div>
+      <table class="table">
+        <th>リスト</th>
+        <th>更新日</th>
+        <tr v-for="item in items" :key="item.id">
+          <td>{{ item.name }}</td>
+          <td>{{ item.day }}</td>
+          <td>
+            <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
+              参照
+            </router-link>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -51,13 +55,34 @@ export default {
   // 最初は何も表示させないためにdataでfalseを返す
   data () {
     return {
-      isActive: false
+      isActive: false,
+      items: [
+        {
+          id: 1,
+          name: 'Yamada',
+          day: '2016-01-14'
+        },
+        {
+          id: 2,
+          name: 'Suzuki',
+          day: '2016-01-15'
+        },
+        {
+          id: 3,
+          name: 'Tanaka',
+          day: '2016-01-16'
+        }
+      ]
     }
   },
   // クリックしたときにtrueになるようにする
   methods: {
     active () {
       this.isActive = true
+    },
+    // リセットボタン
+    reset () {
+      this.isActive = false
     }
   }
 }
@@ -88,33 +113,17 @@ export default {
   margin: 40px;
 }
 /* 下部 */
-.result1{
-  padding: 1em 1em;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 0 8px black;
-  width: 80%;
-  height: auto;
-  margin: 20px auto;
-}
-.result2{
-  padding: 1em 1em;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 0 8px black;
-  width: 80%;
-  height: auto;
-  margin: 20px auto;
-
-}
 button:hover {
   background-color: #59b1eb;
   cursor: pointer;
 }
 .viewButton{
-  float: right;
-  clear: both;
   display: block;
   text-decoration: none;
 }
+table{
+  margin: 0 auto;
+  width: 300px;
+}
+
 </style>
