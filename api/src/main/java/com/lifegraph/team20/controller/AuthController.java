@@ -1,29 +1,40 @@
 package com.lifegraph.team20.controller;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lifegraph.team20.models.Account;
 import com.lifegraph.team20.models.ERole;
 import com.lifegraph.team20.models.Role;
 import com.lifegraph.team20.models.User;
+import com.lifegraph.team20.models.UserData;
 import com.lifegraph.team20.payload.request.LoginRequest;
+import com.lifegraph.team20.payload.request.LogoutRequest;
 import com.lifegraph.team20.payload.request.SignupRequest;
 import com.lifegraph.team20.payload.response.JwtResponse;
 import com.lifegraph.team20.payload.response.MessageResponse;
@@ -34,8 +45,8 @@ import com.lifegraph.team20.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
-public class AuthController {
+@RequestMapping("/auth")
+public class AuthController extends HttpServlet {
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -51,13 +62,15 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
-	@PostMapping("/signin")
+	// http://localhost8080/auth/login が叩かれる
+	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		// トークンが有効期限付きで作られる
 		String jwt = jwtUtils.generateJwtToken(authentication);
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -126,4 +139,81 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+
+	@PostMapping("/logout")
+	public ResponseEntity<?> sampleUser(@Valid @RequestBody LogoutRequest logoutRequest , HttpServletRequest req) {
+
+		String jwt = parseJwt(req);
+
+		if (jwtUtils.validateJwtToken(jwt)) {
+			// 有効期限内の場合
+			// ブラックリストにいれる処理
+		}
+
+		return ResponseEntity.ok("OK");
+	}
+
+	private String parseJwt(HttpServletRequest request) {
+		String headerAuth = request.getHeader("Authorization");
+
+		if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+			return headerAuth.substring(7, headerAuth.length());
+		}
+
+		return null;
+	}
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	  public List<Account> account() {
+		List<Account> account = selectAccount();
+		return account;
+	  }
+
+	private List<Account> selectAccount() {
+		final String sql = "select * from users inner join user_roles on users.id = user_roles.user_id\n" +
+				"inner join roles on roles.id = user_roles.`role_id`;";
+		return jdbcTemplate.query(sql, new RowMapper<Account>() {
+			public Account mapRow(ResultSet rs, int rowNum) throws SQLException{
+				return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("name"));
+			}
+		});
+	}
+
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	public List<UserData> userData() {
+		List<UserData> userDatas = setUserData();
+		return userDatas;
+	}
+
+	private List<UserData> setUserData() {
+		final String sql = "select * from users inner join parent_graphs on users.id = parent_graphs.user_id";
+		return jdbcTemplate.query(sql, new RowMapper<UserData>() {
+			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException{
+				return new UserData(rs.getInt("id"), rs.getString("username"), rs.getTimestamp("updated_at"));
+			}
+		});
+	}
+
+//	@GetMapping("/accounts/{id}")
+//	public ResponseEntity<?> authenticateUser(@Valid @RequestBody AccountRequest accountRequest) {
+//		Authentication authentication = authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken(accountRequest.getUsername(), accountRequest.getPassword()));
+//
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+//		String jwt = jwtUtils.generateJwtToken(authentication);
+//
+//		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+//		List<String> roles = userDetails.getAuthorities().stream()
+//				.map(item -> item.getAuthority())
+//				.collect(Collectors.toList());
+//
+//		return ResponseEntity.ok(new JwtResponse(jwt,
+//												 userDetails.getId(),
+//												 userDetails.getUsername(),
+//												 userDetails.getEmail(),
+//												 roles));
+//	}
 }
