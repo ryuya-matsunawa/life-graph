@@ -32,7 +32,6 @@ import com.lifegraph.team20.models.Account;
 import com.lifegraph.team20.models.ERole;
 import com.lifegraph.team20.models.Role;
 import com.lifegraph.team20.models.User;
-import com.lifegraph.team20.models.UserData;
 import com.lifegraph.team20.payload.request.LoginRequest;
 import com.lifegraph.team20.payload.request.LogoutRequest;
 import com.lifegraph.team20.payload.request.SignupRequest;
@@ -140,6 +139,7 @@ public class AuthController extends HttpServlet {
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 
+	// ログアウトAPI auth/logout
 	@PostMapping("/logout")
 	public ResponseEntity<?> sampleUser(@Valid @RequestBody LogoutRequest logoutRequest , HttpServletRequest req) {
 
@@ -163,36 +163,26 @@ public class AuthController extends HttpServlet {
 		return null;
 	}
 
+
+	// アカウント参照API /auth/accont
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	  public List<Account> account() {
+		// IDとユーザ名と権限名でリスト作ってView側に返してる
 		List<Account> account = selectAccount();
 		return account;
 	  }
 
+	// List作るとこ
 	private List<Account> selectAccount() {
+		// 三つのテーブルくっつけてる。ユーザ名と権限名を取得するため
 		final String sql = "select * from users inner join user_roles on users.id = user_roles.user_id\n" +
 				"inner join roles on roles.id = user_roles.`role_id`;";
 		return jdbcTemplate.query(sql, new RowMapper<Account>() {
 			public Account mapRow(ResultSet rs, int rowNum) throws SQLException{
 				return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("name"));
-			}
-		});
-	}
-
-	@RequestMapping(value = "/sample", method = RequestMethod.GET)
-	public List<UserData> userData() {
-		List<UserData> userDatas = setUserData();
-		return userDatas;
-	}
-
-	private List<UserData> setUserData() {
-		final String sql = "select * from users inner join parent_graphs on users.id = parent_graphs.user_id";
-		return jdbcTemplate.query(sql, new RowMapper<UserData>() {
-			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException{
-				return new UserData(rs.getInt("id"), rs.getString("username"), rs.getTimestamp("updated_at"));
 			}
 		});
 	}

@@ -12,7 +12,6 @@ export default {
       state.tenant = ''
       state.token = data.token
       state.userId = data.id
-      console.log(data)
     },
     destroy (state) {
       state.tenant = ''

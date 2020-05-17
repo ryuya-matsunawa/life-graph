@@ -2,10 +2,10 @@
   <div class="header">
     <ul class="acount">
       <li class="personalinfo">
-        ユーザー名：manato
+        ユーザー名：{{ account[0].username }}
       </li>
       <li class="personalinfo">
-        権限名:一般ユーザー
+        権限名:{{ account[0].role }}
       </li>
       <li>
         <span tag="button" class="btn" @click="logout()">
@@ -18,7 +18,27 @@
 
 <script>
 export default {
+  data () {
+    return {
+      account: [{
+        username: '',
+        role: ''
+      }]
+    }
+  },
+  async mounted () {
+    await this.$store.dispatch('account/fetchAccount')
+    this.setAccount()
+  },
   methods: {
+    setAccount () {
+      const Account = this.$store.state.account
+      this.account[0].username = Account.account[0].username
+      const role = Account.account[0].name
+      if (role === 'ROLE_USER') {
+        this.account[0].role = '一般ユーザ'
+      }
+    },
     logout () {
       this.$store.commit('auth/deleteToken')
       this.$router.push('/login')
