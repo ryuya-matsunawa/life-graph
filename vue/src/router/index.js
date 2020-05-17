@@ -4,12 +4,14 @@ import Login from '../views/Login.vue'
 import Search from '../views/Search.vue'
 import Edit from '../views/Edit.vue'
 import Show from '../views/Show.vue'
+// import { Store } from 'vuex'
+import Store from '@/store/index.js'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
   },
@@ -44,6 +46,23 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
+  if (to.path === '/top' && Store.state.auth.token === '') {
+    next('/login')
+  } else if (to.path === '/' && Store.state.auth.token === '') {
+    next('/login')
+  } else if (to.path === '/edit' && Store.state.auth.token === '') {
+    next('/login')
+  } else if (to.path === '/show' && Store.state.auth.token === '') {
+    next('/login')
+  } else if (to.path === '/search' && Store.state.auth.token === '') {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -8,16 +8,25 @@
         権限名:一般ユーザー
       </li>
       <li>
-        <router-link to="/" tag="button" class="btn">
+        <span tag="button" class="btn" @click="logout()">
           ログアウト
-        </router-link>
+        </span>
       </li>
     </ul>
   </div>
 </template>
-<script>
 
+<script>
+export default {
+  methods: {
+    logout () {
+      this.$store.commit('auth/deleteToken')
+      this.$router.push('/login')
+    }
+  }
+}
 </script>
+
 <style scoped>
     .header{
     top: 0;

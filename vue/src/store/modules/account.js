@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
 
 Vue.use(Vuex)
 
-const config = {
-  headers: {
-    'Access-Control-Allow-Origin': '*'
-  }
-}
+// const config = {
+//   headers: {
+//     'Access-Control-Allow-Origin': '*'
+//   }
+// }
 
 export default {
   state: {
@@ -25,11 +25,11 @@ export default {
   },
   actions: {
     // TODO: delete because of test
-    fetchLogin ({ commit }) {
-      const url = '/api/auth/login'
-      axios.get(url, config).then((res) => {
-        commit('setLogin', res.data)
-      })
-    }
+    // fetchLogin ({ commit }) {
+    //   const url = '/api/auth/login'
+    //   axios.get(url, config).then((res) => {
+    //     commit('setLogin', res.data)
+    //   })
+    // }
   }
 }
