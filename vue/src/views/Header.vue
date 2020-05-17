@@ -2,14 +2,14 @@
   <div class="header">
     <ul class="acount">
       <li class="personalinfo">
-        ユーザー名：manato
+        User Name ： manato
       </li>
       <li class="personalinfo">
-        権限名:一般ユーザー
+        Authority class : General
       </li>
       <li>
         <router-link to="/" tag="button" class="btn">
-          ログアウト
+          Log Out
         </router-link>
       </li>
     </ul>
@@ -24,9 +24,9 @@
     left: 0;
     width: 100%;
     height: 70px;
-    background-color:lemonchiffon;
+    background-color: #fff;
     position:fixed;
-    opacity: 0.7;
+    border-bottom: thin solid #AEAC9E;
   }
   .acount{
     text-align: right;
@@ -34,7 +34,7 @@
   .acount li{
     display:inline-block;
     line-height: 70px;
-    margin-right: 10px;
+    margin-right: 35px;
   }
   .personalinfo{
     color:black
@@ -42,22 +42,15 @@
 
   .btn{
     margin-right: 10px;
-    font-size: 16px;
-    position: relative;
-    background-color: #f7d034;
-    border-radius: 4px;
-    color: #fff;
-    -webkit-transition: none;
-    transition: none;
-    box-shadow: 0 3px 0 #f7ba59;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+    padding: 8px;
+    width: 115px;
+    font-size: 18px;
+    background-color: #EEFF41;
+    color: #AEAC9E;
+    border-color: transparent;
   }
   .btn:hover {
-  top: -4px;
-  box-shadow: 0 7px 0 #f7ba59;
-}
-.btn:active {
-  top: 3px;
-  box-shadow: none;
+  background-color: #ff8f00;
+  color: #fff;
 }
 </style>
