@@ -27,7 +27,6 @@ export default {
       const url = '/api/auth/login'
       axios.post(url, data).then(res => commit('create', res.data))
         .catch(err => err)
-      console.log(data)
     }
     // destroy ({ commit, dispatch }, data) {
     //   dispatch(
