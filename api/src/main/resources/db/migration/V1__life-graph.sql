@@ -17,6 +17,7 @@ CREATE TABLE `user_roles` (
   `user_id` bigint not null,
   `role_id` int not null,
   PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id` (`user_id`,`role_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;

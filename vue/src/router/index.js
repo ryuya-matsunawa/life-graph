@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
+import Top from '../views/Top.vue'
 import Search from '../views/Search.vue'
 import Edit from '../views/Edit.vue'
 import Show from '../views/Show.vue'
@@ -19,12 +20,7 @@ const routes = [
   {
     path: '/top',
     name: 'Top',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/Top.vue')
-    }
+    component: Top
   },
   {
     path: '/search',
@@ -53,15 +49,7 @@ const router = new VueRouter({
 // 作業する時は下全部コメントアウトしてStoreをインポートしているとこもコメントアウトして
 router.beforeEach((to, from, next) => {
   // ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
-  if (to.path === '/top' && Store.state.auth.token === '') {
-    next('/login')
-  } else if (to.path === '/' && Store.state.auth.token === '') {
-    next('/login')
-  } else if (to.path === '/edit' && Store.state.auth.token === '') {
-    next('/login')
-  } else if (to.path === '/show' && Store.state.auth.token === '') {
-    next('/login')
-  } else if (to.path === '/search' && Store.state.auth.token === '') {
+  if (to.path !== '/login' && Store.state.auth.token === '') {
     next('/login')
   } else {
     next()
