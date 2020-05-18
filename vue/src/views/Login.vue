@@ -3,21 +3,58 @@
     <div class="login">
       <img id="title" src="../assets/signin.png">
       <div class="form-item">
-        <label for="email" />
-        <input type="email" name="email" required="required" placeholder="Email Address">
+        <label for="username" />
+      <input v-model="username" type="username" name="username" placeholder="UserName">
         <label for="password" />
-        <input type="password" name="password" required="required" placeholder="Password">
+        <input v-model="password" type="password" name="password" required="required" placeholder="Password">
       </div>
-      <div class="button-panel">
-        <input type="submit" class="button" title="Sign In" value="Sign In">
-      </div>
+      <button class="button-panel" @click="login()">
+        Signin
+      </button>
       <div class="form-footer">
         <p><a href="#">Create an account</a></p>
         <p><a href="#">Forgot password?</a></p>
       </div>
-    </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  computed: {
+    // isValidated () {
+    //   return Object.keys(this.fields).every(k => this.fields[k].validated) &&
+    //     Object.keys(this.fields).every(k => this.fields[k].valid)
+    // },
+    token () {
+      return this.$store.state.auth.token
+    }
+  },
+  watch: {
+    // tokenの状態を監視して、tokenが更新されたらtop画面に遷移する
+    token (newToken) {
+      this.$router.push('/top')
+    }
+  },
+  methods: {
+    login () {
+      // ログイン画面で入力したusrnameとpasswordをAPIに渡す
+      this.$store.dispatch(
+        'auth/create',
+        {
+          username: this.username,
+          password: this.password
+        }
+      )
+    }
+  }
+}
+</script>
 
 <style scoped>
 /*Font*/

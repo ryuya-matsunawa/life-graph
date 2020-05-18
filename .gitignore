@@ -23,7 +23,5 @@
 hs_err_pid*
 /.metadata/
 .vscode
-Servers
-Servers2
-docker/mysql/db
+.recommenders
 .DS_Store
