@@ -7,7 +7,7 @@
       <label for="password" />
       <input v-model="password" type="password" name="password" placeholder="Password">
     </div>
-    <button class="button-panel" @click="sample()">
+    <button class="button-panel" @click="login()">
       Signin
     </button>
 
@@ -36,12 +36,14 @@ export default {
     }
   },
   watch: {
+    // tokenの状態を監視して、tokenが更新されたらtop画面に遷移する
     token (newToken) {
       this.$router.push('/top')
     }
   },
   methods: {
-    sample () {
+    login () {
+      // ログイン画面で入力したusrnameとpasswordをAPIに渡す
       this.$store.dispatch(
         'auth/create',
         {

@@ -28,16 +28,16 @@ export default {
       axios.post(url, data).then(res => commit('create', res.data))
         .catch(err => err)
       console.log(data)
-    },
-    destroy ({ commit, dispatch }, data) {
-      dispatch(
-        'http/delete',
-        { url: '/auth', data },
-        { root: true }
-      ).then(res => commit('create', res.data))
-        .catch(err => err)
-        // logout anyway ...
-        .finally(res => commit('destroy'))
     }
+    // destroy ({ commit, dispatch }, data) {
+    //   dispatch(
+    //     'http/delete',
+    //     { url: '/auth', data },
+    //     { root: true }
+    //   ).then(res => commit('create', res.data))
+    //     .catch(err => err)
+    //     // logout anyway ...
+    //     .finally(res => commit('destroy'))
+    // }
   }
 }

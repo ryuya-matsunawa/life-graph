@@ -16,6 +16,7 @@ export default new Vuex.Store({
     chart,
     account
   },
+  // localStorageにtokenを残し続ける
   plugins: [createPersistedState({
     key: 'example',
     storage: window.sessionStorage
