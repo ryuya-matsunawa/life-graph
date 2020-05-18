@@ -1,18 +1,8 @@
 <template>
-  <div id="edit">
+  <div class="edit">
     <div>
       <Header />
     </div>
-    <!-- パターン１ -->
-    <!-- フォームの中身を一括で送信するため -->
-    <!-- <form class="formOut" @submit="onSubmit"> -->
-    <!-- パターン２ -->
-    <!-- <form @submit.prevent="formSubmit"> -->
-    <!-- イベントリスナーを追加するときにキャプチャモードで使います
-        言い換えれば、内部要素を対象とするイベントは、その要素によって処理される前にここで処理されます
-        <div v-on:click.capture="doThis">...</div> -->
-    <!-- パターン３ -->
-    <!-- ただ、ディブで囲む -->
     <div class="formOut">
       <ul>
         <li>
@@ -34,12 +24,6 @@
         <!-- <p>{{ editComment }}</p> -->
         </li>
       </ul>
-      <!-- 上の@submit="onSubmit"がる場合 -->
-      <!-- <button
-        href="#!"
-        class="graphRegister"
-        type="submit"
-      > -->
       <button
         class="graphRegister"
         href="#!"
@@ -55,8 +39,6 @@
         編集
       </button>
     </div>
-    <!-- 上のフォームを消したので -->
-    <!-- </form> -->
     <div v-if="loaded" class="chart">
       <Chart />
     </div>
@@ -90,7 +72,6 @@ export default {
   computed: {
     // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
     loaded () {
-      // console.log(this.$store.state.chart.age)
       return this.$store.state.chart.loaded
     }
     // sotreからidを元にデータを引っ張ってくる（今はいらない）
