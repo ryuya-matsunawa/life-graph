@@ -96,6 +96,7 @@ export default {
 
 .btn{
   color: #6AAEA5;
+  cursor: pointer
 }
 
 .btn:hover {
