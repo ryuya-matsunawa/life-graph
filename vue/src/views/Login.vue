@@ -3,9 +3,9 @@
     <h1>Sign In</h1>
     <div class="form-item">
       <label for="username" />
-      <input v-model="username" type="username" name="username" placeholder="UserName">
+      <input v-model="username" type="username" placeholder="UserName">
       <label for="password" />
-      <input v-model="password" type="password" name="password" placeholder="Password">
+      <input v-model="password" type="password" placeholder="Password">
     </div>
     <button class="button-panel" @click="login()">
       Signin
