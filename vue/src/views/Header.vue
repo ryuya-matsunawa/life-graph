@@ -2,22 +2,58 @@
   <div class="header">
     <ul class="acount">
       <li class="personalinfo">
-        ユーザー名：manato
+        ユーザー名：{{ account[0].username }}
       </li>
       <li class="personalinfo">
-        権限名:一般ユーザー
+        権限名:{{ account[0].role }}
       </li>
       <li>
-        <router-link to="/" tag="button" class="btn">
+        <span tag="button" class="btn" @click="logout()">
           ログアウト
-        </router-link>
+        </span>
       </li>
     </ul>
   </div>
 </template>
-<script>
 
+<script>
+export default {
+  data () {
+    return {
+      account: [{
+        username: '',
+        role: ''
+      }]
+    }
+  },
+  async mounted () {
+    // ロード時にactionsにdispatchする
+    await this.$store.dispatch('account/fetchAccount')
+    // storeから情報を取得するメソッド
+    this.setAccount()
+  },
+  methods: {
+    // dataのaccountにaccount.jsのstateの情報をsetする
+    setAccount () {
+      const stateAccount = this.$store.state.account
+      this.account[0].username = stateAccount.account[0].username
+      const role = stateAccount.account[0].name
+      // ROLE_USERだったら一般ユーザとヘッダーに表示される
+      if (role === 'ROLE_USER') {
+        this.account[0].role = '一般ユーザ'
+      }
+    },
+    // ログアウトボタンが押された時のメソッド
+    logout () {
+      // authのstateのtokenを消す
+      this.$store.commit('auth/deleteToken')
+      // tokenが消されたあとログイン画面に遷移する
+      this.$router.push('/login')
+    }
+  }
+}
 </script>
+
 <style scoped>
     .header{
     top: 0;
