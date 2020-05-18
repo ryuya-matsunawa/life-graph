@@ -66,48 +66,31 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* body */
-body {
-  background: #e9e9e9;
-  color: #5e5e5e;
-  font: 400 87.5%/1.5em 'Open Sans', sans-serif;
-  margin-left: auto;
-  margin-right: auto;
+.background {
+  background-image: url("../assets/team20.png");
+  background-size: cover;
+  width: 100%;
+  height: 500px;
 }
 
-/* Form Layout */
-.form-wrapper {
-  background: #fafafa;
-  margin: 3em auto;
-  padding: 0 1em;
-  max-width: 370px;
-  margin-left: auto;
-  margin-right: auto;
+.login {
+  width: 50%;
+  margin-left: 80px;
 }
 
-h1 {
-  text-align: center;
-  padding: 1em 0;
-}
-
-form {
-  padding: 0 1.5em;
-  margin-left: auto;
-  margin-right: auto;
+#title {
+  width: 40%;
+  margin-top: 30px;
 }
 
 .form-item {
   margin-bottom: 0.75em;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .form-item input {
-  background: #fafafa;
+  background-color: transparent;
   border: none;
   border-bottom: 2px solid #e9e9e9;
   color: #666;
@@ -115,49 +98,45 @@ form {
   font-size: 1em;
   height: 50px;
   transition: border-color 0.3s;
-  width: 55%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 50%;
+  display: block;
+  text-align: center;
+  z-index: -1;
 }
 
 .form-item input:focus {
   border-bottom: 2px solid #c0c0c0;
   outline: none;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .button-panel {
   margin: 2em 0 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 40px;
+  text-align: left;
 }
 
 .button-panel .button {
-  background: #f16272;
+  background: #EEFF41;
   border: none;
-  color: #fff;
+  color: #8c8c8c;
   cursor: pointer;
-  height: 50px;
+  height: 45px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.2em;
+  font-size: 1.1em;
   letter-spacing: 0.05em;
-  text-align: center;
   text-transform: uppercase;
   transition: background 0.3s ease-in-out;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 25%;
 }
 
 .button:hover {
-  background: #ee3e52;
+  background: #FF8F00;
 }
 
 .form-footer {
   font-size: 1em;
   padding: 2em 0;
-  text-align: center;
+  text-align: left;
 }
 
 .form-footer a {

@@ -7,7 +7,7 @@ import Edit from '../views/Edit.vue'
 import Show from '../views/Show.vue'
 
 // 作業する時は下のコメントアウトしとくと良い、あと一番下のも
-import Store from '@/store/index.js'
+// import Store from '@/store/index.js'
 
 Vue.use(VueRouter)
 
@@ -47,6 +47,7 @@ const router = new VueRouter({
 
 // authのstateのtokenが’’だったらログイン画面に遷移させる
 // 作業する時は下全部コメントアウトしてStoreをインポートしているとこもコメントアウトして
+<<<<<<< HEAD
 router.beforeEach((to, from, next) => {
   // ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
   if (to.path !== '/login' && Store.state.auth.token === '') {
@@ -55,5 +56,23 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+=======
+// router.beforeEach((to, from, next) => {
+//   // ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
+//   if (to.path === '/top' && Store.state.auth.token === '') {
+//     next('/login')
+//   } else if (to.path === '/' && Store.state.auth.token === '') {
+//     next('/login')
+//   } else if (to.path === '/edit' && Store.state.auth.token === '') {
+//     next('/login')
+//   } else if (to.path === '/show' && Store.state.auth.token === '') {
+//     next('/login')
+//   } else if (to.path === '/search' && Store.state.auth.token === '') {
+//     next('/login')
+//   } else {
+//     next()
+//   }
+// })
+>>>>>>> develop
 
 export default router
