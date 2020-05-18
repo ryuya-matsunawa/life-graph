@@ -90,7 +90,6 @@ export default {
   computed: {
     // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
     loaded () {
-      // console.log(this.$store.state.chart.age)
       return this.$store.state.chart.loaded
     }
     // sotreからidを元にデータを引っ張ってくる（今はいらない）

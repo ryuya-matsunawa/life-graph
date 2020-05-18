@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
     contents: [
       {
@@ -156,20 +157,19 @@ export default {
         comment: 'コメント25'
       }
     ],
-    load: false,
     loaded: false
 
+  },
+  mutations: {
+    loadDone (state, payload) {
+      state.loaded = payload.loading
+      // state.loaded = true
+    }
+  },
+  actions: {
+    load ({ commit }) {
+      const loading = true
+      commit('loadDone', { loading })
+    }
   }
-  // mutations: {
-  //   loadDone (state, payload) {
-  //     state.loaded = payload.loading
-  //     state.loaded = true
-  //   }
-  // },
-  // actions: {
-  //   load ({ commit }) {
-  //     const loading = ['DONE']
-  //     commit('loadDone', { loading })
-  //   }
-  // }
 }
