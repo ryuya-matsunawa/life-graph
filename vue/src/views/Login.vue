@@ -4,7 +4,7 @@
       <img id="title" src="../assets/signin.png">
       <div class="form-item">
         <label for="username" />
-      <input v-model="username" type="username" name="username" placeholder="UserName">
+        <input v-model="username" type="username" name="username" placeholder="UserName">
         <label for="password" />
         <input v-model="password" type="password" name="password" required="required" placeholder="Password">
       </div>
@@ -15,6 +15,7 @@
         <p><a href="#">Create an account</a></p>
         <p><a href="#">Forgot password?</a></p>
       </div>
+    </div>
   </div>
 </template>
 
