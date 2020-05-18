@@ -1,18 +1,20 @@
 <template>
-  <div class="header">
-    <ul class="acount">
-      <li class="personalinfo">
-        User Name：{{ account[0].username }}
-      </li>
-      <li class="personalinfo">
-        Authority:{{ account[0].role }}
-      </li>
-      <li>
-        <span tag="button" class="btn" @click="logout()">
-          Log Out
-        </span>
-      </li>
-    </ul>
+  <div class="background">
+    <div class="header">
+      <ul class="acount">
+        <li class="personalinfo">
+          User Name：{{ account[0].username }}
+        </li>
+        <li class="personalinfo">
+          Authority:{{ account[0].role }}
+        </li>
+        <li>
+          <span tag="button" class="btn" @click="logout()">
+            Log Out
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -55,38 +57,50 @@ export default {
 </script>
 
 <style scoped>
-    .header{
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    position:relative;
-    border-bottom: thin solid #AEAC9E;
-    background-image: url(../assets/header.png);
-  }
-  .acount{
-    text-align: right;
-  }
-  .acount li{
-    display:inline-block;
-    line-height: 70px;
-    margin-right: 35px;
-  }
-  .personalinfo{
-    color:black
-  }
+.background {
+  max-width: 100%;
+  height: auto;
+}
+.header{
+  width: 100%;
+  height: 100px;
+  background-color: #B2EBF2;
+  background-image: url("../assets/header.png");
+  background-size: contain;
+}
 
-  .btn{
-    margin-right: 10px;
-    padding: 8px;
-    width: 115px;
-    font-size: 18px;
-    background-color: #EEFF41;
-    color: #AEAC9E;
-    border-color: transparent;
-  }
-  .btn:hover {
-  background-color: #ff8f00;
+.acount{
+  text-align: right;
+}
+
+.acount li{
+  line-height: 30px;
+  margin-right: 35px;
+  margin-top: 30px;
+  padding: 8px;
+  width: 115px;
+  font-size: 18px;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #6AAEA5;
+  border-color: transparent;
+  border-radius: 3px;/*角の丸み*/
+  font-weight: bold;
+  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
+  text-align: center;
+}
+
+.personalinfo{
   color: #fff;
+}
+
+.btn{
+  color: #6AAEA5;
+}
+
+.btn:hover {
+  background-color: #6AAEA5;
+  color: #fff;
+  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
 }
 </style>
