@@ -1,20 +1,19 @@
 <template>
-  <div class="background">
-    <div class="login">
-      <img id="title" src="../assets/signin.png">
-      <div class="form-item">
-        <label for="username" />
-        <input v-model="username" type="username" name="username" placeholder="UserName">
-        <label for="password" />
-        <input v-model="password" type="password" name="password" required="required" placeholder="Password">
-      </div>
-      <button class="button-panel" @click="login()">
-        Signin
-      </button>
-      <div class="form-footer">
-        <p><a href="#">Create an account</a></p>
-        <p><a href="#">Forgot password?</a></p>
-      </div>
+  <div class="login">
+    <h1>Sign In</h1>
+    <div class="form-item">
+      <label for="username" />
+      <input v-model="username" type="username" placeholder="UserName">
+      <label for="password" />
+      <input v-model="password" type="password" placeholder="Password">
+    </div>
+    <button class="button-panel" @click="login()">
+      Signin
+    </button>
+
+    <div class="form-footer">
+      <p><a href="#">Create an account</a></p>
+      <p><a href="#">Forgot password?</a></p>
     </div>
   </div>
 </template>
