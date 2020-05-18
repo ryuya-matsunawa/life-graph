@@ -44,9 +44,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.top{
-  padding-top: 120px;
-}
-</style>>
