@@ -77,11 +77,9 @@ export default {
   },
   methods: {
     setLabels () {
-      const ages = []
-      this.$store.state.chart.contents.map((content) => {
-        ages.push(content.age)
+      this.data.labels = this.$store.state.chart.contents.map((content) => {
+        return content.age
       })
-      this.data.labels = ages
     },
     setData () {
       const lifeScores = []
