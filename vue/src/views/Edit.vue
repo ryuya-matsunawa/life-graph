@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="edit">
     <div>
       <Header />
     </div>
@@ -61,7 +61,7 @@
       <Chart />
     </div>
     <router-link to="/top" tag="button" class="toTop">
-      TOPへ
+      TOP
     </router-link>
   </div>
 </template>
@@ -142,6 +142,14 @@ export default {
 </script>
 
 <style scoped>
+.edit {
+  background-image: url(../assets/human.png);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: 5% 30%;
+  background-position: fixed;
+}
+
 .formOut{
   display: inline-block;
   text-align: center;
@@ -159,8 +167,21 @@ ul li{
   margin: 10px 5px 10px 5px;
 }
 
-button{
-  margin: 10px 5px 10px 5px;
+.toTop {
+  line-height: 30px;
+  margin-right: 35px;
+  margin-top: 30px;
+  padding: 8px;
+  width: 115px;
+  font-size: 18px;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #6AAEA5;
+  border-color: transparent;
+  border-radius: 3px;/*角の丸み*/
+  font-weight: bold;
+  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
+  text-align: center;
 }
 
 /* ラベルを枠で囲みたい
@@ -174,15 +195,85 @@ label{
 }
 
 .graphRegister {
-  background: #f16272;
+  margin-right: 30px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 11px 5px 15px;
+  text-decoration: none;
+  color: #8c8c8c;
+  transition: .4s;
   border: none;
-  color: #fff;
+}
+
+.graphRegister:before {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+
+.graphRegister:after {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top:0;
+  left: 100%;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+
+.graphRegister:hover:before,.graphRegister:hover:after {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
 }
 
 .graphEdit {
-  background: #f16272;
+  margin-right: 30px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 11px 5px 15px;
+  text-decoration: none;
+  color: #8c8c8c;
+  transition: .4s;
   border: none;
-  color: #fff;
+}
+
+.graphEdit:before {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+
+.graphEdit:after {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top:0;
+  left: 100%;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+
+.graphEdit:hover:before,.graphEdit:hover:after {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
 }
 
 </style>
