@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import chart from './modules/chart.js'
 import account from './modules/account.js'
+import search from './modules/search.js'
 import createPersistedState from 'vuex-persistedstate'
 
 import auth from '@/store/modules/auth'
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     auth,
     http,
     chart,
-    account
+    account,
+    search
   },
   // localStorageにtokenを残し続ける
   plugins: [createPersistedState({
