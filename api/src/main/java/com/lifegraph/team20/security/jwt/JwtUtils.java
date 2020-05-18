@@ -31,6 +31,8 @@ public class JwtUtils {
 
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
+
+//		Jwtを作っている。トークンの有効期限もここで決められている。
 		return Jwts.builder()
 				.setSubject((userPrincipal.getUsername()))
 				.setIssuedAt(new Date())
