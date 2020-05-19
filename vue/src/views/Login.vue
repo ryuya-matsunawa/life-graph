@@ -1,19 +1,20 @@
 <template>
-  <div class="login">
-    <h1>Sign In</h1>
-    <div class="form-item">
-      <label for="username" />
-      <input v-model="username" type="username" placeholder="UserName">
-      <label for="password" />
-      <input v-model="password" type="password" placeholder="Password">
-    </div>
-    <button class="button-panel" @click="login()">
-      Signin
-    </button>
-
-    <div class="form-footer">
-      <p><a href="#">Create an account</a></p>
-      <p><a href="#">Forgot password?</a></p>
+  <div class="background">
+    <div class="login">
+      <img id="title" src="../assets/signin.png">
+      <div class="form-item">
+        <label for="username" />
+        <input v-model="username" type="username" placeholder="UserName">
+        <label for="password" />
+        <input v-model="password" type="password" required="required" placeholder="Password">
+      </div>
+      <button class="button-panel button" @click="login()">
+        Signin
+      </button>
+      <div class="form-footer">
+        <p><a href="#">Create an account</a></p>
+        <p><a href="#">Forgot password?</a></p>
+      </div>
     </div>
   </div>
 </template>
@@ -109,13 +110,13 @@ export default {
   outline: none;
 }
 
-.button-panel {
+button {
   margin: 2em 0 0;
   margin-top: 40px;
-  text-align: left;
+  text-align: center;
 }
 
-.button-panel .button {
+.button {
   background: #EEFF41;
   border: none;
   color: #8c8c8c;

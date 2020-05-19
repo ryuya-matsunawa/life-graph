@@ -3,10 +3,10 @@
     <div class="header">
       <ul class="acount">
         <li class="personalinfo">
-          User Name：{{ account[0].username }}
+          User Name：{{ account.username }}
         </li>
         <li class="personalinfo">
-          Authority:{{ account[0].role }}
+          Authority:{{ account.role }}
         </li>
         <li>
           <span tag="button" class="btn" @click="logout()">
@@ -22,15 +22,16 @@
 export default {
   data () {
     return {
-      account: [{
+      account: {
         username: '',
         role: ''
-      }]
+      }
     }
   },
   async mounted () {
+    const userId = this.$store.state.auth.userId
     // ロード時にactionsにdispatchする
-    await this.$store.dispatch('account/fetchAccount')
+    await this.$store.dispatch('account/fetchAccount', { userId: userId })
     // storeから情報を取得するメソッド
     this.setAccount()
   },
@@ -38,17 +39,22 @@ export default {
     // dataのaccountにaccount.jsのstateの情報をsetする
     setAccount () {
       const stateAccount = this.$store.state.account
-      this.account[0].username = stateAccount.account[0].username
-      const role = stateAccount.account[0].name
+      this.account.username = stateAccount.account.username
+      const role = stateAccount.account.name
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
       if (role === 'ROLE_USER') {
-        this.account[0].role = '一般ユーザ'
+        this.account.role = '一般ユーザ'
+      } else if (role === 'ROLE_ADMIN') {
+        this.account.role = '管理者'
+      } else {
+        this.account.role = 'オーナー'
       }
     },
     // ログアウトボタンが押された時のメソッド
     logout () {
       // authのstateのtokenを消す
       this.$store.commit('auth/deleteToken')
+      this.$store.commit('account/deleteAccount')
       // tokenが消されたあとログイン画面に遷移する
       this.$router.push('/login')
     }
@@ -58,15 +64,20 @@ export default {
 
 <style scoped>
 .background {
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
 .header{
   width: 100%;
-  height: 100px;
   background-color: #B2EBF2;
   background-image: url("../assets/header.png");
   background-size: contain;
+  margin-top: -30px;
+  padding-bottom: 10px;
+  opacity: 0.7;
 }
 
 .acount{
@@ -76,9 +87,9 @@ export default {
 .acount li{
   line-height: 30px;
   margin-right: 35px;
-  margin-top: 30px;
+  margin-top: 80px;
   padding: 8px;
-  width: 115px;
+  width: auto;
   font-size: 18px;
   display: inline-block;
   text-decoration: none;

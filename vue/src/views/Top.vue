@@ -34,7 +34,7 @@ export default {
   background-size: 20%;
   background-repeat: no-repeat;
   background-position: 5% 30%;
-  background-position: fixed;
+  padding-top: 150px;
 }
 
 .searchButton {
