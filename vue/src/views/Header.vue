@@ -54,7 +54,6 @@ export default {
     logout () {
       // authのstateのtokenを消す
       this.$store.commit('auth/deleteToken')
-      console.log('ok')
       this.$store.commit('account/deleteAccount')
       // tokenが消されたあとログイン画面に遷移する
       this.$router.push('/login')
