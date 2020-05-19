@@ -43,6 +43,10 @@ export default {
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
       if (role === 'ROLE_USER') {
         this.account[0].role = '一般ユーザ'
+      } else if (role === 'ROLE_ADMIN') {
+        this.account[0].role = '管理者'
+      } else {
+        this.account[0].role = 'オーナー'
       }
     },
     // ログアウトボタンが押された時のメソッド
@@ -58,12 +62,14 @@ export default {
 
 <style scoped>
 .background {
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
 .header{
   width: 100%;
-  height: 100px;
   background-color: #B2EBF2;
   background-image: url("../assets/header.png");
   background-size: contain;
@@ -78,7 +84,7 @@ export default {
   margin-right: 35px;
   margin-top: 30px;
   padding: 8px;
-  width: 115px;
+  width: auto;
   font-size: 18px;
   display: inline-block;
   text-decoration: none;
