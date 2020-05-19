@@ -8,7 +8,7 @@
         <label for="password" />
         <input v-model="password" type="password" required="required" placeholder="Password">
       </div>
-      <button class="button-panel" @click="login()">
+      <button class="button-panel button" @click="login()">
         Signin
       </button>
       <div class="form-footer">
@@ -110,13 +110,13 @@ export default {
   outline: none;
 }
 
-.button-panel {
+button {
   margin: 2em 0 0;
   margin-top: 40px;
-  text-align: left;
+  text-align: center;
 }
 
-.button-panel .button {
+.button {
   background: #EEFF41;
   border: none;
   color: #8c8c8c;
