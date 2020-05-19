@@ -16,7 +16,6 @@ export default {
     },
     deleteAccount (state) {
       state.account = ''
-      console.log('ok')
     }
   },
   actions: {
