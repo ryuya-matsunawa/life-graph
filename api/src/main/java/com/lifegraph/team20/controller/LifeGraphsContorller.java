@@ -5,9 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifegraph.team20.models.Content;
-import com.lifegraph.team20.models.UserData;
 import com.lifegraph.team20.models.LifeGraph;
+import com.lifegraph.team20.models.UserData;
 import com.lifegraph.team20.service.ContentService;
 
 
@@ -83,7 +82,7 @@ public class LifeGraphsContorller {
 	}
 
 	@Autowired
-	private NamedParameterJdbcTemplate jdbcTemplate;
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	private List<LifeGraph> setGraph(Integer id) {
 		//子グラフの中のparent_id, age, score, commentをparent_id = :idで照らし合わせて作る。
@@ -93,7 +92,7 @@ public class LifeGraphsContorller {
 		//param:idに数字を入れる役割、
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		//実行そのものはjdbcTemplate.queryでしてる。RowMapperは呪文
-		List<LifeGraph> result = jdbcTemplate.query(sql, param, new RowMapper<LifeGraph>() {
+		List<LifeGraph> result = namedParameterJdbcTemplate.query(sql, param, new RowMapper<LifeGraph>() {
 			//RowMappers使ったらmapRow使う呪文
 			public LifeGraph mapRow(ResultSet rs, int rowNum) throws SQLException{
 				//LifeGraphに定義してある、コンストラクタに入ってるものを呼び出してくる。そして、それをresultに入れてる
