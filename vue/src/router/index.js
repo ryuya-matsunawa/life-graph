@@ -7,7 +7,7 @@ import Edit from '../views/Edit.vue'
 import Show from '../views/Show.vue'
 
 // 作業する時は下のコメントアウトしとくと良い、あと一番下のも
-// import Store from '@/store/index.js'
+import Store from '@/store/index.js'
 
 Vue.use(VueRouter)
 
