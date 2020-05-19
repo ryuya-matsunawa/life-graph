@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+// import rootState from '@/store'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default {
   },
   actions: {
     async fetchAccount ({ commit }) {
-      // const authId = rootState.auth.userId 他のmoduleからstateを取得したいがうまく行かない、、
+      // const authId = rootState.auth.userId
+      // 他のmoduleからstateを取得したいがうまく行かない、、
       const url = '/api/auth/account'
       await axios.get(url).then(res => commit('setAccount', res.data))
         .catch(err => err)

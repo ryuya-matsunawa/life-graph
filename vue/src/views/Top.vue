@@ -1,32 +1,15 @@
 <template>
   <div class="top">
     <Header />
-    <!-- <router-link to="/">
-      Home
-    </router-link>
-    <router-link to="/search">
-      Search
-    </router-link>
-    <router-link to="/edit">
-      Edit
-    </router-link>
-    <router-link to="/show">
-      Show
-    </router-link>
-    <h1>This is an about page</h1> -->
-
     <router-link to="/search" tag="button" class="searchButton">
       検索
     </router-link>
-
     <router-link to="/edit" tag="button" class="editButton">
       登録
     </router-link>
-
     <router-link to="/edit" tag="button" class="editButton">
       編集
     </router-link>
-
     <div class="chart">
       <Chart />
     </div>
@@ -45,8 +28,89 @@ export default {
 }
 </script>
 
-<style>
-.top{
-  padding-top: 120px;
+<style scoped>
+.top {
+  background-image: url(../assets/top.png);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: 5% 30%;
+  padding-top: 100px;
 }
-</style>>
+
+.searchButton {
+  margin-right: 30px;
+  margin-left: 40px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 11px 5px 15px;
+  text-decoration: none;
+  color: #8c8c8c;
+  transition: .4s;
+  border: none;
+}
+.searchButton:before {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+.searchButton:after {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top:0;
+  left: 100%;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+.searchButton:hover:before,.searchButton:hover:after {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+}
+
+.editButton {
+  margin-right: 30px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 11px 5px 15px;
+  text-decoration: none;
+  color: #8c8c8c;
+  transition: .4s;
+  border: none;
+}
+.editButton:before {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+.editButton:after {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top:0;
+  left: 100%;
+  border-radius: 3px;
+  background:#B3FFD5;
+}
+.editButton:hover:before,.editButton:hover:after {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+}
+</style>

@@ -1,16 +1,28 @@
 package com.lifegraph.team20.models;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+//@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@Table(name = "users")
 public class Account {
-	private int id;
-	private String username;
-	private String name;
 
-	public Account(int id, String username, String name) {
-		this.id = id;
-		this.username = username;
-		this.name = name;
-	}
+  @Id
+  @GeneratedValue
+  private int id;
+
+  @NotBlank
+  private String username;
+
+  @NotBlank
+  private String name;
+
 }
