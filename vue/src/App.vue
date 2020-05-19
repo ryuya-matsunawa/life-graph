@@ -27,4 +27,8 @@
   padding: 5px 10px 5px 10px !important;
 }
 
+button:focus {
+  outline:0;
+}
+
 </style>

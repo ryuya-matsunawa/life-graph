@@ -12,14 +12,17 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -173,26 +176,28 @@ public class AuthController extends HttpServlet {
 
 			// jdbc使ってる
 			@Autowired
-			private JdbcTemplate jdbcTemplate;
+			private NamedParameterJdbcTemplate jdbcTemplate;
 
-			@RequestMapping(value = "/account", method = RequestMethod.GET)
-			  public List<Account> account() {
-				// IDとユーザ名と権限名でリスト作ってView側に返してる
-				List<Account> account = selectAccount();
-				return account;
+			@RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
+			  public ResponseEntity<Account> account(@PathVariable("id") Integer id) {
+				// IDとユーザ名と権限名でオブジェクト作ってView側に返してる
+				Account account = selectAccount(id);
+				return ResponseEntity.ok(account);
 			  }
 
 			// List作るとこ
-			private List<Account> selectAccount() {
+			public Account selectAccount(Integer id) {
 				// 三つのテーブルくっつけてる。ユーザ名と権限名を取得するため
-				final String sql = "select * from users inner join user_roles on users.id = user_roles.user_id\n" +
-						"inner join roles on roles.id = user_roles.`role_id`;";
-				return jdbcTemplate.query(sql, new RowMapper<Account>() {
+				final String sql = "select users.id, username, name from users inner join user_roles on users.id = user_roles.user_id\n" +
+						"inner join roles on roles.id = user_roles.role_id where users.id = :id;";
+				// addValue変えればidごとに取得できそうなんだが、、
+				SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+				Account result = jdbcTemplate.queryForObject(sql, param, new RowMapper<Account>() {
 					public Account mapRow(ResultSet rs, int rowNum) throws SQLException{
 						return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("name"));
 					}
 				});
+				return result;
 			}
-
 }
 
