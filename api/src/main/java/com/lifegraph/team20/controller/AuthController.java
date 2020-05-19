@@ -181,17 +181,17 @@ public class AuthController extends HttpServlet {
 			@RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
 			  public ResponseEntity<Account> account(@PathVariable("id") Integer id) {
 				// IDとユーザ名と権限名でオブジェクト作ってView側に返してる
-				Account account = selectAccount();
+				Account account = selectAccount(id);
 				return ResponseEntity.ok(account);
 			  }
 
 			// List作るとこ
-			public Account selectAccount() {
+			public Account selectAccount(Integer id) {
 				// 三つのテーブルくっつけてる。ユーザ名と権限名を取得するため
 				final String sql = "select users.id, username, name from users inner join user_roles on users.id = user_roles.user_id\n" +
 						"inner join roles on roles.id = user_roles.role_id where users.id = :id;";
 				// addValue変えればidごとに取得できそうなんだが、、
-				SqlParameterSource param = new MapSqlParameterSource().addValue("id", 1);
+				SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 				Account result = jdbcTemplate.queryForObject(sql, param, new RowMapper<Account>() {
 					public Account mapRow(ResultSet rs, int rowNum) throws SQLException{
 						return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("name"));
