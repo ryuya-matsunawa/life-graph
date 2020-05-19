@@ -47,13 +47,13 @@ const router = new VueRouter({
 
 // authのstateのtokenが’’だったらログイン画面に遷移させる
 // 作業する時は下全部コメントアウトしてStoreをインポートしているとこもコメントアウトして
-// router.beforeEach((to, from, next) => {
-//   // ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
-//   if (to.path !== '/login' && Store.state.auth.token === '') {
-//     next('/login')
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+// ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
+  if (to.path !== '/login' && Store.state.auth.token === '') {
+    next('/login')
+  } else {
+    next()
+  }
+})
 
 export default router

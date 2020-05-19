@@ -25,5 +25,15 @@ export default {
 </script>
 
 <style scoped>
+.show {
+  background-image: url(../assets/show.png);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: 5% 30%;
+  background-position: fixed;
+}
 
+.chart {
+  margin-top: 100px;
+}
 </style>
