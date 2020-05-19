@@ -20,6 +20,7 @@ export default {
     },
     deleteToken (state) {
       state.token = ''
+      state.userId = ''
     }
   },
   actions: {
