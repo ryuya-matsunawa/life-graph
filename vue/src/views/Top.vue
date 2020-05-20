@@ -134,7 +134,6 @@ export default {
 .editButton {
   text-align: center;
   width: 5rem;
-  height: 3rem;
   padding-left: 1rem;
   padding-top: 1rem;
   overflow: hidden;
