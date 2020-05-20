@@ -222,6 +222,7 @@ label{
   line-height: 1.5;
   transition: all 1s;
   margin: 10px 15px;
+  cursor: pointer;
 }
 
 .graphRegister:hover{
@@ -245,6 +246,7 @@ label{
   line-height: 1.5;
   transition: all 1s;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .graphEdit:hover {

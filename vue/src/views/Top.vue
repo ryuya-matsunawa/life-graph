@@ -124,6 +124,7 @@ export default {
   line-height: 1.5;
   transition: all 1s;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .searchButton:hover {
@@ -146,6 +147,7 @@ export default {
   line-height: 1.5;
   transition: all 1s;
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .editButton:hover {
