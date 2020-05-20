@@ -24,6 +24,9 @@
           <button @click="reset()">
             リセット
           </button>
+          <button>
+            削除
+          </button>
         </div>
         <!-- 下部 -->
         <div v-if="isActive">
@@ -219,7 +222,6 @@ button {
   width: 9rem;
   height: 3rem;
   padding-left: 1rem;
-  padding-top: 1rem;
   overflow: hidden;
   box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
   background-image:
@@ -230,6 +232,7 @@ button {
   line-height: 1.5;
   transition: all 1s;
   margin-left: 5px;
+  margin-top: 10px;
 }
 
 button:hover {
