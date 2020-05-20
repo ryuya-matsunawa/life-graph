@@ -7,7 +7,7 @@
       <ul id="searchList">
         <li class="username">
           ユーザー名
-          <input type="text">
+          <input v-model="searchWord" type="text">
         </li>
         <li class="update">
           更新日
@@ -62,7 +62,9 @@ export default {
       // 検索条件だけに沿った配列
       filteredItems: [],
       // デフォルトを降順にする
-      sortDesc: true
+      sortDesc: true,
+      // 検索文字列
+      searchWord: ''
     }
   },
   computed: {
@@ -91,36 +93,48 @@ export default {
       this.items = this.$store.state.search.items
     },
     active () {
+      // ユーザー名の検索
+      // まずfilteredItemsにstoreの情報をいれる
+      this.filteredItems = this.$store.state.search.items
+      // filterWordに検索された物が入る
+      const filterWord = this.searchWord && this.searchWord.toLowerCase()
+      // filterWordに文字が入っているかを判断
+      if (filterWord) {
+        this.filteredItems = this.filteredItems.filter(function (row) {
+          // str.indexOf(文字列)で、文字列が見つかれば文字列が見つかった場所(0以上)、文字列が見つからなければ-1が返ることを利用する。
+          // 整数をビット反転演算子にかけると、符号を反転してマイナス1した数になる。
+          return row.name.toLowerCase().indexOf(filterWord) > -1
+        })
+      }
       // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
       // 画面繋ぎ時に追加する必要あり？ this.setItems()
-      this.isActive = true
+
       // XX〜YYまで検索した時に間に該当するものを表示する
       if (this.updatedFrom && this.updatedTo) {
         // split区切る join区切ったものをくっつける parseIntで数字に変える 型次第では不必要？
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
-        this.filteredItems = this.items.filter((item) =>
+        this.filteredItems = this.filteredItems.filter((item) =>
           parseInt(item.day.split('-').join('')) >= updatedFromNumber &&
           parseInt(item.day.split('-').join('')) <= updatedToNumber
         )
       // XX〜 検索した時に該当するものを表示する
       } else if (this.updatedFrom) {
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
-        this.filteredItems = this.items.filter((item) =>
+        this.filteredItems = this.filteredItems.filter((item) =>
           parseInt(item.day.split('-').join('')) >= updatedFromNumber
         )
       // 〜YY 検索した時に該当するものを表示する
       } else if (this.updatedTo) {
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
-        this.filteredItems = this.items.filter((item) =>
+        this.filteredItems = this.filteredItems.filter((item) =>
           parseInt(item.day.split('-').join('')) <= updatedToNumber
         )
-        // 何も指定しなければitemをそのまま返す
-      } else {
-        this.filteredItems = this.items
       }
       // 表示順を決める
       this.sortItems()
+      // activeの処理を終えてから
+      this.isActive = true
     },
     sortItems () {
       this.filteredItems.sort(this.compareFunc)
@@ -134,6 +148,7 @@ export default {
     toggleSort () {
       this.sortDesc = !this.sortDesc
     },
+
     // リセットボタン
     reset () {
       this.isActive = false

@@ -1,7 +1,5 @@
 package com.lifegraph.team20.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,14 +10,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +31,7 @@ import com.lifegraph.team20.payload.request.LoginRequest;
 import com.lifegraph.team20.payload.request.SignupRequest;
 import com.lifegraph.team20.payload.response.JwtResponse;
 import com.lifegraph.team20.payload.response.MessageResponse;
+import com.lifegraph.team20.repository.AccountRepository;
 import com.lifegraph.team20.repository.RoleRepository;
 import com.lifegraph.team20.repository.UserRepository;
 import com.lifegraph.team20.security.jwt.JwtUtils;
@@ -51,6 +49,9 @@ public class AuthController extends HttpServlet {
 
 	@Autowired
 	RoleRepository roleRepository;
+
+	@Autowired
+	AccountRepository accountRepository;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -136,63 +137,13 @@ public class AuthController extends HttpServlet {
 				return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 			}
 
-//			// ログアウトAPI auth/logout
-//			@PostMapping("/logout")
-//			public ResponseEntity<?> sampleUser(@Valid @RequestBody LogoutRequest logoutRequest , HttpServletRequest req) {
-//
-//				String jwt = parseJwt(req);
-//
-//				if (jwtUtils.validateJwtToken(jwt)) {
-//					// 有効期限内の場合
-//					// ブラックリストにいれる処理
-//				}
-//
-//				return ResponseEntity.ok("OK");
-//			}
+	@RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Account> account(@PathVariable("id") Integer id) {
 
-//			private String parseJwt(HttpServletRequest request) {
-//				String headerAuth = request.getHeader("Authorization");
-//
-//				if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-//					return headerAuth.substring(7, headerAuth.length());
-//				}
-//
-//				return null;
-//
-//			}
+		// IDとユーザ名と権限名でオブジェクト作ってView側に返してる
+		Account account = accountRepository.selectAccount(id);
 
-			// アカウント参照API /auth/accont
-			// JPAの方あとでやる
-//			@Autowired
-//			AccountService accountService;
-//
-//			@RequestMapping(value = "/account", method = RequestMethod.GET)
-//			List<Account> getAccount() {
-//				return accountService.getAccount();
-//			}
-
-			// jdbc使ってる
-			@Autowired
-			private JdbcTemplate jdbcTemplate;
-
-			@RequestMapping(value = "/account", method = RequestMethod.GET)
-			  public List<Account> account() {
-				// IDとユーザ名と権限名でリスト作ってView側に返してる
-				List<Account> account = selectAccount();
-				return account;
-			  }
-
-			// List作るとこ
-			private List<Account> selectAccount() {
-				// 三つのテーブルくっつけてる。ユーザ名と権限名を取得するため
-				final String sql = "select * from users inner join user_roles on users.id = user_roles.user_id\n" +
-						"inner join roles on roles.id = user_roles.`role_id`;";
-				return jdbcTemplate.query(sql, new RowMapper<Account>() {
-					public Account mapRow(ResultSet rs, int rowNum) throws SQLException{
-						return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("name"));
-					}
-				});
-			}
-
+		return ResponseEntity.ok(account);
+	}
 }
 

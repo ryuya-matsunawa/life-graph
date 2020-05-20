@@ -13,7 +13,7 @@ export default {
           {
             // スコア
             data: [],
-            borderColor: '#CFD8DC',
+            borderColor: 'gray',
             // 線の中に色つけるかどうか
             fill: false,
             type: 'line',
@@ -54,7 +54,7 @@ export default {
             // 背景の横線を消す
             stacked: false,
             gridLines: {
-              display: false
+              display: true
             },
             ticks: {
               // 軸の最大値
@@ -62,7 +62,7 @@ export default {
               // 軸の最小値
               suggestedMin: -100,
               // 軸の刻み幅
-              stepSize: 10
+              stepSize: 20
             }
           }]
         }
@@ -122,19 +122,19 @@ export default {
           titleLines.forEach(function (age) {
             var comNum = age - 1
             // '<tr><th>'は多分太字にするやつ
-            innerHtml += '<tr><th>' + age + '歳のとき' + '</th></tr>'
+            innerHtml += '<tr><th>' + 'Age ' + age + '</th></tr>'
             // innerHtml += '</thead><tbody>'
             bodyLines.forEach(function (body, i) {
               var colors = tooltipModel.labelColors[i]
               var style = 'background:' + colors.backgroundColor
               style += '; border-color:' + colors.borderColor
-              style += '; border-width: 2px'
+              style += '; border-width: 1px'
               var span = '<span style="' + style + '"></span>'
               // '<tr><td>' は多分改行
               if (com[comNum] !== null) {
-                innerHtml += '<tr><td>' + span + '満足度：' + body + ' ポイント' + '</td></tr>' + '内容：' + com[comNum]
+                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
               } else {
-                innerHtml += '<tr><td>' + span + '満足度：' + body + ' ポイント' + '</td></tr>'
+                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
               }
             })
           })
@@ -145,15 +145,20 @@ export default {
         // `this` はツールチップ全体
         var position = this._chart.canvas.getBoundingClientRect()
         // 表示、配置、およびフォントスタイルの設定
-        tooltipEl.style.opacity = 1
-        tooltipEl.style.position = 'absolute'
+        tooltipEl.style.opacity = 0.8
+        tooltipEl.style.position = 'center'
         tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px'
         tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px'
-        tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily
-        tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px'
-        tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle
-        tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px'
+        tooltipEl.style.fontFamily = 'Tahoma'
+        tooltipEl.style.fontSize = '18px'
+        tooltipEl.style.fontStyle = 'Tahoma'
         tooltipEl.style.pointerEvents = 'none'
+        tooltipEl.style.backgroundColor = 'rgb(255,255,153)'
+        tooltipEl.style.color = 'black'
+        tooltipEl.style.padding = '10px'
+        tooltipEl.style.width = '250px'
+        tooltipEl.style.textAlign = 'left'
+        tooltipEl.style.wordBreak = 'normal'
       }
     }
   }
