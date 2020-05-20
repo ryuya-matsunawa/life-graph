@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
-    account: ''
+    account: {}
   },
   mutations: {
     setAccount (state, payload) {
@@ -19,7 +19,7 @@ export default {
     }
   },
   actions: {
-    async fetchAccount ({ commit }, { userId }) {
+    async fetchAccount ({ commit }, userId) {
       // const authId = rootState.auth.userId
       // 他のmoduleからstateを取得したいがうまく行かない、、
       const url = '/api/auth/accounts/' + userId
