@@ -2,43 +2,50 @@
   <div>
     <Header />
     <!-- 上部 -->
-    <div id="search">
-      検索条件
-      <ul id="searchList">
-        <li class="username">
-          ユーザー名
-          <input v-model="searchWord" type="text">
-        </li>
-        <li class="update">
-          更新日
-          <input v-model="updatedFrom" type="date">
-          〜
-          <input v-model="updatedTo" type="date">
-        </li>
-      </ul>
-      <button @click="active()">
-        検索
-      </button>
-      <button @click="reset()">
-        リセット
-      </button>
-    </div>
-    <!-- 下部 -->
-    <div v-if="isActive">
-      <!-- テーブルを作る（表みたいな感じ） -->
-      <table class="table">
-        <th>リスト</th>
-        <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
-        <tr v-for="item in filteredItems" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.day }}</td>
-          <td>
-            <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
-              参照
-            </router-link>
-          </td>
-        </tr>
-      </table>
+    <div class="paper">
+      <div class="lines">
+        <div id="search">
+          検索条件
+          <ul id="searchList">
+            <li class="username">
+              ユーザー名
+              <input v-model="searchWord" type="text">
+            </li>
+            <li class="update">
+              更新日
+              <input v-model="updatedFrom" type="date">
+              〜
+              <input v-model="updatedTo" type="date">
+            </li>
+          </ul>
+          <button @click="active()">
+            検索
+          </button>
+          <button @click="reset()">
+            リセット
+          </button>
+        </div>
+        <!-- 下部 -->
+        <div v-if="isActive">
+          <!-- テーブルを作る（表みたいな感じ） -->
+          <table class="table">
+            <th>リスト</th>
+            <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
+            <tr v-for="item in filteredItems" :key="item.id">
+              <td>{{ item.name }}</td>
+              <td>{{ item.day }}</td>
+              <td>
+                <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
+                  参照
+                </router-link>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="holes hole-top" />
+      <div class="holes hole-middle" />
+      <div class="holes hole-bottom" />
     </div>
   </div>
 </template>
@@ -158,32 +165,76 @@ export default {
 </script>
 
 <style>
+.paper {
+  position: fixed;
+  height: 500px;
+  width: 400px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0px 0px 5px 0px #888;
+  left: 35%;
+  top: 20%;
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  left: 45px;
+  height: 100%;
+  width: 2px;
+  background: rgba(255,0,0,0.4);
+}
+
+.lines {
+  margin-top: 40px;
+  height: calc(100% - 40px);
+  width: 100%;
+  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
+}
+
 /* 上部 */
 #search{
   text-align: center;
   padding: 0.5em 1em;
-  margin: 100px;
+  font-size: 18px;
   font-weight: bold;
-  border: solid 3px #000000;
   width: 80%;
   height: auto;
   display: inline-block;
 }
 #searchList{
-  list-style: none;
+  text-align: left;
 }
 .username{
-  margin: 40px;
+  margin: 30px;
 }
 .update{
-  margin: 40px;
+  margin: 56px 30px;
 }
 .view{
   margin: 40px;
 }
 /* 下部 */
+button {
+  text-align: center;
+  width: 9rem;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5;
+  transition: all 1s;
+  margin-left: 5px;
+}
+
 button:hover {
-  background-color: #59b1eb;
+  transition-delay: 50ms;
+  transform: rotate3d(0,0,1,-13deg);
   cursor: pointer;
 }
 .viewButton{
@@ -203,4 +254,22 @@ table{
   transform: rotate(0deg);
 }
 
+.holes {
+  position: absolute;
+  left: 10px;
+  height: 25px;
+  width: 25px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 2px 0px #888;
+}
+.hole-top {
+  top: 10%;
+}
+.hole-middle {
+  top: 48%;
+}
+.hole-bottom {
+  bottom: 10%;
+}
 </style>

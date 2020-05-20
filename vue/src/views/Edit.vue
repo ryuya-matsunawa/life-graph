@@ -219,6 +219,7 @@ ul li{
   text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
   text-align: center;
   color: #fff;
+  cursor: pointer;
 }
 
 /* ラベルを枠で囲みたい
@@ -246,6 +247,7 @@ label{
   line-height: 1.5;
   transition: all 1s;
   margin: 10px 15px;
+  cursor: pointer;
 }
 
 .graphRegister:hover{
@@ -269,6 +271,7 @@ label{
   line-height: 1.5;
   transition: all 1s;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .graphEdit:hover {
