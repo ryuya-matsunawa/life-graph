@@ -3,6 +3,8 @@ package com.lifegraph.team20.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +12,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifegraph.team20.models.Content;
+import com.lifegraph.team20.models.LifeGraph;
+import com.lifegraph.team20.models.UserData;
+import com.lifegraph.team20.repository.LifeGraphsRepository;
 import com.lifegraph.team20.service.ContentService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/life-graph")
+@RequestMapping("/life-graphs")
 public class LifeGraphsContorller {
-    @Autowired
+
+	@Autowired
+	LifeGraphsRepository lifeGraphsRepository;
+
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+		public List<UserData> userData() {
+			List<UserData> userDatas = lifeGraphsRepository.setUserData();
+			return userDatas;
+		}
+
+	@Autowired
     ContentService contentService;
 
     @RequestMapping(value = "/new",method = RequestMethod.POST)
@@ -38,18 +55,15 @@ public class LifeGraphsContorller {
     void deleteContent(@PathVariable("id") Integer id) {
     	contentService.deleteContent(id);
     }
-//    @RequestMapping(value = "/sample", method = RequestMethod.GET)
-//	public List<UserData> userData() {
-//		List<UserData> userDatas = setUserData();
-//		return userDatas;
-//	}
-//​
-//	private List<UserData> setUserData() {
-//		final String sql = "select * from users inner join parent_graphs on users.id = parent_graphs.user_id";
-//		return jdbcTemplate.query(sql, new RowMapper<UserData>() {
-//			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException{
-//				return new UserData(rs.getInt("id"), rs.getString("username"), rs.getTimestamp("updated_at"));
-//			}
-//		});
-//	}
+
+    //人生グラフ参照API
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    //Entityクラスとは、dbで扱うデータをアプリケーションで保持するための入れ物のようなものです。
+    //value = "/{id}"のidがInteger idに入る
+	public ResponseEntity<List<LifeGraph>> graph(@PathVariable("id") Integer id) {
+    	//下のidを引数として渡す（上のInteger idのこと）
+    	//setGraph(id);このメソッドは何？これを起動すると、Listを作る
+		List<LifeGraph> graph = lifeGraphsRepository.setGraph(id);
+		return ResponseEntity.ok(graph);
+	}
 }

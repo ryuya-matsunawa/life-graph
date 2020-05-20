@@ -3,10 +3,10 @@
     <div class="header">
       <ul class="acount">
         <li class="personalinfo">
-          User Name：{{ account[0].username }}
+          User Name：{{ username }}
         </li>
         <li class="personalinfo">
-          Authority:{{ account[0].role }}
+          Authority:{{ role }}
         </li>
         <li>
           <span tag="button" class="btn" @click="logout()">
@@ -22,15 +22,14 @@
 export default {
   data () {
     return {
-      account: [{
-        username: '',
-        role: ''
-      }]
+      username: '',
+      role: ''
     }
   },
   async mounted () {
+    const userId = this.$store.state.auth.userId
     // ロード時にactionsにdispatchする
-    await this.$store.dispatch('account/fetchAccount')
+    await this.$store.dispatch('account/fetchAccount', userId)
     // storeから情報を取得するメソッド
     this.setAccount()
   },
@@ -38,21 +37,22 @@ export default {
     // dataのaccountにaccount.jsのstateの情報をsetする
     setAccount () {
       const stateAccount = this.$store.state.account
-      this.account[0].username = stateAccount.account[0].username
-      const role = stateAccount.account[0].name
+      this.username = stateAccount.account.username
+      const role = stateAccount.account.name
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
       if (role === 'ROLE_USER') {
-        this.account[0].role = '一般ユーザ'
+        this.role = '一般ユーザ'
       } else if (role === 'ROLE_ADMIN') {
-        this.account[0].role = '管理者'
+        this.role = '管理者'
       } else {
-        this.account[0].role = 'オーナー'
+        this.role = 'オーナー'
       }
     },
     // ログアウトボタンが押された時のメソッド
     logout () {
       // authのstateのtokenを消す
       this.$store.commit('auth/deleteToken')
+      this.$store.commit('account/deleteAccount')
       // tokenが消されたあとログイン画面に遷移する
       this.$router.push('/login')
     }
@@ -73,6 +73,9 @@ export default {
   background-color: #B2EBF2;
   background-image: url("../assets/header.png");
   background-size: contain;
+  margin-top: -30px;
+  padding-bottom: 10px;
+  opacity: 0.7;
 }
 
 .acount{
@@ -82,7 +85,7 @@ export default {
 .acount li{
   line-height: 30px;
   margin-right: 35px;
-  margin-top: 30px;
+  margin-top: 80px;
   padding: 8px;
   width: auto;
   font-size: 18px;

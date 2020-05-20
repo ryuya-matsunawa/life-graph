@@ -6,23 +6,23 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-//@Entity
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-//@Table(name = "users")
 public class Account {
 
   @Id
   @GeneratedValue
+  // usersテーブルのid
   private int id;
 
   @NotBlank
+  // usersテーブルのusername
   private String username;
 
   @NotBlank
+  // rolesテーブルのname
   private String name;
 
 }
