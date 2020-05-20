@@ -26,10 +26,10 @@ public class LifeGraphsContorller {
 	LifeGraphsRepository lifeGraphsRepository;
 
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-		public List<UserData> userData() {
+	@RequestMapping(method = RequestMethod.GET)
+		public ResponseEntity<List<UserData>> userData() {
 			List<UserData> userDatas = lifeGraphsRepository.setUserData();
-			return userDatas;
+			return ResponseEntity.ok(userDatas);
 		}
 
 	@Autowired

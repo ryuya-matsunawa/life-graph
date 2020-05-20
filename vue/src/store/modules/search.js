@@ -26,10 +26,13 @@ export default {
     ]
   },
   mutations: {
+    setSearch (state, payload) {
+      state.items = payload
+    }
   },
   actions: {
     fetchSearch ({ commit }) {
-      const url = '/api/life-graphs/search'
+      const url = '/api/life-graphs'
       axios.get(url).then(res => commit('setSearch', res.data))
     }
   }

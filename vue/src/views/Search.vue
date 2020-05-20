@@ -96,7 +96,7 @@ export default {
   },
   async mounted () {
     // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
-    await this.$store.dispatch('search/fetchAccount')
+    await this.$store.dispatch('search/fetchSearch')
     this.setItems()
   },
   methods: {
