@@ -13,7 +13,6 @@ export default {
   mutations: {
     setGraph (state, payload) {
       state.contents = payload
-      console.log(payload)
     },
     loadDone (state, payload) {
       state.loaded = payload.loading
