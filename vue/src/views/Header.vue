@@ -74,8 +74,7 @@ export default {
   background-image: url("../assets/header.png");
   background-size: contain;
   margin-top: -30px;
-  padding-bottom: 10px;
-  opacity: 0.7;
+  padding-bottom: 5px;
 }
 
 .acount{
@@ -83,7 +82,7 @@ export default {
 }
 
 .acount li{
-  line-height: 30px;
+  line-height: 26px;
   margin-right: 35px;
   margin-top: 80px;
   padding: 8px;

@@ -73,21 +73,56 @@ export default {
   background-image: url("../assets/team20.png");
   background-size: cover;
   width: 100%;
-  height: 500px;
+  height: 700px;
+  background-position: right;
+  position: relative;
 }
 
 .login {
-  width: 50%;
-  margin-left: 80px;
+  width: 35%;
+  padding: 30px;
+  margin-left: 50px;
+  background: #fff;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 50%,
+      #ffff 50%,
+      #ffff 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 97%,
+      #999 97%,
+      #999 100%
+    );
+  background-size:
+    8px 80%,
+    80% 2em;
+  line-height:1.5;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 #title {
-  width: 40%;
-  margin-top: 30px;
+  width: 50%;
+  margin-top: 15px;
 }
 
 .form-item {
-  margin-bottom: 0.75em;
+  width: 18rem;
+  height: 8rem;
+  padding: 1em 1.5em;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1.125rem;
+  line-height: 1.8;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .form-item input {
@@ -99,8 +134,9 @@ export default {
   font-size: 1em;
   height: 50px;
   transition: border-color 0.3s;
-  width: 50%;
+  width: 70%;
   display: block;
+  margin-left: 10px;
   text-align: center;
   z-index: -1;
 }
@@ -113,31 +149,48 @@ export default {
 button {
   margin: 2em 0 0;
   margin-top: 40px;
-  text-align: center;
+  cursor: pointer
 }
 
 .button {
-  background: #EEFF41;
-  border: none;
-  color: #8c8c8c;
-  cursor: pointer;
-  height: 45px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.1em;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: background 0.3s ease-in-out;
-  width: 25%;
+  width: 12rem;
+  height: 4rem;
+  padding-left: 3rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  color: #fff;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 10%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(30, 100%, 85%, 1), hsla(30, 100%, 85%, 1));
+  font-size: 2rem;
+  line-height: 1.5;
+  transition: all 1s;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  -ms-perspective: 800px;
+  perspective: 800px;
 }
 
 .button:hover {
-  background: #FF8F00;
+  transition-delay: 50ms;
+  transform: rotate3d(0,0,1,-13deg);
 }
 
 .form-footer {
-  font-size: 1em;
-  padding: 2em 0;
   text-align: left;
+  width: 12rem;
+  height: 4rem;
+  padding-left: 3rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .form-footer a {
