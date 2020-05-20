@@ -1,19 +1,26 @@
 <template>
   <div class="background">
-    <div class="login">
-      <img id="title" src="../assets/signin.png">
-      <div class="form-item">
-        <label for="username" />
-        <input v-model="username" type="username" placeholder="UserName">
-        <label for="password" />
-        <input v-model="password" type="password" required="required" placeholder="Password">
-      </div>
-      <button class="button-panel button" @click="login()">
-        Signin
-      </button>
-      <div class="form-footer">
-        <p><a href="#">Create an account</a></p>
-        <p><a href="#">Forgot password?</a></p>
+    <div class="paper">
+      <div class="lines">
+        <img id="title" src="../assets/signin.png">
+        <img id="l2" src="../assets/h2.png">
+        <div class="form-item">
+          <label for="username" />
+          <input v-model="username" type="username" placeholder="UserName">
+          <br>
+          <label for="password" />
+          <input v-model="password" type="password" required="required" placeholder="Password">
+        </div>
+        <button class="button-panel button" @click="login()">
+          Signin
+        </button>
+        <div class="form-footer">
+          <p><a href="#">Create an account</a></p>
+          <p><a href="#">Forgot password?</a></p>
+        </div>
+        <div class="holes hole-top" />
+        <div class="holes hole-middle" />
+        <div class="holes hole-bottom" />
       </div>
     </div>
   </div>
@@ -67,6 +74,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .background {
@@ -75,54 +83,56 @@ export default {
   width: 100%;
   height: 700px;
   background-position: right;
-  position: relative;
 }
 
-.login {
-  width: 35%;
-  padding: 30px;
-  margin-left: 50px;
-  background: #fff;
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 50%,
-      #ffff 50%,
-      #ffff 50%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 97%,
-      #999 97%,
-      #999 100%
-    );
-  background-size:
-    8px 80%,
-    80% 2em;
-  line-height:1.5;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+.paper {
+  height: 450px;
+  width: 570px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0px 0px 5px 0px #888;
+  left: 50px;
+  top: 100px;
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  left: 45px;
+  height: 450px;
+  width: 2px;
+  background: rgba(255,0,0,0.4);
+}
+
+.lines {
+  margin-top: 40px;
+  width: 570px;
+  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
 }
 
 #title {
-  width: 50%;
-  margin-top: 15px;
+  width: 260px;
+}
+
+#l2 {
+  width: 33px;
+  right: 330px;
+  bottom: 180px;
 }
 
 .form-item {
-  width: 18rem;
-  height: 8rem;
-  padding: 1em 1.5em;
+  width: 280px;
+  height: 130px;
+  padding: 20px 20px;
   overflow: hidden;
   box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
   background-image:
     linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
   , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 1.125rem;
+  font-size: 19px;
   line-height: 1.8;
-  white-space: nowrap;
+  white-space: pre-wrap;
   text-overflow: ellipsis;
+  left: 40px;
 }
 
 .form-item input {
@@ -138,7 +148,6 @@ export default {
   display: block;
   margin-left: 10px;
   text-align: center;
-  z-index: -1;
 }
 
 .form-item input:focus {
@@ -153,6 +162,9 @@ button {
 }
 
 .button {
+  position:absolute;
+  top: 250px;
+  right: 10px;
   width: 12rem;
   height: 4rem;
   padding-left: 3rem;
@@ -179,6 +191,9 @@ button {
 }
 
 .form-footer {
+  position: absolute;
+  left: 75%;
+  top: 10%;
   text-align: left;
   width: 12rem;
   height: 4rem;
@@ -201,5 +216,24 @@ button {
 
 .form-footer a:hover {
   border-bottom: 1px dotted #8c8c8c;
+}
+
+.holes {
+  position: absolute;
+  left: 10px;
+  height: 25px;
+  width: 25px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 2px 0px #888;
+}
+.hole-top {
+  top: 10%;
+}
+.hole-middle {
+  top: 43%;
+}
+.hole-bottom {
+  bottom: 10%;
 }
 </style>
