@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifegraph.team20.models.LifeGraph;
+//登録編集APIで使ってます。
+import com.lifegraph.team20.models.LifeGraphData;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -85,27 +87,20 @@ public class LifeGraphsContorller {
 
 	public class LifeGraphsController {
 
-	  @RequestMapping(value = "/auth/life_graphs", method = RequestMethod.POST)
-	  //  @PostMapping("/life-graphs")
-	  //Validでバリデーションチェックしてくれてる。
-	  //  public ResponseEntity<String> postController(@Valid @RequestBody LifeGraphData data) {
-	  public ResponseEntity<String> postController(@Valid @RequestBody LifeGraphData data) {
-	    //    LifeGraphData lifegraph = data;
+		@RequestMapping(value = "/life_graphs", method = RequestMethod.POST)
 
-	    //    LifeGraphData lifegraph = data;
+		  public ResponseEntity<String> postController(@Valid @RequestBody LifeGraphData data) {
 
-	    long id = data.getUserId();
-	    int ageInt = data.getAge();
-	    int scoreInt = data.getScore();
-	    String comment = data.getComment();
+		    long id = data.getUserId();
+		    int ageInt = data.getAge();
+		    int scoreInt = data.getScore();
+		    String comment = data.getComment();
 
-	    //存在チェック
-	    ExistenceCheckService.exists(id, ageInt);
+		    //存在チェック
+		    ExistenceCheckService.exists(id, ageInt);
 
-	    //    return ResponseEntity.ok("OK");
-	    return ResponseEntity.ok("OK");
-	  }
-
+		    return ResponseEntity.ok("OK");
+		  }
 	}
 
 //	【登録編集API】

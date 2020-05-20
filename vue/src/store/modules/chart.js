@@ -167,6 +167,8 @@ export default {
     }
   },
   actions: {
+    // ここでaxiosを使ってAPIと連携する。
+    // その時引数で渡すことができる
     load ({ commit }) {
       const loading = true
       commit('loadDone', { loading })
