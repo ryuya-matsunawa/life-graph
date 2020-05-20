@@ -9,6 +9,11 @@
           Authority:{{ role }}
         </li>
         <li>
+          <router-link to="/top" class="btn">
+            TOP
+          </router-link>
+        </li>
+        <li>
           <span tag="button" class="btn" @click="logout()">
             Log Out
           </span>

@@ -49,9 +49,6 @@
     <div v-if="loaded" class="chart">
       <Chart />
     </div>
-    <router-link to="/top" tag="button" class="toTop">
-      TOP
-    </router-link>
   </div>
 </template>
 
@@ -203,32 +200,10 @@ ul li{
   bottom: 10%;
 }
 
-.toTop {
-  line-height: 30px;
-  margin-right: 35px;
-  margin-top: 30px;
-  padding: 8px;
-  width: 115px;
-  font-size: 18px;
-  display: inline-block;
-  text-decoration: none;
-  background-color: #6AAEA5;
-  border-color: transparent;
-  border-radius: 3px;/*角の丸み*/
-  font-weight: bold;
-  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* ラベルを枠で囲みたい
-ボックスデザイン集:https://saruwakakun.com/html-css/reference/box */
 label{
   display:inline-block;
   vertical-align: middle;
   text-align: left;
-  /* float:left; */
   width:85px;}
 
 .graphRegister {
