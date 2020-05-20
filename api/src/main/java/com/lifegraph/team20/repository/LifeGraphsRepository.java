@@ -19,7 +19,6 @@ import com.lifegraph.team20.models.UserData;
 public class LifeGraphsRepository {
 
 	@Autowired
-
 	private JdbcTemplate jdbcTemplate;
 
 	public List<UserData> setUserData() {
@@ -30,7 +29,6 @@ public class LifeGraphsRepository {
 			}
 		});
 	}
-
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
