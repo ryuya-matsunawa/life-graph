@@ -171,8 +171,8 @@ export default {
 <style>
 .paper {
   position: fixed;
-  height: 500px;
-  width: 400px;
+  height: 700px;
+  width: 600px;
   background: rgba(255,255,255,0.9);
   box-shadow: 0px 0px 5px 0px #888;
   left: 35%;
@@ -233,7 +233,6 @@ button {
   line-height: 1.5;
   transition: all 1s;
   margin-left: 5px;
-  margin-top: 10px;
 }
 
 button:hover {
@@ -246,7 +245,8 @@ button:hover {
   text-decoration: none;
 }
 table{
-  margin: 0 auto;
+  margin-top: 58px;
+  margin-left: 50px;
   width: 60%;
 }
 .arrow {

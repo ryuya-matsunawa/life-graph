@@ -40,6 +40,13 @@
           >
             編集
           </button>
+          <button
+            class="graphClear"
+            href="#!"
+            @click="click"
+          >
+            クリア
+          </button>
         </div>
         <div class="holes hole-top" />
         <div class="holes hole-middle" />
@@ -139,11 +146,11 @@ export default {
 
 .paper {
   position: fixed;
-  height: 200px;
+  height:450px;
   width: 400px;
   background: rgba(255,255,255,0.9);
   box-shadow: 0px 0px 5px 0px #888;
-  left: 65%;
+  left: 75%;
   top: 60%;
 }
 
@@ -250,6 +257,30 @@ label{
 }
 
 .graphEdit:hover {
+  transition-delay: 50ms;
+  transform: rotate3d(0,0,1,-13deg);
+}
+
+.graphClear {
+  text-align: center;
+  width: 5rem;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5;
+  transition: all 1s;
+  margin: 10px 15px;
+  cursor: pointer;
+}
+
+.graphClear:hover{
   transition-delay: 50ms;
   transform: rotate3d(0,0,1,-13deg);
 }

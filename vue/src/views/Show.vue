@@ -5,9 +5,6 @@
     <div class="chart">
       <Chart />
     </div>
-    <router-link to="/top" tag="button" class="totop">
-      TOPへ
-    </router-link>
   </div>
 </template>
 
@@ -27,9 +24,9 @@ export default {
 <style scoped>
 .show {
   background-image: url(../assets/show.png);
-  background-size: 20%;
+  background-size: 25%;
   background-repeat: no-repeat;
-  background-position: 5% 30%;
+  background-position: 5% 50%;
   background-position: fixed;
 }
 
