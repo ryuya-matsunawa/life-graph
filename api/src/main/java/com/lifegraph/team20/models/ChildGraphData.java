@@ -13,7 +13,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class LifeGraphData {
+public class ChildGraphData {
   @NotNull
   private long parentId;
 
