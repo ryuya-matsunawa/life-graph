@@ -3,10 +3,15 @@
     <div class="header">
       <ul class="acount">
         <li class="personalinfo">
-          User Name：{{ account.username }}
+          User Name：{{ username }}
         </li>
         <li class="personalinfo">
-          Authority:{{ account.role }}
+          Authority:{{ role }}
+        </li>
+        <li>
+          <router-link to="/top" class="btn">
+            TOP
+          </router-link>
         </li>
         <li>
           <span tag="button" class="btn" @click="logout()">
@@ -22,16 +27,14 @@
 export default {
   data () {
     return {
-      account: {
-        username: '',
-        role: ''
-      }
+      username: '',
+      role: ''
     }
   },
-  async mounted () {
+  mounted () {
     const userId = this.$store.state.auth.userId
     // ロード時にactionsにdispatchする
-    await this.$store.dispatch('account/fetchAccount', { userId: userId })
+    this.$store.dispatch('account/fetchAccount', userId)
     // storeから情報を取得するメソッド
     this.setAccount()
   },
@@ -39,15 +42,15 @@ export default {
     // dataのaccountにaccount.jsのstateの情報をsetする
     setAccount () {
       const stateAccount = this.$store.state.account
-      this.account.username = stateAccount.account.username
+      this.username = stateAccount.account.username
       const role = stateAccount.account.name
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
       if (role === 'ROLE_USER') {
-        this.account.role = '一般ユーザ'
+        this.role = '一般ユーザ'
       } else if (role === 'ROLE_ADMIN') {
-        this.account.role = '管理者'
+        this.role = '管理者'
       } else {
-        this.account.role = 'オーナー'
+        this.role = 'オーナー'
       }
     },
     // ログアウトボタンが押された時のメソッド
@@ -76,8 +79,7 @@ export default {
   background-image: url("../assets/header.png");
   background-size: contain;
   margin-top: -30px;
-  padding-bottom: 10px;
-  opacity: 0.7;
+  padding-bottom: 5px;
 }
 
 .acount{
@@ -85,7 +87,7 @@ export default {
 }
 
 .acount li{
-  line-height: 30px;
+  line-height: 26px;
   margin-right: 35px;
   margin-top: 80px;
   padding: 8px;

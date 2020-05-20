@@ -1,19 +1,26 @@
 <template>
   <div class="background">
-    <div class="login">
-      <img id="title" src="../assets/signin.png">
-      <div class="form-item">
-        <label for="username" />
-        <input v-model="username" type="username" placeholder="UserName">
-        <label for="password" />
-        <input v-model="password" type="password" required="required" placeholder="Password">
-      </div>
-      <button class="button-panel button" @click="login()">
-        Signin
-      </button>
-      <div class="form-footer">
-        <p><a href="#">Create an account</a></p>
-        <p><a href="#">Forgot password?</a></p>
+    <div class="paper">
+      <div class="lines">
+        <img id="title" src="../assets/signin.png">
+        <img id="l2" src="../assets/h2.png">
+        <div class="form-item">
+          <label for="username" />
+          <input v-model="username" type="username" placeholder="UserName">
+          <br>
+          <label for="password" />
+          <input v-model="password" type="password" required="required" placeholder="Password">
+        </div>
+        <button class="button-panel button" @click="login()">
+          Signin
+        </button>
+        <div class="form-footer">
+          <p><a href="#">Create an account</a></p>
+          <p><a href="#">Forgot password?</a></p>
+        </div>
+        <div class="holes hole-top" />
+        <div class="holes hole-middle" />
+        <div class="holes hole-bottom" />
       </div>
     </div>
   </div>
@@ -67,27 +74,65 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .background {
   background-image: url("../assets/team20.png");
   background-size: cover;
   width: 100%;
-  height: 500px;
+  height: 700px;
+  background-position: right;
 }
 
-.login {
-  width: 50%;
-  margin-left: 80px;
+.paper {
+  height: 450px;
+  width: 570px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0px 0px 5px 0px #888;
+  left: 50px;
+  top: 100px;
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  left: 45px;
+  height: 450px;
+  width: 2px;
+  background: rgba(255,0,0,0.4);
+}
+
+.lines {
+  margin-top: 40px;
+  width: 570px;
+  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
 }
 
 #title {
-  width: 40%;
-  margin-top: 30px;
+  width: 260px;
+}
+
+#l2 {
+  width: 33px;
+  right: 330px;
+  bottom: 180px;
 }
 
 .form-item {
-  margin-bottom: 0.75em;
+  width: 280px;
+  height: 130px;
+  padding: 20px 20px;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 19px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  left: 40px;
 }
 
 .form-item input {
@@ -99,10 +144,10 @@ export default {
   font-size: 1em;
   height: 50px;
   transition: border-color 0.3s;
-  width: 50%;
+  width: 70%;
   display: block;
+  margin-left: 10px;
   text-align: center;
-  z-index: -1;
 }
 
 .form-item input:focus {
@@ -113,31 +158,54 @@ export default {
 button {
   margin: 2em 0 0;
   margin-top: 40px;
-  text-align: center;
+  cursor: pointer
 }
 
 .button {
-  background: #EEFF41;
-  border: none;
-  color: #8c8c8c;
-  cursor: pointer;
-  height: 45px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.1em;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: background 0.3s ease-in-out;
-  width: 25%;
+  position:absolute;
+  top: 250px;
+  right: 10px;
+  width: 12rem;
+  height: 4rem;
+  padding-left: 3rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  color: #fff;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 10%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(30, 100%, 85%, 1), hsla(30, 100%, 85%, 1));
+  font-size: 2rem;
+  line-height: 1.5;
+  transition: all 1s;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  -ms-perspective: 800px;
+  perspective: 800px;
 }
 
 .button:hover {
-  background: #FF8F00;
+  transition-delay: 50ms;
+  transform: rotate3d(0,0,1,-13deg);
 }
 
 .form-footer {
-  font-size: 1em;
-  padding: 2em 0;
+  position: absolute;
+  left: 75%;
+  top: 10%;
   text-align: left;
+  width: 12rem;
+  height: 4rem;
+  padding-left: 3rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .form-footer a {
@@ -148,5 +216,24 @@ button {
 
 .form-footer a:hover {
   border-bottom: 1px dotted #8c8c8c;
+}
+
+.holes {
+  position: absolute;
+  left: 10px;
+  height: 25px;
+  width: 25px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 2px 0px #888;
+}
+.hole-top {
+  top: 10%;
+}
+.hole-middle {
+  top: 43%;
+}
+.hole-bottom {
+  bottom: 10%;
 }
 </style>

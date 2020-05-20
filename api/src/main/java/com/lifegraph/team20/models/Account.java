@@ -14,12 +14,15 @@ public class Account {
 
   @Id
   @GeneratedValue
+  // usersテーブルのid
   private int id;
 
   @NotBlank
+  // usersテーブルのusername
   private String username;
 
   @NotBlank
+  // rolesテーブルのname
   private String name;
 
 }
