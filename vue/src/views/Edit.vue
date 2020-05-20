@@ -3,48 +3,52 @@
     <div>
       <Header />
     </div>
-    <div class="formOut">
-      <ul>
-        <li>
-          <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" v-model="editAge" type="number">
-        <!-- テスト用表示 -->
-        <!-- <p>{{ editAge }}</p> -->
-        </li>
-        <li>
-          <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" v-model="editScore" type="number">
-        <!-- テスト用表示 -->
-        <!-- <p>{{ editScore }}</p> -->
-        </li>
-        <li>
-          <label class="tag" for="editComment">コメント</label>
-          <input id="editComment" v-model="editComment" type="text">
-        <!-- テスト用表示 -->
-        <!-- <p>{{ editComment }}</p> -->
-        </li>
-      </ul>
-      <button
-        class="graphRegister"
-        href="#!"
-        @click="add"
-      >
-        登録
-      </button>
-      <button
-        class="graphEdit"
-        href="#!"
-        @click="edit"
-      >
-        編集
-      </button>
+    <div class="paper">
+      <div class="lines">
+        <div class="formOut">
+          <ul>
+            <li>
+              <label class="tag" for="editAge">年齢</label>
+              <input id="editAge" v-model="editAge" type="number">
+              <!-- テスト用表示 -->
+              <!-- <p>{{ editAge }}</p> -->
+            </li>
+            <li>
+              <label class="tag" for="editScore">スコア</label>
+              <input id="editScore" v-model="editScore" type="number">
+              <!-- テスト用表示 -->
+              <!-- <p>{{ editScore }}</p> -->
+            </li>
+            <li>
+              <label class="tag" for="editComment">コメント</label>
+              <input id="editComment" v-model="editComment" type="text">
+              <!-- テスト用表示 -->
+              <!-- <p>{{ editComment }}</p> -->
+            </li>
+          </ul>
+          <button
+            class="graphRegister"
+            href="#!"
+            @click="add"
+          >
+            登録
+          </button>
+          <button
+            class="graphEdit"
+            href="#!"
+            @click="edit"
+          >
+            編集
+          </button>
+        </div>
+        <div class="holes hole-top" />
+        <div class="holes hole-middle" />
+        <div class="holes hole-bottom" />
+      </div>
     </div>
     <div v-if="loaded" class="chart">
       <Chart />
     </div>
-    <router-link to="/top" tag="button" class="toTop">
-      TOP
-    </router-link>
   </div>
 </template>
 
@@ -128,15 +132,43 @@ export default {
   background-image: url(../assets/human.png);
   background-size: 20%;
   background-repeat: no-repeat;
-  background-position: 5% 30%;
+  background-position: 4% 30%;
   background-position: fixed;
+  padding-top: 100px;
+}
+
+.paper {
+  position: fixed;
+  height: 200px;
+  width: 400px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0px 0px 5px 0px #888;
+  left: 65%;
+  top: 60%;
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  left: 45px;
+  height: 100%;
+  width: 2px;
+  background: rgba(255,0,0,0.4);
+}
+
+.lines {
+  margin-top: 40px;
+  height: calc(100% - 40px);
+  width: 100%;
+  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
 }
 
 .formOut{
   display: inline-block;
   text-align: center;
   width: 250px;
-  margin: 100px 0px 0px 0px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 ul {
@@ -146,116 +178,79 @@ ul {
 }
 
 ul li{
-  margin: 10px 5px 10px 5px;
+  margin: 4px 15px 8px 5px;
 }
 
-.toTop {
-  line-height: 30px;
-  margin-right: 35px;
-  margin-top: 30px;
-  padding: 8px;
-  width: 115px;
-  font-size: 18px;
-  display: inline-block;
-  text-decoration: none;
-  background-color: #6AAEA5;
-  border-color: transparent;
-  border-radius: 3px;/*角の丸み*/
-  font-weight: bold;
-  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
-  text-align: center;
+.holes {
+  position: absolute;
+  left: 10px;
+  height: 25px;
+  width: 25px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 2px 0px #888;
+}
+.hole-top {
+  top: 10%;
+}
+.hole-middle {
+  top: 43%;
+}
+.hole-bottom {
+  bottom: 10%;
 }
 
-/* ラベルを枠で囲みたい
-ボックスデザイン集:https://saruwakakun.com/html-css/reference/box */
 label{
   display:inline-block;
   vertical-align: middle;
   text-align: left;
-  /* float:left; */
-  width:80px;
-}
+  width:85px;}
 
 .graphRegister {
-  margin-right: 30px;
-  position: relative;
-  display: inline-block;
+  text-align: center;
+  width: 5rem;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1rem;
   font-weight: bold;
-  padding: 5px 11px 5px 15px;
-  text-decoration: none;
-  color: #8c8c8c;
-  transition: .4s;
-  border: none;
+  line-height: 1.5;
+  transition: all 1s;
+  margin: 10px 15px;
+  cursor: pointer;
 }
 
-.graphRegister:before {
-  position: absolute;
-  display: inline-block;
-  content: '';
-  width: 4px;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border-radius: 3px;
-  background:#B3FFD5;
-}
-
-.graphRegister:after {
-  position: absolute;
-  display: inline-block;
-  content: '';
-  width: 4px;
-  height: 100%;
-  top:0;
-  left: 100%;
-  border-radius: 3px;
-  background:#B3FFD5;
-}
-
-.graphRegister:hover:before,.graphRegister:hover:after {
-  -webkit-transform: rotate(10deg);
-  transform: rotate(10deg);
+.graphRegister:hover{
+  transition-delay: 50ms;
+  transform: rotate3d(0,0,1,-13deg);
 }
 
 .graphEdit {
-  margin-right: 30px;
-  position: relative;
-  display: inline-block;
+  text-align: center;
+  width: 5rem;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
+  background-image:
+    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
+  font-size: 1rem;
   font-weight: bold;
-  padding: 5px 11px 5px 15px;
-  text-decoration: none;
-  color: #8c8c8c;
-  transition: .4s;
-  border: none;
+  line-height: 1.5;
+  transition: all 1s;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
-.graphEdit:before {
-  position: absolute;
-  display: inline-block;
-  content: '';
-  width: 4px;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border-radius: 3px;
-  background:#B3FFD5;
+.graphEdit:hover {
+  transition-delay: 50ms;
+  transform: rotate3d(0,0,1,-13deg);
 }
-
-.graphEdit:after {
-  position: absolute;
-  display: inline-block;
-  content: '';
-  width: 4px;
-  height: 100%;
-  top:0;
-  left: 100%;
-  border-radius: 3px;
-  background:#B3FFD5;
-}
-
-.graphEdit:hover:before,.graphEdit:hover:after {
-  -webkit-transform: rotate(10deg);
-  transform: rotate(10deg);
-}
-
 </style>
