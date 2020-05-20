@@ -26,16 +26,16 @@ public class LifeGraphsContorller {
 	LifeGraphsRepository lifeGraphsRepository;
 
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-		public List<UserData> userData() {
+	@RequestMapping(method = RequestMethod.GET)
+		public ResponseEntity<List<UserData>> userData() {
 			List<UserData> userDatas = lifeGraphsRepository.setUserData();
-			return userDatas;
+			return ResponseEntity.ok(userDatas);
 		}
 
 	@Autowired
     ContentService contentService;
 
-    @RequestMapping(value = "/new",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     Content postContent(@RequestBody Content content) {
         return contentService.postContent(content);
     }

@@ -33,7 +33,7 @@ const routes = [
     component: Edit
   },
   {
-    path: '/show',
+    path: '/show/5',
     name: 'Show',
     component: Show
   }
