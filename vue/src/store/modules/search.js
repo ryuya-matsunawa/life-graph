@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import axios from 'axios'あとで使う！！
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
     items: [
       {
-        id: 1,
+        id: 5,
         name: 'Yamada',
         day: '2020-05-14'
       },
@@ -23,9 +24,13 @@ export default {
         day: '2020-05-16'
       }
     ]
+  },
+  mutations: {
+  },
+  actions: {
+    fetchSearch ({ commit }) {
+      const url = '/api/life-graphs/search'
+      axios.get(url).then(res => commit('setSearch', res.data))
+    }
   }
-  // mutations: {
-  // },
-  // actions: {
-  // }
 }

@@ -35,7 +35,7 @@ public class LifeGraphsContorller {
 	@Autowired
     ContentService contentService;
 
-    @RequestMapping(value = "/new",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     Content postContent(@RequestBody Content content) {
         return contentService.postContent(content);
     }

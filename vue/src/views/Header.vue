@@ -26,10 +26,10 @@ export default {
       role: ''
     }
   },
-  async mounted () {
+  mounted () {
     const userId = this.$store.state.auth.userId
     // ロード時にactionsにdispatchする
-    await this.$store.dispatch('account/fetchAccount', userId)
+    this.$store.dispatch('account/fetchAccount', userId)
     // storeから情報を取得するメソッド
     this.setAccount()
   },
