@@ -1,4 +1,4 @@
-//梶｜作った気がする。いらない。
+//英輔が作った
 
 package com.lifegraph.team20.models;
 

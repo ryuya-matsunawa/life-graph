@@ -1,3 +1,5 @@
+//梶が作った
+
 package com.lifegraph.team20.models;
 
 import javax.validation.constraints.Max;
