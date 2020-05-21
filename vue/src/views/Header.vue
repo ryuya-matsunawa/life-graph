@@ -1,10 +1,5 @@
 <template>
   <div class="background">
-    <head>
-      <meta charset="UTF-8">
-      <link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    </head>
     <div class="header">
       <div class="title">
         Life graph

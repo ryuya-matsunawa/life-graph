@@ -1,8 +1,5 @@
 <template>
   <div class="top">
-    <head>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
-    </head>
     <Header />
     <div class="title">
       あなたの人生グラフ、どう変えますか。

@@ -1,8 +1,5 @@
 <template>
   <div class="show">
-    <head>
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    </head>
     <Header />
     <h1>User Name</h1>
     <div class="chart">

@@ -1,9 +1,5 @@
 <template>
   <div class="login">
-    <head>
-      <meta charset="UTF-8">
-      <link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
-    </head>
     <video id="video" src="../assets/login.mp4" autoplay loop muted />
     <div class="comment">
       あの頃も、思い返せば綺麗だった。

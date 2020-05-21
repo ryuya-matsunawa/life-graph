@@ -8,6 +8,8 @@
 </template>
 
 <style>
+@import url(https://fonts.googleapis.com/earlyaccess/hannari.css);
+@import url(https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap);
 @media screen and (min-width:1024px) {
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif, Tahoma;
