@@ -37,6 +37,7 @@ export default {
 }
 
 .h1 {
+  /* eslint-disable no-unused-vars */
   font-family: 'Noto Serif JP', serif;
 }
 
@@ -53,6 +54,7 @@ export default {
   letter-spacing: .15rem;
   cursor: pointer;
   background-color: #a7d28d;
+  /* eslint-disable no-unused-vars */
   font-family: 'Playfair Display', serif;
 }
 </style>

@@ -212,6 +212,7 @@ export default {
   width: 80%;
   height: auto;
   display: inline-block;
+  /* eslint-disable no-unused-vars */
   font-family: 'Noto Serif JP', serif;
 }
 #searchList{
@@ -237,6 +238,7 @@ button {
   cursor: pointer;
   margin-left: 15px;
   font-size: 15px;
+  /* eslint-disable no-unused-vars */
   font-family: 'Noto Serif JP', serif;
 }
 
@@ -280,6 +282,7 @@ table{
   letter-spacing: .15rem;
   cursor: pointer;
   background-color: #a7d28d;
+  /* eslint-disable no-unused-vars */
   font-family: 'Playfair Display', serif;
 }
 </style>

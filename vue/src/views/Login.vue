@@ -38,6 +38,7 @@
   top: 300px;
   left: 350px;
   z-index: 1;
+  /* eslint-disable no-unused-vars */
   font-family: "Hannari";
   animation-name: fadeIn;
   animation-duration: 6s;
@@ -92,6 +93,7 @@
   border-radius: 30px;
   border:1px solid #1B1B1B;
   cursor: pointer;
+  /* eslint-disable no-unused-vars */
   font-family: "Hannari"
 }
 

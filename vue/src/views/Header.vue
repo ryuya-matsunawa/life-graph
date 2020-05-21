@@ -76,6 +76,7 @@ export default {
 .title {
   color: #fff;
   font-size: 30px;
+  /* eslint-disable no-unused-vars */
   font-family: 'Playfair Display', serif;
 }
 
@@ -98,6 +99,7 @@ export default {
 
 .personalinfo{
   color: #fff;
+  /* eslint-disable no-unused-vars */
   font-family: 'Playfair Display', serif;
 }
 
@@ -114,6 +116,7 @@ export default {
   letter-spacing: .15rem;
   cursor: pointer;
   background-color: #a7d28d;
+  /* eslint-disable no-unused-vars */
   font-family: 'Playfair Display', serif;
 }
 </style>
