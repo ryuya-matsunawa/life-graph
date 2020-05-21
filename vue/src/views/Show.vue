@@ -3,7 +3,7 @@
     <Header />
     <h1>User Name</h1>
     <div class="chart">
-      <Chart />
+      <Chart :userid="currentUserId" />
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
   components: {
     Header,
     Chart
+  },
+  data () {
+    return {
+      currentUserId: parseInt(this.$route.params.userId)
+    }
   }
 }
 </script>
