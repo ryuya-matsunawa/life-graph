@@ -19,8 +19,8 @@ export default {
     }
   },
   actions: {
-    fetchGraph ({ commit }, userId) {
-      const url = '/api/life-graphs/' + userId
+    fetchGraph ({ commit }, userid) {
+      const url = '/api/life-graphs/' + userid
       axios.get(url).then(res => commit('setGraph', res.data))
         .catch(err => err)
     },

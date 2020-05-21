@@ -31,10 +31,10 @@ export default {
       role: ''
     }
   },
-  mounted () {
+  async mounted () {
     const userId = this.$store.state.auth.userId
     // ロード時にactionsにdispatchする
-    this.$store.dispatch('account/fetchAccount', userId)
+    await this.$store.dispatch('account/fetchAccount', userId)
     // storeから情報を取得するメソッド
     this.setAccount()
   },

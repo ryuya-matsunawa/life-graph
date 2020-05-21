@@ -21,7 +21,7 @@ public class LifeGraphsRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public List<UserData> setUserData() {
+	public List<UserData> getUserData() {
 		final String sql = "select * from users inner join parent_graphs on users.id = parent_graphs.user_id";
 		return jdbcTemplate.query(sql, new RowMapper<UserData>() {
 			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException{
@@ -33,7 +33,7 @@ public class LifeGraphsRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	public List<LifeGraph> setGraph(Integer id) {
+	public List<LifeGraph> getGraph(Integer id) {
 		//子グラフの中のparent_id, age, score, commentをparent_id = :idで照らし合わせて作る。
 		//まず、SQLに詰め込んどくイメージ
 		final String sql = "SELECT parent_id, age, score, comment FROM child_graphs WHERE parent_id = :id";

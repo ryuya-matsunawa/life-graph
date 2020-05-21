@@ -42,22 +42,22 @@ import com.lifegraph.team20.security.services.UserDetailsImpl;
 @RequestMapping("/auth")
 public class AuthController extends HttpServlet {
 	@Autowired
-	AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	RoleRepository roleRepository;
+	private RoleRepository roleRepository;
 
 	@Autowired
-	AccountRepository accountRepository;
+	private AccountRepository accountRepository;
 
 	@Autowired
-	PasswordEncoder encoder;
+	private PasswordEncoder encoder;
 
 	@Autowired
-	JwtUtils jwtUtils;
+	private JwtUtils jwtUtils;
 
 	// http://localhost8080/auth/login が叩かれる
 	@PostMapping("/login")
