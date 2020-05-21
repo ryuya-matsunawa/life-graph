@@ -41,7 +41,7 @@ public class LifeGraphsService {
 		long parentId;
 
 		Optional<ParentGraphData> parent = parentRepository.findByUserId(userId);
-			    if (parent.isPresent()) {
+		if (parent.isPresent()) {
 			// update
 			parentId = parent.get().getUserId();
 			// 更新日時をアップデートする

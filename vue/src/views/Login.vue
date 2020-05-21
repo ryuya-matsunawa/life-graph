@@ -7,10 +7,7 @@
         <div class="form-item">
           <label for="username" />
           <input v-model="username" type="username" placeholder="UserName">
-<<<<<<< HEAD
-=======
           <span v-if="isValid">ユーザー名を入力してください</span>
->>>>>>> develop
           <br>
           <label for="password" />
           <input v-model="password" type="password" required="required" placeholder="Password">
