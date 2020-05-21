@@ -13,9 +13,14 @@ export default {
   mutations: {
     setGraph (state, payload) {
       state.contents = payload
+      state.loaded = true
     },
     loadDone (state, payload) {
       state.loaded = payload.loading
+    },
+    resetState (state) {
+      state.contents = []
+      state.loaded = false
     }
   },
   actions: {
