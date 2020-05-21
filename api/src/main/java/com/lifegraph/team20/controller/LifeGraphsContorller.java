@@ -26,14 +26,16 @@ public class LifeGraphsContorller {
 	LifeGraphsRepository lifeGraphsRepository;
 
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 		public List<UserData> userData() {
 			List<UserData> userDatas = lifeGraphsRepository.setUserData();
 			return userDatas;
 		}
 
+
 	@Autowired
     ContentService contentService;
+//	TestService testService;
 
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     Content postContent(@RequestBody Content content) {
@@ -55,6 +57,10 @@ public class LifeGraphsContorller {
     void deleteContent(@PathVariable("id") Integer id) {
     	contentService.deleteContent(id);
     }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+//    void deleteContent(@PathVariable("id") Integer id) {
+//		testService.deleteContent(id);
+//    }
 
     //人生グラフ参照API
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

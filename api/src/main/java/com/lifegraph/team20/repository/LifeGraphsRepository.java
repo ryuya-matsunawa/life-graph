@@ -24,6 +24,7 @@ public class LifeGraphsRepository {
 
 	public List<UserData> setUserData() {
 		final String sql = "select * from users inner join parent_graphs on users.id = parent_graphs.user_id";
+//		final String sql = "select * from parent_graphs inner join child_graphs on parent_graphs.id = child_graphs.id";
 		return jdbcTemplate.query(sql, new RowMapper<UserData>() {
 			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException{
 				return new UserData(rs.getInt("id"), rs.getString("username"), rs.getTimestamp("updated_at"));
