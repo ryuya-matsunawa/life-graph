@@ -35,8 +35,8 @@
             <th>リスト</th>
             <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
             <tr v-for="item in filteredItems" :key="item.id">
-              <td>{{ item.name }}</td>
-              <td>{{ item.day }}</td>
+              <td>{{ item.username }}</td>
+              <td>{{ parseInt(item.updated_at.split('-', 3).join('')) }}</td>
               <td>
                 <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
                   参照
@@ -96,6 +96,7 @@ export default {
   },
   mounted () {
     // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
+    this.$store.dispatch('search/fetchItems')
     this.setItems()
   },
   methods: {
@@ -125,20 +126,20 @@ export default {
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
-          parseInt(item.day.split('-').join('')) >= updatedFromNumber &&
-          parseInt(item.day.split('-').join('')) <= updatedToNumber
+          parseInt(item.updated_at.split('-', 3).join('')) >= updatedFromNumber &&
+          parseInt(item.updated_at.split('-', 3).join('')) <= updatedToNumber
         )
       // XX〜 検索した時に該当するものを表示する
       } else if (this.updatedFrom) {
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
-          parseInt(item.day.split('-').join('')) >= updatedFromNumber
+          parseInt(item.updated_at.split('-', 3).join('')) >= updatedFromNumber
         )
       // 〜YY 検索した時に該当するものを表示する
       } else if (this.updatedTo) {
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
-          parseInt(item.day.split('-').join('')) <= updatedToNumber
+          parseInt(item.updated_at.split('-', 3).join('')) <= updatedToNumber
         )
       }
       // 表示順を決める
@@ -150,8 +151,8 @@ export default {
       this.filteredItems.sort(this.compareFunc)
     },
     compareFunc (a, b) {
-      const day1 = parseInt(a.day.split('-').join(''))
-      const day2 = parseInt(b.day.split('-').join(''))
+      const day1 = parseInt(a.updated_at.split('-', 3).join(''))
+      const day2 = parseInt(b.updated_at.split('-', 3).join(''))
       // ? true:左 false:右
       return this.sortDesc ? (day2 - day1) : (day1 - day2)
     },
@@ -170,8 +171,8 @@ export default {
 <style>
 .paper {
   position: fixed;
-  height: 500px;
-  width: 400px;
+  height: 700px;
+  width: 600px;
   background: rgba(255,255,255,0.9);
   box-shadow: 0px 0px 5px 0px #888;
   left: 35%;
@@ -232,7 +233,6 @@ button {
   line-height: 1.5;
   transition: all 1s;
   margin-left: 5px;
-  margin-top: 10px;
 }
 
 button:hover {
@@ -245,7 +245,8 @@ button:hover {
   text-decoration: none;
 }
 table{
-  margin: 0 auto;
+  margin-top: 58px;
+  margin-left: 50px;
   width: 60%;
 }
 .arrow {

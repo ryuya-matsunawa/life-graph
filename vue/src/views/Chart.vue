@@ -4,6 +4,12 @@ import { Line } from 'vue-chartjs'
 export default {
   name: 'Chart',
   extends: Line,
+  props: {
+    userid: {
+      type: Number,
+      default: null
+    }
+  },
   data () {
     return {
       data: {
@@ -74,7 +80,8 @@ export default {
       }
     }
   },
-  mounted () {
+  async mounted () {
+    await this.$store.dispatch('chart/fetchGraph', this.userid)
     this.setLabels()
     this.setData()
     this.setComments()
@@ -88,11 +95,9 @@ export default {
       })
     },
     setData () {
-      const lifeScores = []
-      this.$store.state.chart.contents.map((content) => {
-        lifeScores.push(content.lifeScores)
+      this.data.datasets[0].data = this.$store.state.chart.contents.map((content) => {
+        return content.score
       })
-      this.data.datasets[0].data = lifeScores
     },
     setComments () {
       const comment = []
@@ -137,10 +142,10 @@ export default {
               style += '; border-width: 1px'
               var span = '<span style="' + style + '"></span>'
               // '<tr><td>' は多分改行
-              if (com[comNum] !== null) {
-                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
-              } else {
+              if (com[comNum] === null || com[comNum] === undefined) {
                 innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
+              } else {
+                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
               }
             })
           })
@@ -152,7 +157,7 @@ export default {
         var position = this._chart.canvas.getBoundingClientRect()
         // 表示、配置、およびフォントスタイルの設定
         tooltipEl.style.opacity = 0.8
-        tooltipEl.style.position = 'center'
+        tooltipEl.style.position = 'absolute'
         tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px'
         tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px'
         tooltipEl.style.fontFamily = 'Tahoma'

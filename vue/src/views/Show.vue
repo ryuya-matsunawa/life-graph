@@ -3,11 +3,8 @@
     <Header />
     <h1>User Name</h1>
     <div class="chart">
-      <Chart />
+      <Chart :userid="currentUserId" />
     </div>
-    <router-link to="/top" tag="button" class="totop">
-      TOPへ
-    </router-link>
   </div>
 </template>
 
@@ -20,6 +17,11 @@ export default {
   components: {
     Header,
     Chart
+  },
+  data () {
+    return {
+      currentUserId: parseInt(this.$route.params.userId)
+    }
   }
 }
 </script>
@@ -27,9 +29,9 @@ export default {
 <style scoped>
 .show {
   background-image: url(../assets/show.png);
-  background-size: 20%;
+  background-size: 25%;
   background-repeat: no-repeat;
-  background-position: 5% 30%;
+  background-position: 5% 50%;
   background-position: fixed;
 }
 
