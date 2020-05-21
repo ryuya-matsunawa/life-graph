@@ -1,54 +1,58 @@
 <template>
-  <div>
+  <div class="searchvue">
+    <head>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
+    </head>
     <Header />
-    <!-- 上部 -->
-    <div class="paper">
-      <div class="lines">
-        <div id="search">
-          検索条件
-          <ul id="searchList">
-            <li class="username">
-              ユーザー名
-              <input v-model="searchWord" type="text">
-            </li>
-            <li class="update">
-              更新日
-              <input v-model="updatedFrom" type="date">
-              〜
-              <input v-model="updatedTo" type="date">
-            </li>
-          </ul>
-          <button @click="active()">
-            検索
-          </button>
-          <button @click="reset()">
-            リセット
-          </button>
-          <button>
-            削除
-          </button>
-        </div>
-        <!-- 下部 -->
-        <div v-if="isActive">
-          <!-- テーブルを作る（表みたいな感じ） -->
-          <table class="table">
-            <th>リスト</th>
-            <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
-            <tr v-for="item in filteredItems" :key="item.id">
-              <td>{{ item.name }}</td>
-              <td>{{ item.day }}</td>
-              <td>
-                <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
-                  参照
-                </router-link>
-              </td>
-            </tr>
-          </table>
-        </div>
+    <div class="file">
+      <!-- 上部 -->
+      <div id="search">
+        検索条件
+        <ul id="searchList">
+          <li class="username">
+            ユーザー名
+            <input v-model="searchWord" type="text">
+          </li>
+          <li class="update">
+            更新日
+            <input v-model="updatedFrom" type="date">
+            〜
+            <input v-model="updatedTo" type="date">
+          </li>
+        </ul>
+        <button @click="active()">
+          検索
+        </button>
+        <button @click="reset()">
+          リセット
+        </button>
       </div>
-      <div class="holes hole-top" />
-      <div class="holes hole-middle" />
-      <div class="holes hole-bottom" />
+      <!-- 下部 -->
+      <div v-if="isActive">
+        <!-- テーブルを作る（表みたいな感じ） -->
+        <table class="table">
+          <th>リスト</th>
+          <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
+          <tr v-for="item in filteredItems" :key="item.id">
+            <td>{{ item.name }}</td>
+            <td>{{ item.day }}</td>
+            <td>
+              <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
+                参照
+              </router-link>
+              <button class="viewButton">
+                削除
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <img src="../assets/search.png" class="momiji">
+    <div>
+      <router-link to="/top" class="button">
+        TOPへ
+      </router-link>
     </div>
   </div>
 </template>
@@ -159,7 +163,6 @@ export default {
     toggleSort () {
       this.sortDesc = !this.sortDesc
     },
-
     // リセットボタン
     reset () {
       this.isActive = false
@@ -169,32 +172,20 @@ export default {
 </script>
 
 <style>
-.paper {
-  position: fixed;
-  height: 700px;
+.searchvue {
+  margin-top: 130px;
+}
+
+.file {
   width: 600px;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0px 0px 5px 0px #888;
-  left: 35%;
-  top: 20%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid;
+    padding: 30px;
+    border-radius: 5px;
+    border-radius: 8px;
+    border-color: #c0c0c0;
 }
-
-.paper::before {
-  content: '';
-  position: absolute;
-  left: 45px;
-  height: 100%;
-  width: 2px;
-  background: rgba(255,0,0,0.4);
-}
-
-.lines {
-  margin-top: 40px;
-  height: calc(100% - 40px);
-  width: 100%;
-  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
-}
-
 /* 上部 */
 #search{
   text-align: center;
@@ -204,6 +195,7 @@ export default {
   width: 80%;
   height: auto;
   display: inline-block;
+  font-family: 'Noto Serif JP', serif;
 }
 #searchList{
   text-align: left;
@@ -219,31 +211,23 @@ export default {
 }
 /* 下部 */
 button {
-  text-align: center;
-  width: 9rem;
-  height: 3rem;
-  padding-left: 1rem;
-  overflow: hidden;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.5;
-  transition: all 1s;
-  margin-left: 5px;
+  color:#a39d9d;
+  border-color:#a39d9d;
+  width:100px;
+  text-align:center;
+  position:relative;
+  margin-top:30px;
+  cursor: pointer;
+  margin-left: 15px;
+  font-size: 15px;
+  font-family: 'Noto Serif JP', serif;
 }
 
-button:hover {
-  transition-delay: 50ms;
-  transform: rotate3d(0,0,1,-13deg);
-  cursor: pointer;
-}
 .viewButton{
   display: block;
   text-decoration: none;
 }
+
 table{
   margin-top: 58px;
   margin-left: 50px;
@@ -258,22 +242,27 @@ table{
   transform: rotate(0deg);
 }
 
-.holes {
+.momiji {
   position: absolute;
-  left: 10px;
-  height: 25px;
-  width: 25px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 2px 0px #888;
+  width: 200px;
+  left: 0;
+  top: 300px;
+  z-index: -1;
 }
-.hole-top {
-  top: 10%;
-}
-.hole-middle {
-  top: 48%;
-}
-.hole-bottom {
-  bottom: 10%;
+
+.button {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  padding: .75rem 1.25rem;
+  border-radius: 5px;
+  width: 90px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  cursor: pointer;
+  background-color: #a7d28d;
+  font-family: 'Playfair Display', serif;
 }
 </style>
