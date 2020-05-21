@@ -23,6 +23,11 @@ export default {
         ]
       },
       options: {
+        title: {
+          display: true,
+          text: []
+          // text: this.$store.state.chart.titles.title + 'の人生グラフ'
+        },
         // ツールチップで見た目変えるときはこのサイトに変え方諸々書いてるから見てみて！
         // https://misc.0o0o.org/chartjs-doc-ja/configuration/tooltip.html#%E3%83%84%E3%83%BC%E3%83%AB%E3%83%81%E3%83%83%E3%83%97
         tooltips: {
@@ -73,6 +78,7 @@ export default {
     this.setLabels()
     this.setData()
     this.setComments()
+    this.setTitle()
     this.renderChart(this.data, this.options)
   },
   methods: {
@@ -159,6 +165,13 @@ export default {
         tooltipEl.style.width = '250px'
         tooltipEl.style.textAlign = 'left'
         tooltipEl.style.wordBreak = 'normal'
+      }
+    },
+    setTitle () {
+      const titleText = this.$store.state.chart.titles.title
+      if (titleText === null || titleText === undefined) {
+      } else {
+        this.options.title.text = titleText + 'の人生グラフ'
       }
     }
   }

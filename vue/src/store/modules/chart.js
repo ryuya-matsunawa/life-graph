@@ -6,6 +6,9 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
+    titles: {
+      title: '石原さとみ'
+    },
     contents: [
       {
         age: 1,
