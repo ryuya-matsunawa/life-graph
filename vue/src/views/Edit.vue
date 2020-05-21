@@ -161,7 +161,7 @@ export default {
   width: 250px;
   font-weight: bold;
   font-size: 18px;
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Noto Serif JP', serif;
 }
 
@@ -186,7 +186,7 @@ label{
   position:relative;
   margin-top:30px;
   cursor: pointer;
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Hannari';
 }
 
@@ -204,7 +204,7 @@ label{
   position:relative;
   margin-top:30px;
   cursor: pointer;
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Hannari';
 }
 
@@ -222,7 +222,7 @@ label{
   position:relative;
   margin-top:30px;
   cursor: pointer;
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Hannari';
 }
 
@@ -257,7 +257,7 @@ label{
   letter-spacing: .15rem;
   cursor: pointer;
   background-color: #a7d28d;
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
 }
 </style>
