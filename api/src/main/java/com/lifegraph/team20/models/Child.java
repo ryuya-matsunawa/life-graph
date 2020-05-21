@@ -1,3 +1,5 @@
+//英輔が作った
+
 package com.lifegraph.team20.models;
 
 import javax.persistence.Entity;
