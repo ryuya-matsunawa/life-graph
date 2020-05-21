@@ -11,6 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ParentGraphData {
-  @NotNull
-  private long userId;
+	@NotNull
+	private long userId;
 }
