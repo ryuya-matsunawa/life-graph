@@ -15,6 +15,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     semi: 'error',
     'vue/max-attributes-per-line': 0,
-    'font-family-no-missing-generic-family-keyword': true
+    'font-family-no-missing-generic-family-keyword': 0
   }
 }
