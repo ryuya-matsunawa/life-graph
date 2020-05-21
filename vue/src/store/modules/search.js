@@ -26,14 +26,14 @@ export default {
     ]
   },
   mutations: {
-    setSearch (state, payload) {
+    setItems (state, payload) {
       state.items = payload
     }
   },
   actions: {
-    fetchSearch ({ commit }) {
+    fetchItems ({ commit }) {
       const url = '/api/life-graphs'
-      axios.get(url).then(res => commit('setSearch', res.data))
+      axios.get(url).then(res => commit('setItems', res.data))
     }
   }
 }

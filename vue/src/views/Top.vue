@@ -24,7 +24,7 @@
       <div class="holes hole-bottom" />
     </div>
     <div class="chart">
-      <Chart />
+      <Chart :userid="currentUserId" />
     </div>
   </div>
 </template>
@@ -37,6 +37,11 @@ export default {
   components: {
     Chart,
     Header
+  },
+  data () {
+    return {
+      currentUserId: this.$store.state.account.account.id
+    }
   }
 }
 </script>

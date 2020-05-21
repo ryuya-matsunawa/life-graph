@@ -4,6 +4,12 @@ import { Line } from 'vue-chartjs'
 export default {
   name: 'Chart',
   extends: Line,
+  props: {
+    userid: {
+      type: Number,
+      default: null
+    }
+  },
   data () {
     return {
       data: {
@@ -69,26 +75,38 @@ export default {
       }
     }
   },
+  computed: {
+    loaded () {
+      return this.$store.state.chart.loaded
+    }
+  },
+  watch: {
+    loaded () {
+      this.renderGraphChart()
+    }
+  },
   mounted () {
-    const userId = this.$store.state.auth.userId
-    this.$store.dispatch('chart/fetchGraph', userId)
-    this.setLabels()
-    this.setData()
-    this.setComments()
-    this.renderChart(this.data, this.options)
+    this.$store.dispatch('chart/fetchGraph', this.userid)
+  },
+  destroyed () {
+    this.$store.commit('chart/resetState')
   },
   methods: {
+    renderGraphChart () {
+      this.setLabels()
+      this.setData()
+      this.setComments()
+      this.renderChart(this.data, this.options)
+    },
     setLabels () {
       this.data.labels = this.$store.state.chart.contents.map((content) => {
         return content.age
       })
     },
     setData () {
-      const lifeScores = []
-      this.$store.state.chart.contents.map((content) => {
-        lifeScores.push(content.score)
+      this.data.datasets[0].data = this.$store.state.chart.contents.map((content) => {
+        return content.score
       })
-      this.data.datasets[0].data = lifeScores
     },
     setComments () {
       const comment = []
@@ -110,6 +128,13 @@ export default {
         if (tooltipModel.opacity === 0) {
           tooltipEl.style.opacity = 0
           return
+        }
+        // キャレット(ツールチップが指し示すもの)の位置を設定する
+        tooltipEl.classList.remove('above', 'below', 'no-transform')
+        if (tooltipModel.yAlign) {
+          tooltipEl.classList.add(tooltipModel.yAlign)
+        } else {
+          tooltipEl.classList.add('no-transform')
         }
         function getBody (bodyItem) {
           return bodyItem.lines
