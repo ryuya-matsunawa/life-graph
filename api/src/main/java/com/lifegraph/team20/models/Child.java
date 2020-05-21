@@ -11,20 +11,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 //@AllArgsConstructor
-@Table(name = "parent_graphs")
-public class Test {
+@Table(name = "child_graphs")
+public class Child {
     @Id
 //    オートインクリーメント的なもの
 //    @GeneratedValue
     private int id;
 
 //    @Column(nullable = false)
-    private int user_id;
+    private int parentId;
 
 //    @Column(nullable = false)
-//    private String created_at;
-//
-////    @Column(nullable = false)
-//    private String updated_at;
+    private int age;
+
+//    @Column(nullable = false)
+    private int score;
+
+//    @Column(nullable = ture)
+    private String comment;
 
 }

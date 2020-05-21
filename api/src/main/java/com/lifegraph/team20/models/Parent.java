@@ -1,5 +1,7 @@
 package com.lifegraph.team20.models;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,23 +13,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 //@AllArgsConstructor
-@Table(name = "child_graphs")
-public class Content {
+@Table(name = "parent_graphs")
+public class Parent {
     @Id
 //    オートインクリーメント的なもの
 //    @GeneratedValue
     private int id;
 
 //    @Column(nullable = false)
-    private int parent_id;
+    private int user_id;
 
 //    @Column(nullable = false)
-    private int age;
-
-//    @Column(nullable = false)
-    private int score;
-
-//    @Column(nullable = ture)
-    private String comment;
+    private Timestamp created_at;
+//
+////    @Column(nullable = false)
+    private Timestamp updated_at;
 
 }
