@@ -52,7 +52,6 @@ export default {
     // tokenの状態を監視して、tokenが更新されたらtop画面に遷移する
     token (newToken) {
       const userId = this.$store.state.auth.userId
-      console.log(userId)
       // ロード時にactionsにdispatchする
       this.$store.dispatch('account/fetchAccount', userId)
     },
