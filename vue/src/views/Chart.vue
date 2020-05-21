@@ -187,13 +187,6 @@ export default {
         tooltipEl.style.textAlign = 'left'
         tooltipEl.style.wordBreak = 'normal'
       }
-    },
-    deleteGraph () {
-      // this.userid = null
-      this.data.labels = []
-      this.data.datasets[0].data = []
-      this.comment = []
-      console.log(this.userid)
     }
   }
 }
