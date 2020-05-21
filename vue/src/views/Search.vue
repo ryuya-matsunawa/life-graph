@@ -35,8 +35,8 @@
             <th>リスト</th>
             <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
             <tr v-for="item in filteredItems" :key="item.id">
-              <td>{{ item.name }}</td>
-              <td>{{ item.day }}</td>
+              <td>{{ item.username }}</td>
+              <td>{{ parseInt(item.updated_at.split('-', 3).join('')) }}</td>
               <td>
                 <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
                   参照
@@ -94,9 +94,9 @@ export default {
       this.sortItems()
     }
   },
-  async mounted () {
+  mounted () {
     // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
-    await this.$store.dispatch('search/fetchSearch')
+    this.$store.dispatch('search/fetchItems')
     this.setItems()
   },
   methods: {
@@ -126,20 +126,20 @@ export default {
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
-          parseInt(item.day.split('-').join('')) >= updatedFromNumber &&
-          parseInt(item.day.split('-').join('')) <= updatedToNumber
+          parseInt(item.updated_at.split('-', 3).join('')) >= updatedFromNumber &&
+          parseInt(item.updated_at.split('-', 3).join('')) <= updatedToNumber
         )
       // XX〜 検索した時に該当するものを表示する
       } else if (this.updatedFrom) {
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
-          parseInt(item.day.split('-').join('')) >= updatedFromNumber
+          parseInt(item.updated_at.split('-', 3).join('')) >= updatedFromNumber
         )
       // 〜YY 検索した時に該当するものを表示する
       } else if (this.updatedTo) {
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
-          parseInt(item.day.split('-').join('')) <= updatedToNumber
+          parseInt(item.updated_at.split('-', 3).join('')) <= updatedToNumber
         )
       }
       // 表示順を決める
@@ -151,8 +151,8 @@ export default {
       this.filteredItems.sort(this.compareFunc)
     },
     compareFunc (a, b) {
-      const day1 = parseInt(a.day.split('-').join(''))
-      const day2 = parseInt(b.day.split('-').join(''))
+      const day1 = parseInt(a.updated_at.split('-', 3).join(''))
+      const day2 = parseInt(b.updated_at.split('-', 3).join(''))
       // ? true:左 false:右
       return this.sortDesc ? (day2 - day1) : (day1 - day2)
     },

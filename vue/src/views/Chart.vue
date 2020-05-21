@@ -4,6 +4,12 @@ import { Line } from 'vue-chartjs'
 export default {
   name: 'Chart',
   extends: Line,
+  props: {
+    userid: {
+      type: Number,
+      default: null
+    }
+  },
   data () {
     return {
       data: {
@@ -69,9 +75,8 @@ export default {
       }
     }
   },
-  mounted () {
-    const userId = this.$store.state.auth.userId
-    this.$store.dispatch('chart/fetchGraph', userId)
+  async mounted () {
+    await this.$store.dispatch('chart/fetchGraph', this.userid)
     this.setLabels()
     this.setData()
     this.setComments()
@@ -84,11 +89,9 @@ export default {
       })
     },
     setData () {
-      const lifeScores = []
-      this.$store.state.chart.contents.map((content) => {
-        lifeScores.push(content.score)
+      this.data.datasets[0].data = this.$store.state.chart.contents.map((content) => {
+        return content.score
       })
-      this.data.datasets[0].data = lifeScores
     },
     setComments () {
       const comment = []

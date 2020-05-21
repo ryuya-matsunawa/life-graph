@@ -13,7 +13,7 @@ import com.lifegraph.team20.repository.ContentRepository;
 @Transactional
 public class ContentService {
     @Autowired
-    ContentRepository contentRepository;
+    private ContentRepository contentRepository;
 
     public Content postContent(Content content) {
         return contentRepository.save(content);
