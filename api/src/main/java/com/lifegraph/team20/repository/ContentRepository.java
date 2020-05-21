@@ -1,3 +1,6 @@
+//梶｜作成・いらない
+
+
 package com.lifegraph.team20.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,3 +1,4 @@
+//梶作成。必要
 package com.lifegraph.team20.models;
 
 import javax.validation.constraints.NotNull;

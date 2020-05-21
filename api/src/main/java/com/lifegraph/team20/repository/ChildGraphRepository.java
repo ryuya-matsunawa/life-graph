@@ -1,4 +1,4 @@
-
+//梶｜作成・必要
 package com.lifegraph.team20.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;

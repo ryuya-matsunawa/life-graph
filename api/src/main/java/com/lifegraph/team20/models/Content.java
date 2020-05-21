@@ -1,3 +1,5 @@
+//梶｜作った気がする。いらない。
+
 package com.lifegraph.team20.models;
 
 import javax.persistence.Entity;
