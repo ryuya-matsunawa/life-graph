@@ -33,9 +33,10 @@ const routes = [
     component: Edit
   },
   {
-    path: '/show',
+    path: '/show/:userId',
     name: 'Show',
-    component: Show
+    component: Show,
+    props: true
   }
 ]
 
