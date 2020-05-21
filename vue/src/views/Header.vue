@@ -18,10 +18,10 @@
         </li>
       </ul>
       <div>
-      <span tag="button" class="button" @click="logout()">
-        ログアウト
-      </span>
-    </div>
+        <span tag="button" class="button" @click="logout()">
+          ログアウト
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -34,10 +34,10 @@ export default {
       role: ''
     }
   },
-  mounted () {
+  async mounted () {
     const userId = this.$store.state.auth.userId
     // ロード時にactionsにdispatchする
-    this.$store.dispatch('account/fetchAccount', userId)
+    await this.$store.dispatch('account/fetchAccount', userId)
     // storeから情報を取得するメソッド
     this.setAccount()
   },

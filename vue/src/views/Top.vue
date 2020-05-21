@@ -18,7 +18,7 @@
     </router-link>
     <img src="../assets/top.png" class="sakura">
     <div class="chart">
-      <Chart />
+      <Chart :userid="currentUserId" />
     </div>
     <div>
       <router-link to="/top" class="button">
@@ -36,6 +36,11 @@ export default {
   components: {
     Chart,
     Header
+  },
+  data () {
+    return {
+      currentUserId: this.$store.state.account.account.id
+    }
   }
 }
 </script>
