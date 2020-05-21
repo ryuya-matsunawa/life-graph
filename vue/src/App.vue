@@ -8,7 +8,9 @@
 </template>
 
 <style>
+/* eslint-disable-next-line to ignore the next line. */
 @import url(https://fonts.googleapis.com/earlyaccess/hannari.css);
+/* eslint-disable-next-line to ignore the next line. */
 @import url(https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap);
 @media screen and (min-width:1024px) {
   #app {
