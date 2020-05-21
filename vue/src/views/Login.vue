@@ -139,7 +139,6 @@
 }
 
 .form-footer {
-  display: block;
   background-color: transparent;
   color: #666;
   font-family: 'Open Sans', sans-serif;

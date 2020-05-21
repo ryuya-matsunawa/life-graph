@@ -6,6 +6,7 @@ module.exports = {
     'scss/at-rule-no-unknown': true,
     'order/properties-alphabetical-order': true,
     'no-empty-source': null,
+    'font-family-no-missing-generic-family-keyword': true,
     'rule-empty-line-before': [
       'always',
       {

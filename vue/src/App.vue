@@ -22,9 +22,6 @@
     margin-top: 30px;
     border: 1px solid;
     padding: 30px;
-    border-radius: 5px;
-    border-bottom: solid 6px #c0c0c0;
-    box-shadow: 0 3px 5px gray;
     border-radius: 8px;
     border-color: #c0c0c0;
   }
