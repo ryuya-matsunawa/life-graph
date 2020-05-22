@@ -56,7 +56,7 @@
     </div>
     <img src="../assets/edit.png" class="hima">
     <div class="chart">
-      <Chart />
+      <Chart :id="currentUserId" />
     </div>
     <div>
       <router-link to="/top" class="button">
