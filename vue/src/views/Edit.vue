@@ -43,7 +43,7 @@
           href="#!"
           @click="edit()"
         >
-          編集
+          更新
         </button>
         <button
           class="graphClear"
@@ -128,13 +128,10 @@ export default {
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      // console.log('編集されました')
-      // console.log(this.editAge)
-      // console.log(this.editScore)
-      // console.log(this.editComment)
-      // console.log(this.editComment)
       // // storeに送りたい
-      // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
+      // setcontent { age: this.editAge, score: this.editScore, comment: this.editComment }
+      // this.$store.dispatch('chart/fetchGraph', this.id)
+
     }
   }
 }
