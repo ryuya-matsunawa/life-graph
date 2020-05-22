@@ -89,6 +89,7 @@ export default {
     },
     update () {
       this.$store.dispatch('chart/fetchGraph', this.id)
+      this.$store.dispatch('account/fetchAccount', this.id)
     }
   },
   mounted () {
@@ -120,6 +121,7 @@ export default {
       this.$store.state.chart.contents.map((content) => {
         comment.push(content.comment)
       })
+      console.log(comment)
       this.options.tooltips.custom = function (tooltipModel) {
         // ツールチップ要素
         var tooltipEl = document.getElementById('chartjs-tooltip')
@@ -165,10 +167,10 @@ export default {
               style += '; border-width: 1px'
               var span = '<span style="' + style + '"></span>'
               // '<tr><td>' は多分改行
-              if (com[comNum] === null || com[comNum] === undefined) {
-                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
-              } else {
+              if (com[comNum] !== null) {
                 innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
+              } else {
+                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
               }
             })
           })

@@ -29,8 +29,8 @@
           <!-- テスト用表示 -->
           <!-- <p>{{ editComment }}</p> -->
         </p>
-        <p>登録日 {{ parseInt(date.updated_at.split('-', 3).join('')) }}</p>
-        <p>更新日 {{ parseInt(date.created_at.split('-', 3).join('')) }}</p>
+        <p>登録日時 {{ date.created_at | moment }}</p>
+        <p>更新日時 {{ date.updated_at | moment }}</p>
         <button
           class="graphRegister"
           href="#!"
@@ -59,12 +59,18 @@
 // https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
+import moment from 'moment'
 
 export default {
   name: 'Edit',
   components: {
     Chart,
     Header
+  },
+  filters: {
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD HH:mm')
+    }
   },
   data () {
     return {
@@ -80,11 +86,14 @@ export default {
       }
     }
   },
-  // 値が変わるたびに計算し直してくれるらしい
   computed: {
-    // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
-    loaded () {
-      return this.$store.state.chart.loaded
+    account () {
+      return this.$store.state.account.account
+    }
+  },
+  watch: {
+    account (newAccount) {
+      this.setDate()
     }
   },
   mounted () {
@@ -96,8 +105,12 @@ export default {
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
     updateGraphData () {
+      // 年齢だけが入った配列を作る
       const ageList = this.$store.state.chart.contents.map(obj => obj.age)
+      // editAgeに入力した値があるか確認し、あったらそこのインデックス番号、なければ-1を返す
       const result = ageList.indexOf(parseInt(this.editAge))
+      // if:まだ登録されていない年齢の場合
+      // else:すでにある年齢を更新
       if (result === -1) {
         this.$store.dispatch('chart/register',
           {
@@ -108,7 +121,9 @@ export default {
           }
         )
       } else {
-        const currentUserId = this.$store.state.chart.contents[result].age
+        // resultには入力した年齢があるインデックス番号が入っている
+        // そのインデックス番号にあるidを取得
+        const currentUserId = this.$store.state.chart.contents[result].id
         this.$store.dispatch('chart/register',
           {
             id: currentUserId,
@@ -119,6 +134,9 @@ export default {
           }
         )
       }
+      this.editAge = ''
+      this.editScore = ''
+      this.editComment = ''
     }
   }
 }
