@@ -78,11 +78,17 @@ export default {
   computed: {
     loaded () {
       return this.$store.state.chart.loaded
+    },
+    update () {
+      return this.$store.state.chart.update
     }
   },
   watch: {
     loaded () {
       this.renderGraphChart()
+    },
+    update () {
+      this.$store.dispatch('chart/fetchGraph', this.id)
     }
   },
   mounted () {
