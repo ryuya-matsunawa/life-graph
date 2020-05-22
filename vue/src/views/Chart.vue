@@ -5,7 +5,7 @@ export default {
   name: 'Chart',
   extends: Line,
   props: {
-    userid: {
+    id: {
       type: Number,
       default: null
     }
@@ -86,7 +86,8 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('chart/fetchGraph', this.userid)
+    this.$store.dispatch('chart/fetchGraph', this.id)
+    this.renderGraphChart()
   },
   destroyed () {
     this.$store.commit('chart/resetState')

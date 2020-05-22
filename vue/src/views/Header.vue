@@ -31,7 +31,7 @@ export default {
       role: ''
     }
   },
-  mounted () {
+  created () {
     // storeから情報を取得するメソッド
     this.setAccount()
   },

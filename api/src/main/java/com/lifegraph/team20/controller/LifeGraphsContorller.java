@@ -19,9 +19,7 @@ import com.lifegraph.team20.models.ChildGraphData;
 import com.lifegraph.team20.models.LifeGraph;
 import com.lifegraph.team20.models.UserData;
 import com.lifegraph.team20.repository.LifeGraphsRepository;
-import com.lifegraph.team20.service.ChildService;
 import com.lifegraph.team20.service.LifeGraphsService;
-import com.lifegraph.team20.service.ParentService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -30,7 +28,7 @@ public class LifeGraphsContorller {
 
 	// 人生グラフ登録編集API
 	@Autowired
-	LifeGraphsService service;
+	private LifeGraphsService service;
 
 	@PostMapping
 	public ResponseEntity<String> postContent(@Valid @RequestBody ChildGraphData data) {
@@ -77,17 +75,16 @@ public class LifeGraphsContorller {
 
 	//    削除API
 	@Autowired
-	private ChildService childService;
-	@Autowired
-	private ParentService parentService;
+	private LifeGraphsService lifeGraphsService;
 
 	@DeleteMapping("/{parentId}")
 	void deleteContent(@PathVariable("parentId") Integer parentId) {
 		//    	子テーブルを消すメソッド
-		childService.deleteContent(parentId);
+		lifeGraphsService.deleteChild(parentId);
 		//    	親テーブルを消すメソッド
-		parentService.deleteContent(parentId);
+		lifeGraphsService.deleteParent(parentId);
 	}
+	// ↑↑↑↑↑↑ここまで削除API↑↑↑↑↑↑
 
 	//人生グラフ参照API
 	@GetMapping("/{id}")

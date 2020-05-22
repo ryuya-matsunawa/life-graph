@@ -43,7 +43,7 @@
           <button
             class="graphClear"
             href="#!"
-            @click="click"
+            @click="click()"
           >
             クリア
           </button>
@@ -53,8 +53,8 @@
         <div class="holes hole-bottom" />
       </div>
     </div>
-    <div v-if="loaded" class="chart">
-      <Chart />
+    <div class="chart">
+      <Chart :id="currentUserId" />
     </div>
   </div>
 </template>
@@ -72,6 +72,7 @@ export default {
   },
   data () {
     return {
+      currentUserId: this.$store.state.account.account.id,
       // storeにつなぐ代わりにここで値を管理
       // intなので''ではなくnullにした
       editAge: null,
@@ -94,10 +95,6 @@ export default {
     //   // https://vuex.vuejs.org/ja/guide/mutations.html
     //   this.$store.commit('chart/getComtent')
     // }
-  },
-  // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
-  mounted () {
-    this.$store.dispatch('chart/load')
   },
   methods: {
     // formSubmit (event) {

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.lifegraph.team20.models.ChildGraphData;
 import com.lifegraph.team20.models.ParentGraphData;
 import com.lifegraph.team20.repository.ChildGraphRepository;
+import com.lifegraph.team20.repository.ChildRepository;
 import com.lifegraph.team20.repository.ParentGraphRepository;
+import com.lifegraph.team20.repository.ParentRepository;
 
 @Service
 public class LifeGraphsService {
@@ -70,5 +72,19 @@ public class LifeGraphsService {
 			childRepository.addChild(parentId, data.getAge(), data.getScore(), data.getComment());
 			// 更新した時にすでにageが存在する場合、エラーを出す
 		}
+	}
+
+	@Autowired
+	private ChildRepository childGraphRepository;
+
+	public void deleteChild(Integer parentId) {
+		childGraphRepository.deleteByParentId(parentId);
+	}
+
+	@Autowired
+	ParentRepository parentGraphRepository;
+
+	public void deleteParent(Integer id) {
+		parentGraphRepository.deleteById(id);
 	}
 }
