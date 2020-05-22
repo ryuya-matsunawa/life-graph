@@ -13,6 +13,7 @@ export default {
   mutations: {
     setAccount (state, payload) {
       state.account = payload
+      console.log(payload)
     },
     deleteAccount (state) {
       state.account = ''

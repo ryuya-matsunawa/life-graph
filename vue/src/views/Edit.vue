@@ -25,6 +25,8 @@
               <!-- テスト用表示 -->
               <!-- <p>{{ editComment }}</p> -->
             </li>
+            <li>{{ parseInt(date.updated_at.split('-', 3).join('')) }}</li>
+            <li>{{ parseInt(date.created_at.split('-', 3).join('')) }}</li>
           </ul>
           <button
             class="graphRegister"
@@ -77,7 +79,11 @@ export default {
       // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
-      editComment: ''
+      editComment: '',
+      date: {
+        created_at: '',
+        updated_at: ''
+      }
     }
   },
   // 値が変わるたびに計算し直してくれるらしい
@@ -96,7 +102,15 @@ export default {
     //   this.$store.commit('chart/getComtent')
     // }
   },
+  mounted () {
+    this.setDate()
+  },
   methods: {
+    setDate () {
+      console.log(this.$store.state.account.account.created_at)
+      this.date.created_at = this.$store.state.account.account.created_at
+      this.date.updated_at = this.$store.state.account.account.updated_at
+    },
     // formSubmit (event) {
     //   console.log(event)
     //   console.log(this.age)
