@@ -133,9 +133,9 @@ export default {
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      // storeに送りたい
-      setcontent { age: this.editAge, score: this.editScore, comment: this.editComment }
-      this.$store.dispatch('chart/fetchGraph', this.id)
+      // // storeに送りたい
+      // setcontent { age: this.editAge, score: this.editScore, comment: this.editComment }
+      // this.$store.dispatch('chart/fetchGraph', this.id)
 
     }
   }

@@ -16,12 +16,6 @@ public class ChildGraphData {
   @NotNull
   private long userId;
 
-  //	@NotNull
-  ////	このあたいはMySQLから引っ張ってきたい。
-  ////	こんな感じで
-  ////	select id from parent_graphs where user_id = 1
-  //	private long parentId;
-
   @NotNull
   @Max(99)
   @Min(1)
