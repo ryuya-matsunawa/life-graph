@@ -47,7 +47,7 @@
       </div>
     </div>
     <img src="../assets/edit.png" class="hima">
-    <div v-if="loaded" class="chart">
+    <div class="chart">
       <Chart />
     </div>
     <div>
