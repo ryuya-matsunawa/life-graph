@@ -24,9 +24,6 @@
           <button @click="reset()">
             リセット
           </button>
-          <button>
-            削除
-          </button>
         </div>
         <!-- 下部 -->
         <div v-if="isActive">
@@ -34,13 +31,18 @@
           <table class="table">
             <th>リスト</th>
             <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
-            <tr v-for="item in filteredItems" :key="item.id">
+            <tr v-for="(item, index) in filteredItems" :key="item.id">
               <td>{{ item.username }}</td>
               <td>{{ parseInt(item.updated_at.split('-', 3).join('')) }}</td>
               <td>
                 <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
                   参照
                 </router-link>
+              </td>
+              <td>
+                <button @click="deleteGraphData(index, item.id)">
+                  削除
+                </button>
               </td>
             </tr>
           </table>
@@ -95,7 +97,6 @@ export default {
     }
   },
   mounted () {
-    // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
     this.$store.dispatch('search/fetchItems')
     this.setItems()
   },
@@ -117,9 +118,6 @@ export default {
           return row.name.toLowerCase().indexOf(filterWord) > -1
         })
       }
-      // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
-      // 画面繋ぎ時に追加する必要あり？ this.setItems()
-
       // XX〜YYまで検索した時に間に該当するものを表示する
       if (this.updatedFrom && this.updatedTo) {
         // split区切る join区切ったものをくっつける parseIntで数字に変える 型次第では不必要？
@@ -163,6 +161,16 @@ export default {
     // リセットボタン
     reset () {
       this.isActive = false
+      this.searchWord = ''
+      this.updatedFrom = ''
+      this.updatedTo = ''
+    },
+    // 削除ボタン
+    deleteGraphData (index, userId) {
+      if (confirm('本当に削除してもよろしいですか?')) {
+        this.$store.dispatch('search/deleteGraphData', userId)
+        this.filteredItems.splice(index, 1)
+      }
     }
   }
 }
