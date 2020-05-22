@@ -5,11 +5,6 @@
     <div class="chart">
       <Chart :id="currentUserId" />
     </div>
-    <div>
-      <router-link to="/top" class="button1">
-        TOPへ
-      </router-link>
-    </div>
   </div>
 </template>
 
@@ -34,6 +29,7 @@ export default {
 <style scoped>
 .chart {
   margin-top: 100px;
+  width: 50%;
 }
 
 .h1 {

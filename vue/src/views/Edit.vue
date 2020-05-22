@@ -148,7 +148,6 @@ export default {
   margin-top: 30px;
   border: 1px solid;
   padding: 30px;
-  border-radius: 5px;
   border-radius: 8px;
   border-color: #c0c0c0;
   width: 50%;
@@ -177,7 +176,7 @@ label{
   width:85px;}
 
 .graphRegister {
-  color:#a39d9d;
+  color:#353434;
   border-color:#a39d9d;
   max-width:960px;
   text-align:center;
@@ -185,6 +184,7 @@ label{
   margin-top:30px;
   cursor: pointer;
   font-family: 'Hannari', serif;
+  border-radius: 8px;
 }
 
 .graphRegister:hover{
@@ -194,7 +194,7 @@ label{
 }
 
 .graphEdit {
-  color:#a39d9d;
+  color:#353434;
   border-color:#a39d9d;
   max-width:960px;
   text-align:center;
@@ -202,6 +202,7 @@ label{
   margin-top:30px;
   cursor: pointer;
   font-family: 'Hannari', serif;
+  border-radius: 8px;
 }
 
 .graphEdit:hover {
@@ -211,7 +212,7 @@ label{
 }
 
 .graphClear {
-  color:#a39d9d;
+  color:#353434;
   border-color:#a39d9d;
   max-width:960px;
   text-align:center;
@@ -229,13 +230,13 @@ label{
 
 .hima {
   position: absolute;
-  width: 200px;
-  left: 0;
+  left: 30px;
   top: 200px;
+  width: 230px;
   z-index: -1;
 }
 
 .chart {
-  width: 60%;
+  width: 50%;
 }
 </style>
