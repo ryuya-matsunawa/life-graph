@@ -98,15 +98,6 @@ export default {
     loaded () {
       return this.$store.state.chart.loaded
     }
-    // sotreからidを元にデータを引っ張ってくる（今はいらない）
-    // getId () {
-    // }
-    // 項目を入力するたび、$store.state.chart.contentsに要素（オブジェクト)を追加する
-    // postContent (editAge,editScore,editComment){
-    //   newContent = {age: editAge,lifeScores: editScore,comment: editComment}
-    //   // https://vuex.vuejs.org/ja/guide/mutations.html
-    //   this.$store.commit('chart/getComtent')
-    // }
   },
   mounted () {
     this.setDate()
@@ -116,21 +107,32 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
-    // formSubmit (event) {
-    //   console.log(event)
-    //   console.log(this.age)
-    // this.$store.dispatch('chart/submit',event)
-    // @submit="onSubmit"パターンの時
-    // onSubmit () {
-    //   console.log('送信されました')
-    //   console.log(this.editAge)
-    //   console.log(this.editScore)
-    //   console.log(this.editComment)
-    // },
     add () {
-      // console.log({ age: this.editAge, score: this.editScore, comment: this.editComment })
-      // storeに送りたい
-      // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
+      const ageList = this.$store.state.chart.contents.map(obj => obj.age)
+      const result = ageList.some(value =>
+        value === parseInt(this.editAge)
+      )
+      if (result === true) {
+        const currentDataId = 1
+        this.$store.dispatch('chart/register',
+          {
+            id: currentDataId,
+            userId: this.userId,
+            age: this.editAge,
+            score: this.editScore,
+            comment: this.editComment
+          }
+        )
+      } else {
+        this.$store.dispatch('chart/register',
+          {
+            userId: this.userId,
+            age: this.editAge,
+            score: this.editScore,
+            comment: this.editComment
+          }
+        )
+      }
     },
     edit () {
       // console.log('編集されました')
