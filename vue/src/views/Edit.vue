@@ -58,11 +58,6 @@
     <div class="chart">
       <Chart :id="currentUserId" />
     </div>
-    <div>
-      <router-link to="/top" class="button">
-        TOPへ
-      </router-link>
-    </div>
   </div>
 </template>
 
