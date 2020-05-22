@@ -13,9 +13,14 @@
         </li>
       </ul>
       <div>
-        <span tag="button" class="button" @click="logout()">
+        <span tag="button" class="logout" @click="logout()">
           ログアウト
         </span>
+      </div>
+      <div>
+        <router-link to="/top" class="toTop">
+          TOPへ
+        </router-link>
       </div>
     </div>
   </div>
@@ -99,10 +104,10 @@ export default {
   font-family: 'Playfair Display', serif;
 }
 
-.button {
+.logout {
   width: 95px;
   position: fixed;
-  bottom: 190px;
+  bottom: 130px;
   right: 30px;
   padding: .75rem 1.25rem;
   border-radius: 5px;
@@ -112,6 +117,23 @@ export default {
   letter-spacing: .15rem;
   cursor: pointer;
   background-color: #a7d28d;
+  font-family: 'Playfair Display', serif;
+}
+
+.toTop {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  padding: .75rem 1.25rem;
+  border-radius: 5px;
+  width: 90px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  cursor: pointer;
+  background-color: #a7d28d;
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
 }
 </style>
