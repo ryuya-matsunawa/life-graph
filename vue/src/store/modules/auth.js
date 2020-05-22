@@ -8,7 +8,6 @@ export default {
   },
   mutations: {
     create (state, data) {
-      console.log(data)
       state.token = data.token
       state.userId = data.id
     },
