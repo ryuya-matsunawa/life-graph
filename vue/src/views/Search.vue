@@ -45,12 +45,7 @@
         </table>
       </div>
     </div>
-    <img src="../assets/search.png" class="momiji">
-    <div>
-      <router-link to="/top" class="button">
-        TOPへ
-      </router-link>
-    </div>
+    <img src="../assets/top.png" class="sakura">
   </div>
 </template>
 
@@ -170,18 +165,24 @@ export default {
 
 <style>
 .searchvue {
-  margin-top: 130px;
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: 4% 30%;
+  background-position: fixed;
+  padding-top: 100px;
 }
 
 .file {
   width: 600px;
-    margin: 0 auto;
-    margin-top: 20px;
-    border: 1px solid;
-    padding: 30px;
-    border-radius: 5px;
-    border-radius: 8px;
-    border-color: #c0c0c0;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: 1px solid;
+  padding: 30px;
+  border-radius: 5px;
+  border-radius: 8px;
+  border-color: #c0c0c0;
+  border-radius: 8px;
+  background-color: #efeeee;
 }
 /* 上部 */
 #search{
@@ -209,7 +210,7 @@ export default {
 }
 /* 下部 */
 button {
-  color:#a39d9d;
+  color:#353434;
   border-color:#a39d9d;
   width:100px;
   text-align:center;
@@ -220,6 +221,8 @@ button {
   font-size: 15px;
   /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Noto Serif JP', serif;
+  border-radius: 8px;
+  padding: 20px 15px;
 }
 
 .viewButton{
@@ -241,11 +244,11 @@ table{
   transform: rotate(0deg);
 }
 
-.momiji {
+.sakura {
   position: absolute;
-  width: 200px;
+  width: 300px;
   left: 0;
-  top: 300px;
+  top: 80px;
   z-index: -1;
 }
 </style>

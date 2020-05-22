@@ -5,7 +5,7 @@
       あの頃も、思い返せば綺麗だった。
     </div>
     <div class="form-item">
-      <validation-provider v-slot="{ errors }" name="ユーザー名" rules="required">
+      <validation-provider v-slot="{ errors }" name="ユーザー名" rules="required" class="alert">
         <label for="username" />
         <input v-model="username" type="username" placeholder="UserName">
         <span>{{ errors[0] }}</span>
@@ -123,7 +123,7 @@ export default {
   border-bottom: 1px solid #8c8c8c;
   color: #666;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
+  font-size: 16px;
   height: 50px;
   transition: border-color 0.3s;
   width: 280px;
@@ -136,6 +136,10 @@ export default {
 .form-item input:focus {
   border-bottom: 2px solid #c0c0c0;
   outline: none;
+}
+
+.alert {
+  font-size: 10px;
 }
 
 .button1 {
@@ -153,7 +157,7 @@ export default {
   font-family: "Hannari", serif;
 }
 
-.button:hover{
+.button1:hover{
   -webkit-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   -moz-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: button .4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;

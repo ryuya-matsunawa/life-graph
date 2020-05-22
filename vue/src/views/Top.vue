@@ -5,12 +5,11 @@
       あなたの人生グラフ、どう変えますか。
     </div>
     <router-link to="/search" tag="button" class="searchButton">
-      検索
+      検索へ
     </router-link>
     <router-link to="/edit" tag="button" class="editButton">
-      登録 / 編集
+      登録または編集へ
     </router-link>
-    <img src="../assets/top.png" class="sakura">
     <div class="chart">
       <Chart :id="currentUserId" />
     </div>
@@ -45,50 +44,46 @@ export default {
 
 .title {
   color: black;
-  font-size: 19px;
+  font-size: 22px;
   /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Noto Serif JP', serif;
+  margin-top: 60px;
 }
 
 .searchButton {
-  color:#a39d9d;
-  border-color:#a39d9d;
-  max-width:960px;
-  text-align:center;
-  position:relative;
-  margin-top:30px;
+  color: #353434;
+  border-color: #a39d9d;
+  position: absolute;
+  top: 232px;
+  left: 30px;
+  font-size: 16px;
   cursor: pointer;
-}
-
-.searchButton:hover {
-  color:#fff;
-  background-color:#a39d9d;
-  border-color:#a39d9d;
+  width: 250px;
+  padding: 20px 10px;
+  border-radius: 8px;
+  background-image: url('../assets/top.png');
+  background-size: 80px;
+  background-repeat: no-repeat;
 }
 
 .editButton {
-  color:#a39d9d;
+  color:#353434;
   border-color:#a39d9d;
-  max-width:960px;
-  text-align:center;
-  position:relative;
-  margin:auto;
-  cursor: pointer;
-  margin-left: 17px;
-}
-
-.editButton:hover {
-  color:#fff;
-  background-color:#a39d9d;
-  border-color:#a39d9d;
-}
-
-.sakura {
   position: absolute;
-  width: 300px;
-  left: 0;
-  top: 80px;
-  z-index: -1;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 17px;
+  top: 370px;
+  left: 30px;
+  width: 250px;
+  padding: 20px 80px;
+  border-radius: 8px;
+  background-image: url('../assets/edit.png');
+  background-size: 80px;
+  background-repeat: no-repeat;
+}
 
+.chart {
+  margin-top: 80px;
 }
 </style>
