@@ -22,6 +22,7 @@ export default {
   },
   actions: {
     create ({ commit }, data) {
+      debugger
       const url = '/api/auth/login'
       axios.post(url, data).then(res => commit('create', res.data))
         .catch(err => err).then(res => {

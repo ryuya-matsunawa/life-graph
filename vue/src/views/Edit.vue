@@ -6,7 +6,7 @@
     <div class="file">
       <div class="formOut">
         <p>
-          <validation-provider v-slot="{ errors }" name="年齢" rules="required">
+          <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
             <label class="tag" for="editAge">年齢</label>
             <input id="editAge" v-model="editAge" type="number" min="0" max="25">
             <!-- テスト用表示 -->
@@ -15,7 +15,7 @@
           </validation-provider>
         </p>
         <p>
-          <validation-provider v-slot="{ errors }" name="スコア" rules="required">
+          <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation">
             <label class="tag" for="editScore">スコア</label>
             <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
             <!-- テスト用表示 -->
@@ -146,6 +146,15 @@ export default {
 </script>
 
 <style scoped>
+.validation{
+  font-size: 10px;
+  color: gray;
+}
+.tag{
+  font-size: 20px;
+  color:black;
+}
+
 .edit {
   background-size: 20%;
   background-repeat: no-repeat;
