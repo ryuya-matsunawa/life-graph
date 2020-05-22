@@ -18,6 +18,8 @@ public class Account {
 	// usersテーブルのid
 	private int id;
 
+	private int user_id;
+
 	@NotBlank
 	// usersテーブルのusername
 	private String username;

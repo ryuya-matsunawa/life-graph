@@ -8,7 +8,11 @@
         <p>
           <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
             <label class="tag" for="editAge">年齢</label>
+<<<<<<< HEAD
             <input id="editAge" v-model="editAge" type="number" min="0" max="99">
+=======
+            <input id="editAge" v-model="editAge" type="number" min="0" max="101">
+>>>>>>> develop
             <!-- テスト用表示 -->
             <!-- <p>{{ editAge }}</p> -->
             <span>{{ errors[0] }}</span>
@@ -34,9 +38,15 @@
         <button
           class="graphRegister"
           href="#!"
+<<<<<<< HEAD
           @click="add()"
         >
         更新
+=======
+          @click="updateGraphData()"
+        >
+          更新
+>>>>>>> develop
         </button>
         <button
           class="graphClear"
@@ -73,7 +83,7 @@ export default {
       // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
-      editComment: '',
+      editComment: null,
       date: {
         created_at: '',
         updated_at: ''
@@ -86,15 +96,6 @@ export default {
     loaded () {
       return this.$store.state.chart.loaded
     }
-    // sotreからidを元にデータを引っ張ってくる（今はいらない）
-    // getId () {
-    // }
-    // 項目を入力するたび、$store.state.chart.contentsに要素（オブジェクト)を追加する
-    // postContent (editAge,editScore,editComment){
-    //   newContent = {age: editAge,lifeScores: editScore,comment: editComment}
-    //   // https://vuex.vuejs.org/ja/guide/mutations.html
-    //   this.$store.commit('chart/getComtent')
-    // }
   },
   mounted () {
     this.setDate()
@@ -104,6 +105,7 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
+<<<<<<< HEAD
     // formSubmit (event) {
     //   console.log(event)
     //   console.log(this.age)
@@ -128,6 +130,32 @@ export default {
       this.editAge = ''
       this.editScore = ''
       this.editComment = ''
+=======
+    updateGraphData () {
+      const ageList = this.$store.state.chart.contents.map(obj => obj.age)
+      const result = ageList.indexOf(parseInt(this.editAge))
+      if (result === -1) {
+        this.$store.dispatch('chart/register',
+          {
+            userId: this.$store.state.account.account.user_id,
+            age: parseInt(this.editAge),
+            score: parseInt(this.editScore),
+            comment: this.editComment
+          }
+        )
+      } else {
+        const currentUserId = this.$store.state.chart.contents[result].age
+        this.$store.dispatch('chart/register',
+          {
+            id: currentUserId,
+            userId: this.$store.state.account.account.user_id,
+            age: this.editAge,
+            score: this.editScore,
+            comment: this.editComment
+          }
+        )
+      }
+>>>>>>> develop
     }
   }
 }
