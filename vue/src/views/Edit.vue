@@ -8,7 +8,7 @@
         <p>
           <validation-provider v-slot="{ errors }" name="年齢" rules="required">
             <label class="tag" for="editAge">年齢</label>
-            <input id="editAge" v-model="editAge" type="number" min="0" max="25">
+            <input id="editAge" v-model="editAge" type="number" min="0" max="101">
             <!-- テスト用表示 -->
             <!-- <p>{{ editAge }}</p> -->
             <span>{{ errors[0] }}</span>
@@ -34,14 +34,7 @@
         <button
           class="graphRegister"
           href="#!"
-          @click="add()"
-        >
-          登録
-        </button>
-        <button
-          class="graphEdit"
-          href="#!"
-          @click="edit()"
+          @click="updateGraphData()"
         >
           更新
         </button>
@@ -80,7 +73,7 @@ export default {
       // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
-      editComment: '',
+      editComment: null,
       date: {
         created_at: '',
         updated_at: ''
@@ -102,38 +95,30 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
-    add () {
+    updateGraphData () {
       const ageList = this.$store.state.chart.contents.map(obj => obj.age)
-      const result = ageList.some(value =>
-        value === parseInt(this.editAge)
-      )
-      if (result === true) {
-        const currentDataId = 1
+      const result = ageList.indexOf(parseInt(this.editAge))
+      if (result === -1) {
         this.$store.dispatch('chart/register',
           {
-            id: currentDataId,
-            userId: this.userId,
-            age: this.editAge,
-            score: this.editScore,
+            userId: this.$store.state.account.account.user_id,
+            age: parseInt(this.editAge),
+            score: parseInt(this.editScore),
             comment: this.editComment
           }
         )
       } else {
+        const currentUserId = this.$store.state.chart.contents[result].age
         this.$store.dispatch('chart/register',
           {
-            userId: this.userId,
+            id: currentUserId,
+            userId: this.$store.state.account.account.user_id,
             age: this.editAge,
             score: this.editScore,
             comment: this.editComment
           }
         )
       }
-    },
-    edit () {
-      // // storeに送りたい
-      // setcontent { age: this.editAge, score: this.editScore, comment: this.editComment }
-      // this.$store.dispatch('chart/fetchGraph', this.id)
-
     }
   }
 }

@@ -9,19 +9,18 @@ export default {
   state: {
     contents: [],
     loaded: false,
-    sample: []
+    update: false
   },
   mutations: {
     setGraph (state, payload) {
       state.contents = payload
-      state.loaded = true
+      state.loaded = !state.loaded
     },
     resetState (state) {
       state.contents = []
-      state.loaded = false
     },
     sample (state) {
-      state.sample = []
+      state.update = !state.update
     }
   },
   actions: {
@@ -31,6 +30,7 @@ export default {
         .catch(err => err)
     },
     register ({ commit }, data) {
+      console.log(data)
       const url = '/api/life-graphs'
       axios.post(url, data).then(res => commit('sample', res.data))
         .catch(err => err)
