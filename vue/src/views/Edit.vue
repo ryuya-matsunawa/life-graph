@@ -58,11 +58,6 @@
     <div class="chart">
       <Chart :id="currentUserId" />
     </div>
-    <div>
-      <router-link to="/top" class="button">
-        TOPへ
-      </router-link>
-    </div>
   </div>
 </template>
 
@@ -249,21 +244,5 @@ label{
 
 .chart {
   width: 60%;
-}
-
-.button {
-  position: fixed;
-  bottom: 50px;
-  right: 30px;
-  padding: .75rem 1.25rem;
-  border-radius: 5px;
-  width: 90px;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: .15rem;
-  cursor: pointer;
-  background-color: #a7d28d;
-  font-family: 'Playfair Display', serif;
 }
 </style>
