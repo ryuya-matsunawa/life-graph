@@ -88,7 +88,7 @@ export default {
   padding: 8px;
   width: auto;
   font-size: 18px;
-  font-family: "Hannari";
+  font-family: "Hannari", serif;
   display: inline-block;
   text-decoration: none;
   text-align: center;
@@ -96,7 +96,6 @@ export default {
 
 .personalinfo{
   color: #fff;
-  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
 }
 
@@ -113,7 +112,6 @@ export default {
   letter-spacing: .15rem;
   cursor: pointer;
   background-color: #a7d28d;
-  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
 }
 </style>

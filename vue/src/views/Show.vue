@@ -37,7 +37,6 @@ export default {
 }
 
 .h1 {
-  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Noto Serif JP', serif;
 }
 

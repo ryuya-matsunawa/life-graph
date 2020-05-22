@@ -85,8 +85,8 @@ export default {
   top: 300px;
   left: 350px;
   z-index: 1;
-  /* eslint-disable no-unused-vars */
-  font-family: "Hannari";
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: "Hannari", serif;
   animation-name: fadeIn;
   animation-duration: 6s;
   animation-timing-function: ease-out;
@@ -140,8 +140,8 @@ export default {
   border-radius: 30px;
   border:1px solid #1B1B1B;
   cursor: pointer;
-  /* eslint-disable no-unused-vars */
-  font-family: "Hannari"
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: "Hannari", serif;
 }
 
 .button:hover{
@@ -186,6 +186,7 @@ export default {
 .form-footer {
   background-color: transparent;
   color: #666;
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   height: 50px;
