@@ -30,7 +30,6 @@ export default {
         .catch(err => err)
     },
     register ({ commit }, data) {
-      console.log(data)
       const url = '/api/life-graphs'
       axios.post(url, data).then(res => commit('sample', res.data))
         .catch(err => err)
