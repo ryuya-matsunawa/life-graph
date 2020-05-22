@@ -38,7 +38,7 @@
                 参照
               </router-link>
             </td>
-            <td>
+            <td v-if="roleActive">
               <button @click="deleteGraphData(index, item.id)">
                 削除
               </button>
@@ -82,6 +82,13 @@ export default {
         arrow: true,
         // sortDescがtrueのときに追加される
         desc: this.sortDesc
+      }
+    },
+    roleActive () {
+      if (this.$store.state.account.account.name === 'ROLE_USER') {
+        return false
+      } else {
+        return true
       }
     }
   },

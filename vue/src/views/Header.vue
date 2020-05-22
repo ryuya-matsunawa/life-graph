@@ -45,8 +45,8 @@ export default {
       this.username = stateAccount.account.username
       const role = stateAccount.account.name
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
-      if (role === 'ROLE_ADMIN') {
-        this.role = 'ユーザ'
+      if (role === 'ROLE_OWNER') {
+        this.role = 'オーナー'
       } else if (role === 'ROLE_ADMIN') {
         this.role = '管理者'
       } else {
