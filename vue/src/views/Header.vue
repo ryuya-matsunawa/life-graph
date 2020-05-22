@@ -29,10 +29,7 @@ export default {
       role: ''
     }
   },
-  async mounted () {
-    const userId = this.$store.state.auth.userId
-    // ロード時にactionsにdispatchする
-    await this.$store.dispatch('account/fetchAccount', userId)
+  created () {
     // storeから情報を取得するメソッド
     this.setAccount()
   },
@@ -43,12 +40,12 @@ export default {
       this.username = stateAccount.account.username
       const role = stateAccount.account.name
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
-      if (role === 'ROLE_USER') {
-        this.role = '一般ユーザ'
+      if (role === 'ROLE_ADMIN') {
+        this.role = 'ユーザ'
       } else if (role === 'ROLE_ADMIN') {
         this.role = '管理者'
       } else {
-        this.role = 'オーナー'
+        this.role = '一般ユーザ'
       }
     },
     // ログアウトボタンが押された時のメソッド

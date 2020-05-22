@@ -72,6 +72,7 @@ export default {
   },
   data () {
     return {
+      currentUserId: this.$store.state.account.account.id,
       // storeにつなぐ代わりにここで値を管理
       // intなので''ではなくnullにした
       editAge: null,
@@ -95,10 +96,6 @@ export default {
     //   this.$store.commit('chart/getComtent')
     // }
   },
-  // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
-  mounted () {
-    this.$store.dispatch('chart/load')
-  },
   methods: {
     // formSubmit (event) {
     //   console.log(event)
@@ -112,11 +109,6 @@ export default {
     //   console.log(this.editComment)
     // },
     add () {
-      // console.logはリントに怒られるのでpushの時には消す
-      // console.log('登録されました')
-      // console.log(this.editAge)
-      // console.log(this.editScore)
-      // console.log(this.editComment)
       // console.log({ age: this.editAge, score: this.editScore, comment: this.editComment })
       // storeに送りたい
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})

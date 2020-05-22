@@ -20,6 +20,53 @@
   </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+      username: '',
+      password: '',
+      isValid: false
+    }
+  },
+  computed: {
+    // isValidated () {
+    //   return Object.keys(this.fields).every(k => this.fields[k].validated) &&
+    //     Object.keys(this.fields).every(k => this.fields[k].valid)
+    // },
+    token () {
+      return this.$store.state.auth.token
+    },
+    account () {
+      return this.$store.state.account.account
+    }
+  },
+  watch: {
+    // tokenの状態を監視して、tokenが更新されたらtop画面に遷移する
+    token (newToken) {
+      const userId = this.$store.state.auth.userId
+      // ロード時にactionsにdispatchする
+      this.$store.dispatch('account/fetchAccount', userId)
+    },
+    account (newAccount) {
+      this.$router.push('/top')
+    }
+  },
+  methods: {
+    login () {
+      // ログイン画面で入力したusrnameとpasswordをAPIに渡す
+      this.$store.dispatch(
+        'auth/create',
+        {
+          username: this.username,
+          password: this.password
+        }
+      )
+    }
+  }
+}
+</script>
+
 <style scoped>
 * {
   margin: 0;

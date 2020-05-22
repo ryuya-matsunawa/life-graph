@@ -3,7 +3,7 @@
     <Header />
     <h1>User Name</h1>
     <div class="chart">
-      <Chart :userid="currentUserId" />
+      <Chart :id="currentUserId" />
     </div>
     <div>
       <router-link to="/top" class="button1">

@@ -15,7 +15,7 @@
     </router-link>
     <img src="../assets/top.png" class="sakura">
     <div class="chart">
-      <Chart :userid="currentUserId" />
+      <Chart :id="currentUserId" />
     </div>
     <div>
       <router-link to="/top" class="button">
