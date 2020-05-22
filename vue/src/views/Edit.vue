@@ -151,6 +151,7 @@ export default {
   border-radius: 8px;
   border-color: #c0c0c0;
   width: 50%;
+  background-color:  #efeeee;
 }
 
 .formOut{

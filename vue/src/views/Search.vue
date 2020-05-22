@@ -23,9 +23,6 @@
         <button @click="reset()">
           リセット
         </button>
-        <button>
-          削除
-        </button>
       </div>
       <!-- 下部 -->
       <div v-if="isActive">
@@ -40,6 +37,11 @@
               <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
                 参照
               </router-link>
+            </td>
+            <td>
+              <button @click="deleteGraphData(index, item.id)">
+                削除
+              </button>
             </td>
           </tr>
         </table>
@@ -91,7 +93,6 @@ export default {
     }
   },
   mounted () {
-    // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
     this.$store.dispatch('search/fetchItems')
     this.setItems()
   },
@@ -113,9 +114,6 @@ export default {
           return row.name.toLowerCase().indexOf(filterWord) > -1
         })
       }
-      // 画面繋ぎ時に追加する必要あり？ this.$store.dispatch('search/アクション名')
-      // 画面繋ぎ時に追加する必要あり？ this.setItems()
-
       // XX〜YYまで検索した時に間に該当するものを表示する
       if (this.updatedFrom && this.updatedTo) {
         // split区切る join区切ったものをくっつける parseIntで数字に変える 型次第では不必要？
@@ -158,12 +156,22 @@ export default {
     // リセットボタン
     reset () {
       this.isActive = false
+      this.searchWord = ''
+      this.updatedFrom = ''
+      this.updatedTo = ''
+    },
+    // 削除ボタン
+    deleteGraphData (index, userId) {
+      if (confirm('本当に削除してもよろしいですか?')) {
+        this.$store.dispatch('search/deleteGraphData', userId)
+        this.filteredItems.splice(index, 1)
+      }
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .searchvue {
   background-size: 20%;
   background-repeat: no-repeat;
@@ -178,8 +186,6 @@ export default {
   margin-top: 20px;
   border: 1px solid;
   padding: 30px;
-  border-radius: 5px;
-  border-radius: 8px;
   border-color: #c0c0c0;
   border-radius: 8px;
   background-color: #efeeee;

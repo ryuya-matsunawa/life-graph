@@ -7,33 +7,24 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
-    items: [
-      {
-        id: 5,
-        name: 'Yamada',
-        day: '2020-05-14'
-      },
-      {
-        id: 2,
-        name: 'Suzuki',
-        day: '2020-05-15'
-      },
-      {
-        id: 3,
-        name: 'Tanaka',
-        day: '2020-05-16'
-      }
-    ]
+    items: []
   },
   mutations: {
     setItems (state, payload) {
       state.items = payload
+    },
+    deleteGraphData (state) {
+      state.items = ''
     }
   },
   actions: {
     fetchItems ({ commit }) {
       const url = '/api/life-graphs'
       axios.get(url).then(res => commit('setItems', res.data))
+    },
+    deleteGraphData ({ commit }, userId) {
+      const url = '/api/life-graphs/' + userId
+      axios.delete(url).then(res => commit('deleteGraphData', res.data))
     }
   }
 }
