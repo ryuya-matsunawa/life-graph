@@ -1,28 +1,28 @@
 <template>
-  <div class="background">
-    <div class="paper">
-      <div class="lines">
-        <img id="title" src="../assets/signin.png">
-        <img id="l2" src="../assets/h2.png">
-        <div class="form-item">
-          <label for="username" />
-          <input v-model="username" type="username" placeholder="UserName">
-          <span v-if="isValid">ユーザー名を入力してください</span>
-          <br>
-          <label for="password" />
-          <input v-model="password" type="password" required="required" placeholder="Password">
-        </div>
-        <button class="button-panel button" @click="login()">
-          Signin
-        </button>
-        <div class="form-footer">
-          <p><a href="#">Create an account</a></p>
-          <p><a href="#">Forgot password?</a></p>
-        </div>
-        <div class="holes hole-top" />
-        <div class="holes hole-middle" />
-        <div class="holes hole-bottom" />
-      </div>
+  <div class="loginSection">
+    <video id="video" src="../assets/login.mp4" autoplay loop muted />
+    <div class="comment">
+      あの頃も、思い返せば綺麗だった。
+    </div>
+    <div class="form-item">
+      <validation-provider v-slot="{ errors }" name="ユーザー名" rules="required" class="alert">
+        <label for="username" />
+        <input v-model="username" type="username" placeholder="UserName">
+        <span>{{ errors[0] }}</span>
+      </validation-provider>
+      <br>
+      <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
+        <label for="password" />
+        <input v-model="password" type="password" required="required" placeholder="Password">
+        <span>{{ errors[0] }}</span>
+      </validation-provider>
+    </div>
+    <button class="login" @click="login()">
+      ログイン
+    </button>
+    <div class="form-footer">
+      <p><a href="#">Create an account</a></p>
+      <p><a href="#">Forgot password?</a></p>
     </div>
   </div>
 </template>
@@ -70,93 +70,66 @@ export default {
         }
       )
     }
+
   }
 }
+
 </script>
 
 <style scoped>
-/*Font*/
-@import url(//weloveiconfonts.com/api/?family=fontawesome);
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-}
-/* Simple Reset */
 * {
   margin: 0;
   padding: 0;
   position: relative;
 }
 
-.background {
-  background-image: url("../assets/team20.png");
-  background-size: cover;
-  width: 100%;
-  height: 700px;
-  background-position: right;
+#video {
+  position: relative;
 }
 
-.paper {
-  height: 450px;
-  width: 570px;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0px 0px 5px 0px #888;
-  left: 50px;
-  top: 100px;
-}
-
-.paper::before {
-  content: '';
+.comment {
   position: absolute;
-  left: 45px;
-  height: 450px;
-  width: 2px;
-  background: rgba(255,0,0,0.4);
+  color: #fff;
+  font-size: 40px;
+  top: 300px;
+  left: 350px;
+  z-index: 1;
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: "Hannari", serif;
+  animation-name: fadeIn;
+  animation-duration: 6s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
 }
 
-.lines {
-  margin-top: 40px;
-  width: 570px;
-  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
-}
+@keyframes fadeIn { /*animetion-nameで設定した値を書く*/
+  0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
+  100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
 
-#title {
-  width: 260px;
-}
-
-#l2 {
-  width: 33px;
-  right: 330px;
-  bottom: 180px;
 }
 
 .form-item {
-  width: 280px;
-  height: 130px;
-  padding: 20px 20px;
-  overflow: hidden;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 19px;
-  line-height: 1.8;
-  white-space: pre-wrap;
-  text-overflow: ellipsis;
-  left: 40px;
+  position: absolute;
+  display: block;
+  margin-top: 5px;
 }
 
 .form-item input {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #e9e9e9;
+  border-bottom: 1px solid #8c8c8c;
   color: #666;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
+  font-size: 16px;
   height: 50px;
   transition: border-color 0.3s;
-  width: 70%;
+  width: 280px;
   display: block;
-  margin-left: 10px;
+  margin-left: 180px;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -165,57 +138,78 @@ export default {
   outline: none;
 }
 
-button {
-  margin: 2em 0 0;
-  margin-top: 40px;
-  cursor: pointer
+.alert {
+  font-size: 10px;
 }
 
-.button {
-  position:absolute;
-  top: 250px;
-  right: 10px;
-  width: 12rem;
-  height: 4rem;
-  padding-left: 3rem;
-  padding-top: 1rem;
-  overflow: hidden;
-  color: #fff;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 10%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(30, 100%, 85%, 1), hsla(30, 100%, 85%, 1));
-  font-size: 2rem;
-  line-height: 1.5;
-  transition: all 1s;
-  -webkit-perspective: 800px;
-  -moz-perspective: 800px;
-  -o-perspective: 800px;
-  -ms-perspective: 800px;
-  perspective: 800px;
+.login {
+  display: block;
+  top: 70px;
+  left: 580px;
+  width: 160px;
+  text-align: center;
+  color: #1B1B1B;
+  background: #fff;
+  border-radius: 30px;
+  border:1px solid #1B1B1B;
+  cursor: pointer;
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: "Hannari", serif;
 }
 
-.button:hover {
-  transition-delay: 50ms;
-  transform: rotate3d(0,0,1,-13deg);
+.login:hover{
+  -webkit-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -moz-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: button .4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes button {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
+}
+
+@-moz-keyframes button {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
+}
+
+@keyframes button {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
 }
 
 .form-footer {
-  position: absolute;
-  left: 75%;
-  top: 10%;
-  text-align: left;
-  width: 12rem;
-  height: 4rem;
-  padding-left: 3rem;
-  padding-top: 1rem;
-  overflow: hidden;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 1rem;
-  line-height: 1.5;
+  background-color: transparent;
+  color: #666;
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 280px;
+  display: block;
+  margin-left: 520px;
+  margin-top: 110px;
+  text-align: center;
+  line-height: 190%;
 }
 
 .form-footer a {
@@ -223,27 +217,7 @@ button {
   text-decoration: none;
   transition: border-color 0.3s;
 }
-
 .form-footer a:hover {
   border-bottom: 1px dotted #8c8c8c;
-}
-
-.holes {
-  position: absolute;
-  left: 10px;
-  height: 25px;
-  width: 25px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 2px 0px #888;
-}
-.hole-top {
-  top: 10%;
-}
-.hole-middle {
-  top: 43%;
-}
-.hole-bottom {
-  bottom: 10%;
 }
 </style>

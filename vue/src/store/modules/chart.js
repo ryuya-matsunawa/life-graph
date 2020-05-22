@@ -8,30 +8,31 @@ export default {
   namespaced: true,
   state: {
     contents: [],
-    loaded: false
+    loaded: false,
+    update: false
   },
   mutations: {
     setGraph (state, payload) {
       state.contents = payload
-      state.loaded = true
-    },
-    loadDone (state, payload) {
-      state.loaded = payload.loading
+      state.loaded = !state.loaded
     },
     resetState (state) {
       state.contents = []
-      state.loaded = false
+    },
+    sample (state) {
+      state.update = !state.update
     }
   },
   actions: {
-    fetchGraph ({ commit }, userid) {
-      const url = '/api/life-graphs/' + userid
+    fetchGraph ({ commit }, userId) {
+      const url = '/api/life-graphs/' + userId
       axios.get(url).then(res => commit('setGraph', res.data))
         .catch(err => err)
     },
-    load ({ commit }) {
-      const loading = true
-      commit('loadDone', { loading })
+    register ({ commit }, data) {
+      const url = '/api/life-graphs'
+      axios.post(url, data).then(res => commit('sample', res.data))
+        .catch(err => err)
     }
   }
 }
