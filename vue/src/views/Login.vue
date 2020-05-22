@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="loginSection">
     <video id="video" src="../assets/login.mp4" autoplay loop muted />
     <div class="comment">
       あの頃も、思い返せば綺麗だった。
