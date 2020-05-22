@@ -8,7 +8,7 @@
         <p>
           <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
             <label class="tag" for="editAge">年齢</label>
-            <input id="editAge" v-model="editAge" type="number" min="0" max="25">
+            <input id="editAge" v-model="editAge" type="number" min="0" max="99">
             <!-- テスト用表示 -->
             <!-- <p>{{ editAge }}</p> -->
             <span>{{ errors[0] }}</span>
@@ -38,13 +38,6 @@
         >
         更新
         </button>
-        <!-- <button
-          class="graphEdit"
-          href="#!"
-          @click="edit()"
-        >
-          編集
-        </button> -->
         <button
           class="graphClear"
           href="#!"
@@ -128,11 +121,6 @@ export default {
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
     },
     edit () {
-      // console.log('編集されました')
-      // console.log(this.editAge)
-      // console.log(this.editScore)
-      // console.log(this.editComment)
-      // console.log(this.editComment)
       // // storeに送りたい
       // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
     },

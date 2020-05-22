@@ -193,13 +193,6 @@ export default {
         tooltipEl.style.textAlign = 'left'
         tooltipEl.style.wordBreak = 'normal'
       }
-    },
-    setTitle () {
-      const titleText = this.$store.state.chart.titles.title
-      if (titleText === null || titleText === undefined) {
-      } else {
-        this.options.title.text = titleText + 'の人生グラフ'
-      }
     }
   }
 }
