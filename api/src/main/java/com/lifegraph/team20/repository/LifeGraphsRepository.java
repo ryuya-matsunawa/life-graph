@@ -24,7 +24,7 @@ public class LifeGraphsRepository {
 	public List<UserData> getUserData() {
 		final String sql = "select * from users inner join parent_graphs on users.id = parent_graphs.user_id";
 		return jdbcTemplate.query(sql, new RowMapper<UserData>() {
-			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException{
+			public UserData mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new UserData(rs.getInt("id"), rs.getString("username"), rs.getTimestamp("updated_at"));
 			}
 		});
@@ -43,9 +43,10 @@ public class LifeGraphsRepository {
 		//実行そのものはjdbcTemplate.queryでしてる。RowMapperは呪文
 		List<LifeGraph> result = namedParameterJdbcTemplate.query(sql, param, new RowMapper<LifeGraph>() {
 			//RowMappers使ったらmapRow使う呪文
-			public LifeGraph mapRow(ResultSet rs, int rowNum) throws SQLException{
+			public LifeGraph mapRow(ResultSet rs, int rowNum) throws SQLException {
 				//LifeGraphに定義してある、コンストラクタに入ってるものを呼び出してくる。そして、それをresultに入れてる
-				return new LifeGraph(rs.getInt("parent_id"), rs.getInt("age"), rs.getInt("score"),rs.getString("comment"));
+				return new LifeGraph(rs.getInt("parent_id"), rs.getInt("age"), rs.getInt("score"),
+						rs.getString("comment"));
 			}
 			//resultの定義終了
 		});

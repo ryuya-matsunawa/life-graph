@@ -3,58 +3,57 @@
     <div>
       <Header />
     </div>
-    <div class="paper">
-      <div class="lines">
-        <div class="formOut">
-          <ul>
-            <li>
-              <label class="tag" for="editAge">年齢</label>
-              <input id="editAge" v-model="editAge" type="number">
-              <!-- テスト用表示 -->
-              <!-- <p>{{ editAge }}</p> -->
-            </li>
-            <li>
-              <label class="tag" for="editScore">スコア</label>
-              <input id="editScore" v-model="editScore" type="number">
-              <!-- テスト用表示 -->
-              <!-- <p>{{ editScore }}</p> -->
-            </li>
-            <li>
-              <label class="tag" for="editComment">コメント</label>
-              <input id="editComment" v-model="editComment" type="text">
-              <!-- テスト用表示 -->
-              <!-- <p>{{ editComment }}</p> -->
-            </li>
-          </ul>
-          <button
-            class="graphRegister"
-            href="#!"
-            @click="add"
-          >
-            登録
-          </button>
-          <button
-            class="graphEdit"
-            href="#!"
-            @click="edit"
-          >
-            編集
-          </button>
-          <button
-            class="graphClear"
-            href="#!"
-            @click="click"
-          >
-            クリア
-          </button>
-        </div>
-        <div class="holes hole-top" />
-        <div class="holes hole-middle" />
-        <div class="holes hole-bottom" />
+    <div class="file">
+      <div class="formOut">
+        <p>
+          <label class="tag" for="editAge">年齢</label>
+          <input id="editAge" v-model="editAge" type="number" min="0" max="25">
+          <!-- テスト用表示 -->
+          <!-- <p>{{ editAge }}</p> -->
+        </p>
+        <p>
+          <label class="tag" for="editScore">スコア</label>
+          <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
+          <!-- テスト用表示 -->
+          <!-- <p>{{ editScore }}</p> -->
+        </p>
+        <p>
+          <label class="tag" for="editComment">コメント</label>
+          <input id="editComment" v-model="editComment" type="text" maxlength="200">
+          <!-- テスト用表示 -->
+          <!-- <p>{{ editComment }}</p> -->
+        </p>
+        <button
+          class="graphRegister"
+          href="#!"
+          @click="add"
+        >
+        更新
+        </button>
+        <!-- <button
+          class="graphEdit"
+          href="#!"
+          @click="edit"
+        >
+          編集
+        </button> -->
+        <button
+          class="graphClear"
+          href="#!"
+          @click="click"
+        >
+          クリア
+        </button>
       </div>
     </div>
-    <div v-if="loaded" class="chart">
+    <img src="../assets/edit.png" class="hima">
+    <div class="chart">
       <Chart />
+    </div>
+    <div>
+      <router-link to="/top" class="button">
+        TOPへ
+      </router-link>
     </div>
   </div>
 </template>
@@ -64,6 +63,7 @@
 // https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
+
 export default {
   name: 'Edit',
   components: {
@@ -72,6 +72,7 @@ export default {
   },
   data () {
     return {
+      currentUserId: this.$store.state.account.account.id,
       // storeにつなぐ代わりにここで値を管理
       // intなので''ではなくnullにした
       editAge: null,
@@ -95,10 +96,6 @@ export default {
     //   this.$store.commit('chart/getComtent')
     // }
   },
-  // チャートのレンダリングの際、読み込んでから表示できるようにするのskill.vueの時と同じ
-  mounted () {
-    this.$store.dispatch('chart/load')
-  },
   methods: {
     // formSubmit (event) {
     //   console.log(event)
@@ -112,11 +109,6 @@ export default {
     //   console.log(this.editComment)
     // },
     add () {
-      // console.logはリントに怒られるのでpushの時には消す
-      // console.log('登録されました')
-      // console.log(this.editAge)
-      // console.log(this.editScore)
-      // console.log(this.editComment)
       // console.log({ age: this.editAge, score: this.editScore, comment: this.editComment })
       // storeに送りたい
       // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
@@ -129,6 +121,11 @@ export default {
       // console.log(this.editComment)
       // // storeに送りたい
       // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
+    },
+    click () {
+      this.editAge = ''
+      this.editScore = ''
+      this.editComment = ''
     }
   }
 }
@@ -136,7 +133,6 @@ export default {
 
 <style scoped>
 .edit {
-  background-image: url(../assets/human.png);
   background-size: 20%;
   background-repeat: no-repeat;
   background-position: 4% 30%;
@@ -144,30 +140,16 @@ export default {
   padding-top: 100px;
 }
 
-.paper {
-  position: fixed;
-  height:450px;
-  width: 400px;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0px 0px 5px 0px #888;
-  left: 75%;
-  top: 60%;
-}
-
-.paper::before {
-  content: '';
-  position: absolute;
-  left: 45px;
-  height: 100%;
-  width: 2px;
-  background: rgba(255,0,0,0.4);
-}
-
-.lines {
-  margin-top: 40px;
-  height: calc(100% - 40px);
-  width: 100%;
-  background-image: repeating-linear-gradient(white 0px, white 24px, steelblue 25px);
+.file {
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 1px solid;
+  padding: 30px;
+  border-radius: 5px;
+  border-radius: 8px;
+  border-color: #c0c0c0;
+  width: 50%;
 }
 
 .formOut{
@@ -176,35 +158,14 @@ export default {
   width: 250px;
   font-weight: bold;
   font-size: 18px;
+  font-family: 'Noto Serif JP', serif;
 }
 
-ul {
+p{
+  margin: 4px 15px 8px 5px;
   list-style: none;
   text-align: center;
   width: 240px;
-}
-
-ul li{
-  margin: 4px 15px 8px 5px;
-}
-
-.holes {
-  position: absolute;
-  left: 10px;
-  height: 25px;
-  width: 25px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 2px 0px #888;
-}
-.hole-top {
-  top: 10%;
-}
-.hole-middle {
-  top: 43%;
-}
-.hole-bottom {
-  bottom: 10%;
 }
 
 label{
@@ -214,74 +175,81 @@ label{
   width:85px;}
 
 .graphRegister {
-  text-align: center;
-  width: 5rem;
-  height: 3rem;
-  padding-left: 1rem;
-  padding-top: 1rem;
-  overflow: hidden;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.5;
-  transition: all 1s;
-  margin: 10px 15px;
+  color:#a39d9d;
+  border-color:#a39d9d;
+  max-width:960px;
+  text-align:center;
+  position:relative;
+  margin-top:30px;
   cursor: pointer;
+  font-family: 'Hannari', serif;
 }
 
 .graphRegister:hover{
-  transition-delay: 50ms;
-  transform: rotate3d(0,0,1,-13deg);
+  color:#fff;
+  background-color:#a39d9d;
+  border-color:#a39d9d;
 }
 
 .graphEdit {
-  text-align: center;
-  width: 5rem;
-  height: 3rem;
-  padding-left: 1rem;
-  padding-top: 1rem;
-  overflow: hidden;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.5;
-  transition: all 1s;
-  margin-right: 5px;
+  color:#a39d9d;
+  border-color:#a39d9d;
+  max-width:960px;
+  text-align:center;
+  position:relative;
+  margin-top:30px;
   cursor: pointer;
+  font-family: 'Hannari', serif;
 }
 
 .graphEdit:hover {
-  transition-delay: 50ms;
-  transform: rotate3d(0,0,1,-13deg);
+  color:#fff;
+  background-color:#a39d9d;
+  border-color:#a39d9d;
 }
 
 .graphClear {
-  text-align: center;
-  width: 5rem;
-  height: 3rem;
-  padding-left: 1rem;
-  padding-top: 1rem;
-  overflow: hidden;
-  box-shadow: .25rem 0 .25rem hsla(0, 0%, 0%, .1);
-  background-image:
-    linear-gradient(90deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
-  , linear-gradient(90deg, hsla(60, 100%, 85%, 1), hsla(60, 100%, 85%, 1));
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.5;
-  transition: all 1s;
-  margin: 10px 15px;
+  color:#a39d9d;
+  border-color:#a39d9d;
+  max-width:960px;
+  text-align:center;
+  position:relative;
+  margin-top:30px;
   cursor: pointer;
+  font-family: 'Hannari',serif;
 }
 
 .graphClear:hover{
-  transition-delay: 50ms;
-  transform: rotate3d(0,0,1,-13deg);
+  color:#fff;
+  background-color:#a39d9d;
+  border-color:#a39d9d;
+}
+
+.hima {
+  position: absolute;
+  width: 200px;
+  left: 0;
+  top: 200px;
+  z-index: -1;
+}
+
+.chart {
+  width: 60%;
+}
+
+.button {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  padding: .75rem 1.25rem;
+  border-radius: 5px;
+  width: 90px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  cursor: pointer;
+  background-color: #a7d28d;
+  font-family: 'Playfair Display', serif;
 }
 </style>

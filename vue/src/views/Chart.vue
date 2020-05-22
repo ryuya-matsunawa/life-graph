@@ -5,7 +5,7 @@ export default {
   name: 'Chart',
   extends: Line,
   props: {
-    userid: {
+    id: {
       type: Number,
       default: null
     }
@@ -80,15 +80,30 @@ export default {
       }
     }
   },
-  async mounted () {
-    await this.$store.dispatch('chart/fetchGraph', this.userid)
-    this.setLabels()
-    this.setData()
-    this.setComments()
-    this.setTitle()
-    this.renderChart(this.data, this.options)
+  computed: {
+    loaded () {
+      return this.$store.state.chart.loaded
+    }
+  },
+  watch: {
+    loaded () {
+      this.renderGraphChart()
+    }
+  },
+  mounted () {
+    this.$store.dispatch('chart/fetchGraph', this.id)
+    this.renderGraphChart()
+  },
+  destroyed () {
+    this.$store.commit('chart/resetState')
   },
   methods: {
+    renderGraphChart () {
+      this.setLabels()
+      this.setData()
+      this.setComments()
+      this.renderChart(this.data, this.options)
+    },
     setLabels () {
       this.data.labels = this.$store.state.chart.contents.map((content) => {
         return content.age
@@ -119,6 +134,13 @@ export default {
         if (tooltipModel.opacity === 0) {
           tooltipEl.style.opacity = 0
           return
+        }
+        // キャレット(ツールチップが指し示すもの)の位置を設定する
+        tooltipEl.classList.remove('above', 'below', 'no-transform')
+        if (tooltipModel.yAlign) {
+          tooltipEl.classList.add(tooltipModel.yAlign)
+        } else {
+          tooltipEl.classList.add('no-transform')
         }
         function getBody (bodyItem) {
           return bodyItem.lines
