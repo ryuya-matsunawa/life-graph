@@ -24,7 +24,7 @@
       <div class="holes hole-bottom" />
     </div>
     <div class="chart">
-      <Chart :userid="currentUserId" />
+      <Chart :id="currentUserId" />
     </div>
   </div>
 </template>
