@@ -6,15 +6,15 @@
     </div>
     <div class="form-item">
       <validation-provider v-slot="{ errors }" name="ユーザー名" rules="required">
-      <label for="username" />
-      <input v-model="username" type="username" placeholder="UserName">
-      <span>{{ errors[0] }}</span>
+        <label for="username" />
+        <input v-model="username" type="username" placeholder="UserName">
+        <span>{{ errors[0] }}</span>
       </validation-provider>
       <br>
       <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
-      <label for="password" />
-      <input v-model="password" type="password" required="required" placeholder="Password">
-      <span>{{ errors[0] }}</span>
+        <label for="password" />
+        <input v-model="password" type="password" required="required" placeholder="Password">
+        <span>{{ errors[0] }}</span>
       </validation-provider>
     </div>
     <button class="button1" @click="login()">
