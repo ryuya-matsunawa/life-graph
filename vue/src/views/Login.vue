@@ -1,27 +1,35 @@
 <template>
   <div class="background">
     <div class="paper">
-      <div class="lines">
-        <img id="title" src="../assets/signin.png">
-        <img id="l2" src="../assets/h2.png">
-        <div class="form-item">
-          <label for="username" />
-          <input v-model="username" type="username" placeholder="UserName">
-          <br>
-          <label for="password" />
-          <input v-model="password" type="password" required="required" placeholder="Password">
+      <!-- <ValidationObserver v-slot="{ invalid }" @add.prevent="add()"> -->
+        <div class="lines">
+          <img id="title" src="../assets/signin.png">
+          <img id="l2" src="../assets/h2.png">
+          <div class="form-item">
+            <validation-provider v-slot="{ errors }" name="ユーザー名" rules="required">
+            <label for="username" />
+            <input v-model="username" type="username" placeholder="UserName">
+            <span>{{ errors[0] }}</span>
+            </validation-provider>
+            <br>
+            <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
+            <label for="password" />
+            <input v-model="password" type="password" required="required" placeholder="Password">
+            <span>{{ errors[0] }}</span>
+            </validation-provider>
+          </div>
+          <button class="button-panel button"  :disabled="invalid" @click="login()">
+            Signin
+          </button>
+          <div class="form-footer">
+            <p><a href="#">Create an account</a></p>
+            <p><a href="#">Forgot password?</a></p>
+          </div>
+          <div class="holes hole-top" />
+          <div class="holes hole-middle" />
+          <div class="holes hole-bottom" />
         </div>
-        <button class="button-panel button" @click="login()">
-          Signin
-        </button>
-        <div class="form-footer">
-          <p><a href="#">Create an account</a></p>
-          <p><a href="#">Forgot password?</a></p>
-        </div>
-        <div class="holes hole-top" />
-        <div class="holes hole-middle" />
-        <div class="holes hole-bottom" />
-      </div>
+      <!-- </ValidationObserver> -->
     </div>
   </div>
 </template>
@@ -60,8 +68,10 @@ export default {
         }
       )
     }
+
   }
 }
+
 </script>
 
 <style scoped>

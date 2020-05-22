@@ -7,18 +7,24 @@
       <div class="lines">
         <div class="formOut">
           <ul>
+            <validation-provider v-slot="{ errors }" name="年齢" rules="required">
             <li>
               <label class="tag" for="editAge">年齢</label>
               <input id="editAge" v-model="editAge" type="number">
               <!-- テスト用表示 -->
               <!-- <p>{{ editAge }}</p> -->
             </li>
+            <span>{{ errors[0] }}</span>
+            </validation-provider>
+            <validation-provider v-slot="{ errors }" name="スコア" rules="required">
             <li>
               <label class="tag" for="editScore">スコア</label>
               <input id="editScore" v-model="editScore" type="number">
               <!-- テスト用表示 -->
               <!-- <p>{{ editScore }}</p> -->
             </li>
+            <span>{{ errors[0] }}</span>
+            </validation-provider>
             <li>
               <label class="tag" for="editComment">コメント</label>
               <input id="editComment" v-model="editComment" type="text">
