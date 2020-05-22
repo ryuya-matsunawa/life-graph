@@ -29,11 +29,6 @@ export default {
         ]
       },
       options: {
-        title: {
-          display: true,
-          text: []
-          // text: this.$store.state.chart.titles.title + 'の人生グラフ'
-        },
         // ツールチップで見た目変えるときはこのサイトに変え方諸々書いてるから見てみて！
         // https://misc.0o0o.org/chartjs-doc-ja/configuration/tooltip.html#%E3%83%84%E3%83%BC%E3%83%AB%E3%83%81%E3%83%83%E3%83%97
         tooltips: {

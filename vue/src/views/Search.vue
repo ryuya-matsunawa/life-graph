@@ -8,7 +8,7 @@
         <ul id="searchList">
           <li class="username">
             ユーザー名
-            <input v-model="searchWord" type="text" id="userName">
+            <input v-model="searchWord" type="text">
           </li>
           <li class="update">
             更新日
@@ -163,9 +163,6 @@ export default {
     // リセットボタン
     reset () {
       this.isActive = false
-    },
-    click () {
-      this.userName = ''
     }
   }
 }
