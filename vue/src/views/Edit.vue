@@ -8,11 +8,7 @@
         <p>
           <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
             <label class="tag" for="editAge">年齢</label>
-<<<<<<< HEAD
             <input id="editAge" v-model="editAge" type="number" min="0" max="99">
-=======
-            <input id="editAge" v-model="editAge" type="number" min="0" max="101">
->>>>>>> develop
             <!-- テスト用表示 -->
             <!-- <p>{{ editAge }}</p> -->
             <span>{{ errors[0] }}</span>
@@ -38,15 +34,9 @@
         <button
           class="graphRegister"
           href="#!"
-<<<<<<< HEAD
-          @click="add()"
-        >
-        更新
-=======
           @click="updateGraphData()"
         >
           更新
->>>>>>> develop
         </button>
         <button
           class="graphClear"
@@ -105,32 +95,6 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
-<<<<<<< HEAD
-    // formSubmit (event) {
-    //   console.log(event)
-    //   console.log(this.age)
-    // this.$store.dispatch('chart/submit',event)
-    // @submit="onSubmit"パターンの時
-    // onSubmit () {
-    //   console.log('送信されました')
-    //   console.log(this.editAge)
-    //   console.log(this.editScore)
-    //   console.log(this.editComment)
-    // },
-    add () {
-      // console.log({ age: this.editAge, score: this.editScore, comment: this.editComment })
-      // storeに送りたい
-      // this.$store.dispatch('chart/register',{editAge,editScore,editComment})
-    },
-    edit () {
-      // // storeに送りたい
-      // this.$store.dispatch('chart/edit',{editAge,editScore,editComment})
-    },
-    click () {
-      this.editAge = ''
-      this.editScore = ''
-      this.editComment = ''
-=======
     updateGraphData () {
       const ageList = this.$store.state.chart.contents.map(obj => obj.age)
       const result = ageList.indexOf(parseInt(this.editAge))
@@ -155,7 +119,6 @@ export default {
           }
         )
       }
->>>>>>> develop
     }
   }
 }
