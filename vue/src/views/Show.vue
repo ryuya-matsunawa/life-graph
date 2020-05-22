@@ -3,7 +3,7 @@
     <Header />
     <h1>User Name</h1>
     <div class="chart">
-      <Chart :userid="currentUserId" />
+      <Chart :id="currentUserId" />
     </div>
   </div>
 </template>
@@ -27,15 +27,12 @@ export default {
 </script>
 
 <style scoped>
-.show {
-  background-image: url(../assets/show.png);
-  background-size: 25%;
-  background-repeat: no-repeat;
-  background-position: 5% 50%;
-  background-position: fixed;
-}
-
 .chart {
   margin-top: 100px;
+  width: 50%;
+}
+
+.h1 {
+  font-family: 'Noto Serif JP', serif;
 }
 </style>

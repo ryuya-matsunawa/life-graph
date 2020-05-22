@@ -1,8 +1,8 @@
 package com.lifegraph.team20.repository;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,7 +38,7 @@ public class ParentGraphRepository {
 		final String sql = "select * from parent_graphs where user_id = " + userId;
 		//	    List<ParentGraphData> parentLifeGraphs = jdbcTemplate.queryForList(sql, ParentGraphData.class);
 		RowMapper<ParentGraphData> mapper = new BeanPropertyRowMapper<ParentGraphData>(ParentGraphData.class);
-		ArrayList<ParentGraphData> parentLifeGraphs = (ArrayList<ParentGraphData>) jdbcTemplate.query(sql, mapper);
+		List<ParentGraphData> parentLifeGraphs = jdbcTemplate.query(sql, mapper);
 		return CollectionUtils.isEmpty(parentLifeGraphs) ? Optional.empty() : Optional.of(parentLifeGraphs.get(0));
 
 	}

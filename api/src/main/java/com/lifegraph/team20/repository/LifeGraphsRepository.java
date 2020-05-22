@@ -36,7 +36,7 @@ public class LifeGraphsRepository {
   public List<LifeGraph> getGraph(Integer id) {
     //子グラフの中のparent_id, age, score, commentをparent_id = :idで照らし合わせて作る。
     //まず、SQLに詰め込んどくイメージ
-    final String sql = "SELECT parent_id, age, score, comment FROM child_graphs WHERE parent_id = :id";
+    final String sql = "SELECT id, parent_id, age, score, comment FROM child_graphs WHERE parent_id = :id";
     //addValueを使うことで上のSQLの:idに下の右のidを入れている
     //param:idに数字を入れる役割、
     SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
@@ -45,7 +45,7 @@ public class LifeGraphsRepository {
       //RowMappers使ったらmapRow使う呪文
       public LifeGraph mapRow(ResultSet rs, int rowNum) throws SQLException {
         //LifeGraphに定義してある、コンストラクタに入ってるものを呼び出してくる。そして、それをresultに入れてる
-        return new LifeGraph(rs.getInt("parent_id"), rs.getInt("age"), rs.getInt("score"),
+        return new LifeGraph(rs.getInt("id"), rs.getInt("parent_id"), rs.getInt("age"), rs.getInt("score"),
             rs.getString("comment"));
       }
       //resultの定義終了
