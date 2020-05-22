@@ -6,16 +6,22 @@
     <div class="file">
       <div class="formOut">
         <p>
-          <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" v-model="editAge" type="number" min="0" max="25">
-          <!-- テスト用表示 -->
-          <!-- <p>{{ editAge }}</p> -->
+          <validation-provider v-slot="{ errors }" name="年齢" rules="required">
+            <label class="tag" for="editAge">年齢</label>
+            <input id="editAge" v-model="editAge" type="number" min="0" max="25">
+            <!-- テスト用表示 -->
+            <!-- <p>{{ editAge }}</p> -->
+            <span>{{ errors[0] }}</span>
+          </validation-provider>
         </p>
         <p>
-          <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
-          <!-- テスト用表示 -->
-          <!-- <p>{{ editScore }}</p> -->
+          <validation-provider v-slot="{ errors }" name="スコア" rules="required">
+            <label class="tag" for="editScore">スコア</label>
+            <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
+            <!-- テスト用表示 -->
+            <!-- <p>{{ editScore }}</p> -->
+            <span>{{ errors[0] }}</span>
+          </validation-provider>
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
@@ -23,17 +29,19 @@
           <!-- テスト用表示 -->
           <!-- <p>{{ editComment }}</p> -->
         </p>
+        <p>登録日 {{ parseInt(date.updated_at.split('-', 3).join('')) }}</p>
+        <p>更新日 {{ parseInt(date.created_at.split('-', 3).join('')) }}</p>
         <button
           class="graphRegister"
           href="#!"
-          @click="add"
+          @click="add()"
         >
           登録
         </button>
         <button
           class="graphEdit"
           href="#!"
-          @click="edit"
+          @click="edit()"
         >
           更新
         </button>
@@ -48,7 +56,7 @@
     </div>
     <img src="../assets/edit.png" class="hima">
     <div class="chart">
-      <Chart />
+      <Chart :id="currentUserId" />
     </div>
     <div>
       <router-link to="/top" class="button">
@@ -77,7 +85,11 @@ export default {
       // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
-      editComment: ''
+      editComment: '',
+      date: {
+        created_at: '',
+        updated_at: ''
+      }
     }
   },
   // 値が変わるたびに計算し直してくれるらしい
@@ -96,7 +108,14 @@ export default {
     //   this.$store.commit('chart/getComtent')
     // }
   },
+  mounted () {
+    this.setDate()
+  },
   methods: {
+    setDate () {
+      this.date.created_at = this.$store.state.account.account.created_at
+      this.date.updated_at = this.$store.state.account.account.updated_at
+    },
     // formSubmit (event) {
     //   console.log(event)
     //   console.log(this.age)
