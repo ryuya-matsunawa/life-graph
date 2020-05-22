@@ -113,7 +113,6 @@ export default {
   },
   methods: {
     setDate () {
-      console.log(this.$store.state.account.account.created_at)
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
