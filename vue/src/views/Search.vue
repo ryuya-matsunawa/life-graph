@@ -44,26 +44,6 @@
           </tr>
         </table>
       </div>
-      <!-- 下部 -->
-      <div v-if="isActive">
-        <!-- テーブルを作る（表みたいな感じ） -->
-        <table class="table">
-          <th>リスト</th>
-          <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
-          <tr v-for="item in filteredItems" :key="item.id">
-            <td>{{ item.name }}</td>
-            <td>{{ item.day }}</td>
-            <td>
-              <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
-                参照
-              </router-link>
-              <button class="viewButton">
-                削除
-              </button>
-            </td>
-          </tr>
-        </table>
-      </div>
     </div>
     <img src="../assets/search.png" class="momiji">
     <div>

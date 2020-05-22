@@ -26,16 +26,16 @@ import com.lifegraph.team20.service.LifeGraphsService;
 @RequestMapping("/life-graphs")
 public class LifeGraphsContorller {
 
-	// 人生グラフ登録編集API
 	@Autowired
-	private LifeGraphsService service;
+	private LifeGraphsService lifeGraphsService;
 
+	// 人生グラフ登録編集API
 	@PostMapping
 	public ResponseEntity<String> postContent(@Valid @RequestBody ChildGraphData data) {
 		//		レスポンスにグラフのデータを載せるときは使う
 		//		List<LifeGraph> graph = setEditedGraph(data.getUserId());
 		// サービスを呼ぶ
-		service.resister(data);
+		lifeGraphsService.resister(data);
 		return ResponseEntity.ok("OK");
 	}
 
@@ -74,8 +74,6 @@ public class LifeGraphsContorller {
 	// ↑↑↑↑↑↑ここまで検索API↑↑↑↑↑↑
 
 	//    削除API
-	@Autowired
-	private LifeGraphsService lifeGraphsService;
 
 	@DeleteMapping("/{parentId}")
 	void deleteContent(@PathVariable("parentId") Integer parentId) {

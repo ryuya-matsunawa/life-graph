@@ -22,14 +22,6 @@ public class ChildGraphRepository {
 		return 1 <= count;
 	}
 
-	// ageが重複しているか確認したい
-	// リクエストできたageが同じユーザーのレコードに既に存在しているか
-	public Integer selectChild(int age) {
-		final String sql = "select count(*) from child_graphs where age = " + age;
-		Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
-		return count;
-	}
-
 	public void updateChild(long id, int age, int score, String comment) {
 		jdbcTemplate.update("update child_graphs set age = " + age + ", score = " + score + ", comment = '" + comment
 				+ "' where parent_id = " + id);

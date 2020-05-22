@@ -22,8 +22,7 @@
 
   .chart{
     width: 600px;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 50px auto;
     border: 1px solid;
     padding: 30px;
     border-radius: 8px;
@@ -40,8 +39,7 @@
 
   .chart{
     width: 600px;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 50px auto;
     border: 1px solid;
     padding: 30px;
     border-radius: 5px;

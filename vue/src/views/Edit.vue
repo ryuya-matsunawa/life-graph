@@ -29,24 +29,26 @@
           <!-- テスト用表示 -->
           <!-- <p>{{ editComment }}</p> -->
         </p>
+        <p>登録日 {{ parseInt(date.updated_at.split('-', 3).join('')) }}</p>
+        <p>更新日 {{ parseInt(date.created_at.split('-', 3).join('')) }}</p>
         <button
           class="graphRegister"
           href="#!"
-          @click="add"
+          @click="add()"
         >
           登録
         </button>
         <button
           class="graphEdit"
           href="#!"
-          @click="edit"
+          @click="edit()"
         >
           編集
         </button>
         <button
           class="graphClear"
           href="#!"
-          @click="click"
+          @click="click()"
         >
           クリア
         </button>
@@ -54,7 +56,7 @@
     </div>
     <img src="../assets/edit.png" class="hima">
     <div class="chart">
-      <Chart />
+      <Chart :id="currentUserId" />
     </div>
     <div>
       <router-link to="/top" class="button">
@@ -83,7 +85,11 @@ export default {
       // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
-      editComment: ''
+      editComment: '',
+      date: {
+        created_at: '',
+        updated_at: ''
+      }
     }
   },
   // 値が変わるたびに計算し直してくれるらしい
@@ -102,7 +108,14 @@ export default {
     //   this.$store.commit('chart/getComtent')
     // }
   },
+  mounted () {
+    this.setDate()
+  },
   methods: {
+    setDate () {
+      this.date.created_at = this.$store.state.account.account.created_at
+      this.date.updated_at = this.$store.state.account.account.updated_at
+    },
     // formSubmit (event) {
     //   console.log(event)
     //   console.log(this.age)
