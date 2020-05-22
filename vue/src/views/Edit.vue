@@ -211,7 +211,7 @@ label{
   position:relative;
   margin-top:30px;
   cursor: pointer;
-  font-family: 'Hannari';
+  font-family: 'Hannari',serif;
 }
 
 .graphClear:hover{
