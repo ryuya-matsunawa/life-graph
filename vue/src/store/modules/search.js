@@ -13,7 +13,7 @@ export default {
     setItems (state, payload) {
       state.items = payload
     },
-    deleteUser (state) {
+    deleteGraphData (state) {
       state.items = ''
     }
   },
@@ -24,7 +24,7 @@ export default {
     },
     deleteGraphData ({ commit }, userId) {
       const url = '/api/life-graphs/' + userId
-      axios.delete(url).then(res => commit('deleteUser', res.data))
+      axios.delete(url).then(res => commit('deleteGraphData', res.data))
     }
   }
 }
