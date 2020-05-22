@@ -17,7 +17,7 @@
         <span>{{ errors[0] }}</span>
       </validation-provider>
     </div>
-    <button class="button1" @click="login()">
+    <button class="logIn" @click="login()">
       ログイン
     </button>
     <div class="form-footer">
@@ -128,7 +128,7 @@ export default {
   transition: border-color 0.3s;
   width: 280px;
   display: block;
-  margin-left: 100px;
+  margin-left: 180px;
   margin-top: 10px;
   text-align: center;
 }
@@ -142,10 +142,10 @@ export default {
   font-size: 10px;
 }
 
-.button1 {
+.logIn {
   display: block;
-  top: 80px;
-  left: 500px;
+  top: 70px;
+  left: 580px;
   width: 160px;
   text-align: center;
   color: #1B1B1B;
@@ -157,7 +157,7 @@ export default {
   font-family: "Hannari", serif;
 }
 
-.button1:hover{
+.logIn:hover{
   -webkit-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   -moz-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: button .4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -206,7 +206,7 @@ export default {
   transition: border-color 0.3s;
   width: 280px;
   display: block;
-  margin-left: 440px;
+  margin-left: 520px;
   margin-top: 110px;
   text-align: center;
   line-height: 190%;
