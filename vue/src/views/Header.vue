@@ -1,6 +1,9 @@
 <template>
   <div class="background">
     <div class="header">
+      <div class="title">
+        Life graph
+      </div>
       <ul class="acount">
         <li class="personalinfo">
           User Name：{{ username }}
@@ -8,17 +11,12 @@
         <li class="personalinfo">
           Authority:{{ role }}
         </li>
-        <li>
-          <router-link to="/top" class="btn">
-            TOP
-          </router-link>
-        </li>
-        <li>
-          <span tag="button" class="btn" @click="logout()">
-            Log Out
-          </span>
-        </li>
       </ul>
+      <div>
+        <span tag="button" class="button" @click="logout()">
+          ログアウト
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -31,10 +29,7 @@ export default {
       role: ''
     }
   },
-  async mounted () {
-    const userId = this.$store.state.auth.userId
-    // ロード時にactionsにdispatchする
-    await this.$store.dispatch('account/fetchAccount', userId)
+  created () {
     // storeから情報を取得するメソッド
     this.setAccount()
   },
@@ -45,12 +40,12 @@ export default {
       this.username = stateAccount.account.username
       const role = stateAccount.account.name
       // ROLE_USERだったら一般ユーザとヘッダーに表示される
-      if (role === 'ROLE_USER') {
-        this.role = '一般ユーザ'
+      if (role === 'ROLE_ADMIN') {
+        this.role = 'ユーザ'
       } else if (role === 'ROLE_ADMIN') {
         this.role = '管理者'
       } else {
-        this.role = 'オーナー'
+        this.role = '一般ユーザ'
       }
     },
     // ログアウトボタンが押された時のメソッド
@@ -68,18 +63,18 @@ export default {
 <style scoped>
 .background {
   width: 100%;
-  height: auto;
+  height: 80px;
   position: fixed;
   top: 0;
-  z-index: 10;
+  background-color: #a39d9d;
+  z-index: 1;
 }
-.header{
-  width: 100%;
-  background-color: #B2EBF2;
-  background-image: url("../assets/header.png");
-  background-size: contain;
-  margin-top: -30px;
-  padding-bottom: 5px;
+
+.title {
+  color: #fff;
+  font-size: 30px;
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: 'Playfair Display', serif;
 }
 
 .acount{
@@ -89,32 +84,34 @@ export default {
 .acount li{
   line-height: 26px;
   margin-right: 35px;
-  margin-top: 80px;
+  margin-top: 10px;
   padding: 8px;
   width: auto;
   font-size: 18px;
+  font-family: "Hannari", serif;
   display: inline-block;
   text-decoration: none;
-  background-color: #6AAEA5;
-  border-color: transparent;
-  border-radius: 3px;/*角の丸み*/
-  font-weight: bold;
-  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
   text-align: center;
 }
 
 .personalinfo{
   color: #fff;
+  font-family: 'Playfair Display', serif;
 }
 
-.btn{
-  color: #6AAEA5;
-  cursor: pointer
-}
-
-.btn:hover {
-  background-color: #6AAEA5;
+.button {
+  width: 95px;
+  position: fixed;
+  bottom: 190px;
+  right: 30px;
+  padding: .75rem 1.25rem;
+  border-radius: 5px;
   color: #fff;
-  text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  cursor: pointer;
+  background-color: #a7d28d;
+  font-family: 'Playfair Display', serif;
 }
 </style>

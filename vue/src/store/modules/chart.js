@@ -13,20 +13,18 @@ export default {
   mutations: {
     setGraph (state, payload) {
       state.contents = payload
+      state.loaded = true
     },
-    loadDone (state, payload) {
-      state.loaded = payload.loading
+    resetState (state) {
+      state.contents = []
+      state.loaded = false
     }
   },
   actions: {
-    fetchGraph ({ commit }, userid) {
-      const url = '/api/life-graphs/' + userid
+    fetchGraph ({ commit }, userId) {
+      const url = '/api/life-graphs/' + userId
       axios.get(url).then(res => commit('setGraph', res.data))
         .catch(err => err)
-    },
-    load ({ commit }) {
-      const loading = true
-      commit('loadDone', { loading })
     }
   }
 }

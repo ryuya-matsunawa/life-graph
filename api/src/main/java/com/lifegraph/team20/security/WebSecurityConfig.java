@@ -58,7 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			// TODO:/auth/**以外は認証必要にするからあとで変更する
-			.authorizeRequests().antMatchers("/auth/**", "/test/**", "/life-graphs/**").permitAll()
+			.authorizeRequests().antMatchers("/auth/**", "/test/**").permitAll()
+			.antMatchers("/life-graphs/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
