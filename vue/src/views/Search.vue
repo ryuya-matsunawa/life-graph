@@ -248,21 +248,4 @@ table{
   top: 300px;
   z-index: -1;
 }
-
-.button {
-  position: fixed;
-  bottom: 50px;
-  right: 30px;
-  padding: .75rem 1.25rem;
-  border-radius: 5px;
-  width: 90px;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: .15rem;
-  cursor: pointer;
-  background-color: #a7d28d;
-  /* eslint-disable-next-line to ignore the next line. */
-  font-family: 'Playfair Display', serif;
-}
 </style>
