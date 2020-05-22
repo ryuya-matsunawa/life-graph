@@ -13,12 +13,12 @@
         </li>
       </ul>
       <div>
-        <span tag="button" class="button1" @click="logout()">
+        <span tag="button" class="logout" @click="logout()">
           ログアウト
         </span>
       </div>
       <div>
-        <router-link to="/top" class="button2">
+        <router-link to="/top" class="toTop">
           TOPへ
         </router-link>
       </div>
@@ -104,7 +104,7 @@ export default {
   font-family: 'Playfair Display', serif;
 }
 
-.button1{
+.logout {
   width: 95px;
   position: fixed;
   bottom: 130px;
@@ -120,7 +120,7 @@ export default {
   font-family: 'Playfair Display', serif;
 }
 
-.button2 {
+.toTop {
   position: fixed;
   bottom: 50px;
   right: 30px;
