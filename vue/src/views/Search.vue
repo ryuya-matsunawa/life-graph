@@ -171,7 +171,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .searchvue {
   background-size: 20%;
   background-repeat: no-repeat;
@@ -186,8 +186,6 @@ export default {
   margin-top: 20px;
   border: 1px solid;
   padding: 30px;
-  border-radius: 5px;
-  border-radius: 8px;
   border-color: #c0c0c0;
   border-radius: 8px;
   background-color: #efeeee;
