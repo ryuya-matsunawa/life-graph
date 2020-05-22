@@ -12,7 +12,7 @@ public class ChildGraphRepository {
 	@Autowired
 
 	// MySQLのデータを持ってくるライブラリ
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	public Boolean existsByUserIdAndAge(long userId, int age) {
 		final String parentId = "( select id from parent_graphs where user_id = " + userId + ") ";
