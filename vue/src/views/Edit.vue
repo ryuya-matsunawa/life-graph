@@ -3,7 +3,13 @@
     <div>
       <Header />
     </div>
-    <div class="file">
+    <button @click="addChange()">
+      登録
+    </button>
+    <button @click="editChange()">
+      編集
+    </button>
+    <div v-if="addGraph" class="file">
       <div class="formOut">
         <p>
           <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
@@ -47,6 +53,30 @@
         </button>
       </div>
     </div>
+    <div v-if="editGraph" class="file">
+      <div class="formOut">
+        <table class="table">
+          <th>年齢</th>
+          <th>スコア</th>
+          <th>コメント</th>
+          <tr v-for="item in contents" :key="item.id">
+            <td>{{ item.age }}</td>
+            <td>{{ item.score }}</td>
+            <td>{{ item.comment }}</td>
+            <td>
+              <button @click="editData(item.id)">
+                編集
+              </button>
+            </td>
+            <td>
+              <button @click="deleteData()">
+                削除
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
     <img src="../assets/edit.png" class="hima">
     <div class="chart">
       <Chart :id="currentUserId" />
@@ -74,6 +104,10 @@ export default {
   },
   data () {
     return {
+      addGraph: true,
+      editGraph: false,
+      contents: [],
+      editId: null,
       currentUserId: this.$store.state.account.account.id,
       // storeにつなぐ代わりにここで値を管理
       // intなので''ではなくnullにした
@@ -94,24 +128,49 @@ export default {
   watch: {
     account (newAccount) {
       this.setDate()
+      this.setContents()
     }
   },
   mounted () {
+    this.setContents()
     this.setDate()
   },
   methods: {
+    addChange () {
+      this.addGraph = true
+      this.editGraph = false
+    },
+    editData (id) {
+      // idだけの配列を作る
+      const idList = this.contents.map(obj => obj.id)
+      // 編集したいidがある場所のインデックス番号を取得
+      const indexId = idList.indexOf(id)
+      // 更新の画面に変える
+      this.addChange()
+      // inputに編集したいデータが入る
+      this.editAge = this.contents[indexId].age
+      this.editScore = this.contents[indexId].score
+      this.editComment = this.contents[indexId].comment
+      // 編集で使うようにdataに入れとく
+      this.editId = id
+    },
+    editChange () {
+      this.addGraph = false
+      this.editGraph = true
+    },
+    setContents () {
+      this.contents = this.$store.state.chart.contents
+    },
     setDate () {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
     updateGraphData () {
-      // 年齢だけが入った配列を作る
-      const ageList = this.$store.state.chart.contents.map(obj => obj.age)
-      // editAgeに入力した値があるか確認し、あったらそこのインデックス番号、なければ-1を返す
-      const result = ageList.indexOf(parseInt(this.editAge))
+      const idList = this.contents.map(obj => obj.id)
+      const indexId = idList.indexOf(this.editId)
       // if:まだ登録されていない年齢の場合
       // else:すでにある年齢を更新
-      if (result === -1) {
+      if (indexId === -1) {
         this.$store.dispatch('chart/register',
           {
             userId: this.$store.state.auth.userId,
@@ -123,7 +182,7 @@ export default {
       } else {
         // resultには入力した年齢があるインデックス番号が入っている
         // そのインデックス番号にあるidを取得
-        const currentUserId = this.$store.state.chart.contents[result].id
+        const currentUserId = this.$store.state.chart.contents[indexId].id
         this.$store.dispatch('chart/register',
           {
             id: currentUserId,
