@@ -29,7 +29,6 @@ export default {
         .catch(err => err)
     },
     fetchDate ({ commit }, userId) {
-      console.log(userId)
       const url = '/api/life-graphs/date/' + userId
       axios.get(url).then(res => commit('setDate', res.data))
         .catch(err => err)
