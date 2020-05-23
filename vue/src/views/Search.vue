@@ -123,12 +123,12 @@ export default {
         this.filteredItems = this.filteredItems.filter(function (row) {
           // str.indexOf(文字列)で、文字列が見つかれば文字列が見つかった場所(0以上)、文字列が見つからなければ-1が返ることを利用する。
           // 整数をビット反転演算子にかけると、符号を反転してマイナス1した数になる。
-          return row.name.toLowerCase().indexOf(filterWord) > -1
+          return row.username.toLowerCase().indexOf(filterWord) > -1
         })
       }
       // XX〜YYまで検索した時に間に該当するものを表示する
       if (this.updatedFrom && this.updatedTo) {
-        // split区切る join区切ったものをくっつける parseIntで数字に変える 型次第では不必要？
+        // split区切る join区切ったものをくっつける parseIntで数字に変える
         const updatedFromNumber = parseInt(this.updatedFrom.split('-').join(''))
         const updatedToNumber = parseInt(this.updatedTo.split('-').join(''))
         this.filteredItems = this.filteredItems.filter((item) =>
