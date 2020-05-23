@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
-    account: {}
+    account: {},
+    date: {}
   },
   mutations: {
     setAccount (state, payload) {
@@ -16,12 +17,21 @@ export default {
     },
     deleteAccount (state) {
       state.account = ''
+    },
+    setDate (state, payload) {
+      state.date = payload
     }
   },
   actions: {
     fetchAccount ({ commit }, userId) {
       const url = '/api/auth/accounts/' + userId
       axios.get(url).then(res => commit('setAccount', res.data))
+        .catch(err => err)
+    },
+    fetchDate ({ commit }, userId) {
+      console.log(userId)
+      const url = '/api/life-graphs/date/' + userId
+      axios.get(url).then(res => commit('setDate', res.data))
         .catch(err => err)
     }
   }

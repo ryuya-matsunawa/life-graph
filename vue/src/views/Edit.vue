@@ -114,7 +114,7 @@ export default {
       if (result === -1) {
         this.$store.dispatch('chart/register',
           {
-            userId: this.$store.state.account.account.user_id,
+            userId: this.$store.state.auth.userId,
             age: parseInt(this.editAge),
             score: parseInt(this.editScore),
             comment: this.editComment
@@ -127,7 +127,7 @@ export default {
         this.$store.dispatch('chart/register',
           {
             id: currentUserId,
-            userId: this.$store.state.account.account.user_id,
+            userId: this.$store.state.auth.userId,
             age: this.editAge,
             score: this.editScore,
             comment: this.editComment

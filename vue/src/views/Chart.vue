@@ -76,6 +76,9 @@ export default {
     }
   },
   computed: {
+    account () {
+      return this.$store.state.account.account
+    },
     loaded () {
       return this.$store.state.chart.loaded
     },
@@ -84,12 +87,17 @@ export default {
     }
   },
   watch: {
+    account () {
+      this.$store.dispatch('chart/fetchGraph', this.id)
+    },
     loaded () {
       this.renderGraphChart()
     },
     update () {
+      const userId = this.$store.state.auth.userId
+      // ロード時にactionsにdispatchする
+      this.$store.dispatch('account/fetchAccount', userId)
       this.$store.dispatch('chart/fetchGraph', this.id)
-      this.$store.dispatch('account/fetchAccount', this.id)
     }
   },
   mounted () {
@@ -121,7 +129,6 @@ export default {
       this.$store.state.chart.contents.map((content) => {
         comment.push(content.comment)
       })
-      console.log(comment)
       this.options.tooltips.custom = function (tooltipModel) {
         // ツールチップ要素
         var tooltipEl = document.getElementById('chartjs-tooltip')

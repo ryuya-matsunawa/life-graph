@@ -24,10 +24,7 @@ export default {
     create ({ commit }, data) {
       const url = '/api/auth/login'
       axios.post(url, data).then(res => commit('create', res.data))
-        .catch(err => err).then(res => {
-          const userId = this.$store.state.auth.userId
-          this.$store.dispatch('account/fetchAccount', userId)
-        })
+        .catch(err => err)
     }
     // destroy ({ commit, dispatch }, data) {
     //   dispatch(

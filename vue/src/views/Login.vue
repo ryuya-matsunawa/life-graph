@@ -5,9 +5,9 @@
       あの頃も、思い返せば綺麗だった。
     </div>
     <div class="form-item">
-      <validation-provider v-slot="{ errors }" name="ユーザー名" rules="required" class="alert">
-        <label for="username" />
-        <input v-model="username" type="username" placeholder="UserName">
+      <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
+        <label for="email" />
+        <input v-model="email" type="email" placeholder="Email">
         <span>{{ errors[0] }}</span>
       </validation-provider>
       <br>
@@ -31,7 +31,7 @@
 export default {
   data () {
     return {
-      username: '',
+      email: '',
       password: '',
       isValid: false
     }
@@ -65,7 +65,7 @@ export default {
       this.$store.dispatch(
         'auth/create',
         {
-          username: this.username,
+          email: this.email,
           password: this.password
         }
       )

@@ -33,13 +33,13 @@ public class LifeGraphsRepository {
   @Autowired
   private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-  public List<LifeGraph> getGraph(Integer id) {
+  public List<LifeGraph> getGraph(Integer parent_id) {
     //子グラフの中のparent_id, age, score, commentをparent_id = :idで照らし合わせて作る。
     //まず、SQLに詰め込んどくイメージ
-    final String sql = "SELECT id, parent_id, age, score, comment FROM child_graphs WHERE parent_id = :id";
+    final String sql = "SELECT id, parent_id, age, score, comment FROM child_graphs WHERE parent_id = :parent_id";
     //addValueを使うことで上のSQLの:idに下の右のidを入れている
     //param:idに数字を入れる役割、
-    SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+    SqlParameterSource param = new MapSqlParameterSource().addValue("parent_id", parent_id);
     //実行そのものはjdbcTemplate.queryでしてる。RowMapperは呪文
     List<LifeGraph> result = namedParameterJdbcTemplate.query(sql, param, new RowMapper<LifeGraph>() {
       //RowMappers使ったらmapRow使う呪文

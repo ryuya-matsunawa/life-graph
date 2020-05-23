@@ -34,8 +34,17 @@ export default {
       role: ''
     }
   },
-  created () {
-    // storeから情報を取得するメソッド
+  computed: {
+    account () {
+      return this.$store.state.account.account
+    }
+  },
+  watch: {
+    account (newAccount) {
+      this.setAccount()
+    }
+  },
+  mounted () {
     this.setAccount()
   },
   methods: {
