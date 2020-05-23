@@ -19,7 +19,7 @@ export default {
     resetState (state) {
       state.contents = []
     },
-    sample (state) {
+    updateGraph (state) {
       state.update = !state.update
     }
   },
@@ -31,7 +31,7 @@ export default {
     },
     register ({ commit }, data) {
       const url = '/api/life-graphs'
-      axios.post(url, data).then(res => commit('sample', res.data))
+      axios.post(url, data).then(res => commit('updateGraph', res.data))
         .catch(err => err)
     }
   }
