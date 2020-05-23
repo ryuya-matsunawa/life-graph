@@ -13,23 +13,20 @@ import lombok.Data;
 @AllArgsConstructor
 public class Account {
 
-	@Id
-	@GeneratedValue
-	// usersテーブルのid
-	private int id;
+  @Id
+  @GeneratedValue
+  private int id;
 
-	private int user_id;
+  @NotBlank
+  // usersテーブルのusername
+  private String username;
 
-	@NotBlank
-	// usersテーブルのusername
-	private String username;
+  @NotBlank
+  // rolesテーブルのname
+  private String name;
 
-	@NotBlank
-	// rolesテーブルのname
-	private String name;
+  private Timestamp created_at;
 
-	private Timestamp created_at;
-
-	private Timestamp updated_at;
+  private Timestamp updated_at;
 
 }

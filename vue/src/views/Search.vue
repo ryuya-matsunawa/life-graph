@@ -32,13 +32,13 @@
           <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
           <tr v-for="item in filteredItems" :key="item.id">
             <td>{{ item.username }}</td>
-            <td>{{ parseInt(item.updated_at.split('-', 3).join('')) }}</td>
+            <td>{{ item.updated_at | moment }}</td>
             <td>
               <router-link :to="'/show/' + item.id" tag="button" class="viewButton">
                 参照
               </router-link>
             </td>
-            <td>
+            <td v-if="roleActive">
               <button @click="deleteGraphData(index, item.id)">
                 削除
               </button>
@@ -53,13 +53,18 @@
 
 <script>
 import Header from '../views/Header.vue'
+import moment from 'moment'
 
 export default {
   name: 'Search',
   components: {
     Header
   },
-
+  filters: {
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD')
+    }
+  },
   data () {
     return {
       updatedFrom: null,
@@ -82,6 +87,13 @@ export default {
         arrow: true,
         // sortDescがtrueのときに追加される
         desc: this.sortDesc
+      }
+    },
+    roleActive () {
+      if (this.$store.state.account.account.name === 'ROLE_USER') {
+        return false
+      } else {
+        return true
       }
     }
   },

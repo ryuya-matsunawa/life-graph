@@ -76,6 +76,9 @@ export default {
     }
   },
   computed: {
+    account () {
+      return this.$store.state.account.account
+    },
     loaded () {
       return this.$store.state.chart.loaded
     },
@@ -84,10 +87,16 @@ export default {
     }
   },
   watch: {
+    account () {
+      this.$store.dispatch('chart/fetchGraph', this.id)
+    },
     loaded () {
       this.renderGraphChart()
     },
     update () {
+      const userId = this.$store.state.auth.userId
+      // ロード時にactionsにdispatchする
+      this.$store.dispatch('account/fetchAccount', userId)
       this.$store.dispatch('chart/fetchGraph', this.id)
     }
   },
@@ -165,10 +174,10 @@ export default {
               style += '; border-width: 1px'
               var span = '<span style="' + style + '"></span>'
               // '<tr><td>' は多分改行
-              if (com[comNum] === null || com[comNum] === undefined) {
-                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
-              } else {
+              if (com[comNum] !== null) {
                 innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
+              } else {
+                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
               }
             })
           })

@@ -62,13 +62,13 @@ public class LifeGraphsContorller {
   // ↑↑↑↑↑↑ここまで削除API↑↑↑↑↑↑
 
   //人生グラフ参照API
-  @GetMapping("/{id}")
+  @GetMapping("/{parent_id}")
   //Entityクラスとは、dbで扱うデータをアプリケーションで保持するための入れ物のようなものです。
   //value = "/{id}"のidがInteger idに入る
-  public ResponseEntity<List<LifeGraph>> graph(@PathVariable("id") Integer id) {
+  public ResponseEntity<List<LifeGraph>> graph(@PathVariable("parent_id") Integer parent_id) {
     //下のidを引数として渡す（上のInteger idのこと）
     //setGraph(id);このメソッドは何？これを起動すると、Listを作る
-    List<LifeGraph> graph = lifeGraphsRepository.getGraph(id);
+    List<LifeGraph> graph = lifeGraphsRepository.getGraph(parent_id);
     return ResponseEntity.ok(graph);
   }
 }
