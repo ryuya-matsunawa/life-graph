@@ -134,9 +134,9 @@ export default {
           }
         )
       }
-      this.editAge = ''
-      this.editScore = ''
-      this.editComment = ''
+      this.editAge = null
+      this.editScore = null
+      this.editComment = null
     }
   }
 }
