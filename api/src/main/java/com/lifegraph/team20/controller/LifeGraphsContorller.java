@@ -19,6 +19,7 @@ import com.lifegraph.team20.models.ChildGraphData;
 import com.lifegraph.team20.models.LifeGraph;
 import com.lifegraph.team20.models.UserData;
 import com.lifegraph.team20.repository.LifeGraphsRepository;
+import com.lifegraph.team20.service.GraphItemDeletService;
 import com.lifegraph.team20.service.LifeGraphsService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,6 +36,16 @@ public class LifeGraphsContorller {
     // サービスを呼ぶ
     service.resister(data);
     return ResponseEntity.ok("OK");
+  }
+
+  //  人生グラフレコード削除API
+  @Autowired
+  private GraphItemDeletService graphItemDeletService;
+
+  @DeleteMapping("/delete/{id}")
+  void deleteid(@PathVariable("id") long id) {
+    // サービスを呼ぶ
+    graphItemDeletService.deletItem(id);
   }
 
   @Autowired

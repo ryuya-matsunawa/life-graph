@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
-//HTTPリクエストを受け取るためのクラスここに情報の定義が集まっている
+//HTTPリクエストのRequestBodyに送るデータ
 @Data
 public class ChildGraphData {
 
