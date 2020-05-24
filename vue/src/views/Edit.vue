@@ -149,6 +149,7 @@ export default {
       this.editId = id
     },
     editChange () {
+      this.setContents()
       this.addGraph = false
       this.editGraph = true
     },
