@@ -42,12 +42,10 @@ public class LifeGraphsContorller {
   @Autowired
   private GraphItemDeletService graphItemDeletService;
 
-  @PostMapping("/{id}")
-  public ResponseEntity<String> postid(@PathVariable("id") long id) {
+  @DeleteMapping("/delete/{id}")
+  void deleteid(@PathVariable("id") long id) {
     // サービスを呼ぶ
     graphItemDeletService.deletItem(id);
-    //    service.resister(data);
-    return ResponseEntity.ok("OK");
   }
 
   @Autowired
