@@ -39,7 +39,7 @@
               </router-link>
             </td>
             <td v-if="roleActive">
-              <button @click="deleteGraphData(index, item.id)">
+              <button @click="deleteGraphData(index, item.id,item.username)">
                 削除
               </button>
             </td>
@@ -173,8 +173,9 @@ export default {
       this.updatedTo = ''
     },
     // 削除ボタン
-    deleteGraphData (index, userId) {
-      if (confirm('本当に削除してもよろしいですか?')) {
+    deleteGraphData (index, userId, username) {
+      // \nは改行コードです
+      if (confirm(username + 'さんのライフグラフを削除します。\n本当に削除してもよろしいですか?')) {
         this.$store.dispatch('search/deleteGraphData', userId)
         this.filteredItems.splice(index, 1)
       }

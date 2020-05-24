@@ -15,8 +15,6 @@
           <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
             <label class="tag" for="editAge">年齢</label>
             <input id="editAge" v-model="editAge" type="number" min="0" max="99">
-            <!-- テスト用表示 -->
-            <!-- <p>{{ editAge }}</p> -->
             <span>{{ errors[0] }}</span>
           </validation-provider>
         </p>
@@ -24,16 +22,12 @@
           <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation">
             <label class="tag" for="editScore">スコア</label>
             <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
-            <!-- テスト用表示 -->
-            <!-- <p>{{ editScore }}</p> -->
             <span>{{ errors[0] }}</span>
           </validation-provider>
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
           <input id="editComment" v-model="editComment" type="text" maxlength="200">
-          <!-- テスト用表示 -->
-          <!-- <p>{{ editComment }}</p> -->
         </p>
         <p>登録日時 {{ date.created_at | moment }}</p>
         <p>更新日時 {{ date.updated_at | moment }}</p>
@@ -69,7 +63,7 @@
               </button>
             </td>
             <td>
-              <button @click="deleteData()">
+              <button @click="deleteItem(item.id,item.age)">
                 削除
               </button>
             </td>
@@ -180,12 +174,9 @@ export default {
           }
         )
       } else {
-        // resultには入力した年齢があるインデックス番号が入っている
-        // そのインデックス番号にあるidを取得
-        const currentUserId = this.$store.state.chart.contents[indexId].id
         this.$store.dispatch('chart/register',
           {
-            id: currentUserId,
+            id: this.editId,
             userId: this.$store.state.auth.userId,
             age: this.editAge,
             score: this.editScore,
@@ -196,6 +187,16 @@ export default {
       this.editAge = null
       this.editScore = null
       this.editComment = null
+    },
+    deleteItem (id, age) {
+      // todo_あとで消す
+      // confirmのカスタマイズもできるらしい。
+      // https://techacademy.jp/magazine/32797
+      if (confirm(age + '歳の情報を本当に削除してもよろしいですか?')) {
+        this.$store.dispatch('chart/deleteItem', id)
+        // どうやら、配列を操作するものらしい。今回はいらないかな？
+        // this.filteredItems.splice(index, 1)
+      }
     }
   }
 }
