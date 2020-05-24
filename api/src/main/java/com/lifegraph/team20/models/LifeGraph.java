@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 
+//ライプグラフ参照APIでテーブルの取得に使用する。
 public class LifeGraph {
   private int id;
   private int parent_id;
