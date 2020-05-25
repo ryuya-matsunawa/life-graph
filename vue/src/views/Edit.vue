@@ -4,16 +4,18 @@
       <Header />
     </div>
     <div class="topbuttons">
-    <button
-    class="graphRegister"
-    @click="addChange()">
-      登録
-    </button>
-    <button
-    class="graphRegister"
-    @click="editChange()">
-      編集
-    </button>
+      <button
+        class="graphRegister"
+        @click="addChange()"
+      >
+        登録
+      </button>
+      <button
+        class="graphRegister"
+        @click="editChange()"
+      >
+        編集
+      </button>
     </div>
     <div v-if="addGraph" class="file">
       <div class="formOut">
@@ -41,8 +43,12 @@
           <br>
           <span v-if="isErrorComment" class="erroe">コメントは200文字以下で入力してください</span>
         </p>
-        <p class="tag">登録日時 {{ date.created_at | moment }}</p>
-        <p class="tag">更新日時 {{ date.updated_at | moment }}</p>
+        <p class="tag">
+          登録日時 {{ date.created_at | moment }}
+        </p>
+        <p class="tag">
+          更新日時 {{ date.updated_at | moment }}
+        </p>
         <button
           class="graphRegister"
           href="#!"
@@ -62,16 +68,28 @@
     <div v-if="editGraph" class="file">
       <div class="formOut">
         <table class="table">
-          <th class="edittag">年齢</th>
-          <th class="edittag">スコア</th>
-          <th class="edittag">コメント</th>
+          <th class="edittag">
+            年齢
+          </th>
+          <th class="edittag">
+            スコア
+          </th>
+          <th class="edittag">
+            コメント
+          </th>
           <tr v-for="item in contents" :key="item.id">
-            <td class="details">{{ item.age }}</td>
-            <td class="details">{{ item.score }}</td>
-            <td class="details">{{ item.comment }}</td>
+            <td class="details">
+              {{ item.age }}
+            </td>
+            <td class="details">
+              {{ item.score }}
+            </td>
+            <td class="details">
+              {{ item.comment }}
+            </td>
             <td>
               <button
-              class="graphRegister"
+                class="graphRegister"
                 @click="editData(item.id)"
               >
                 編集
@@ -79,8 +97,9 @@
             </td>
             <td>
               <button
-              class="graphRegister"
-              @click="deleteItem(item.id,item.age)">
+                class="graphRegister"
+                @click="deleteItem(item.id,item.age)"
+              >
                 削除
               </button>
             </td>
@@ -383,7 +402,6 @@ label{
   max-width:960px;
   text-align:center;
   position:relative;
-  /* margin-top:30px; */
   cursor: pointer;
   font-family: 'Hannari', serif;
   border-radius: 8px;
