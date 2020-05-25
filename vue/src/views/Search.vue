@@ -30,6 +30,12 @@
         <table class="table">
           <th>リスト</th>
           <th>更新日<img src="../assets/triangle.png" :class="arrow" @click="toggleSort"></th>
+          <th v-show="filteredItems.length > 0">
+            結果は{{ filteredItems.length }}件です
+          </th>
+          <th v-show="filteredItems.length == 0">
+            ---0件です---
+          </th>
           <tr v-for="item in filteredItems" :key="item.id">
             <td>{{ item.username }}</td>
             <td>{{ item.updated_at | moment }}</td>
@@ -86,7 +92,13 @@ export default {
         // いつでも存在するクラス
         arrow: true,
         // sortDescがtrueのときに追加される
-        desc: this.sortDesc
+        desc: this.sortDesc,
+        // 検索したときの件数表示
+        filteredItems: function () {
+          return this.items.filter(function (item) {
+            return item.indexOf('helllo') > -1
+          })
+        }
       }
     },
     roleActive () {
@@ -216,7 +228,8 @@ export default {
   font-family: 'Noto Serif JP', serif;
 }
 #searchList{
-  text-align: left;
+  text-align: center;
+  list-style-type: none;
 }
 .username{
   margin: 30px;
@@ -248,11 +261,13 @@ button {
   display: block;
   text-decoration: none;
 }
-
 table{
   margin-top: 58px;
-  margin-left: 50px;
-  width: 60%;
+  margin-left: 90px;
+  width: 65%;
+}
+td{
+  width: 75%;
 }
 .arrow {
   transform: rotate(180deg);

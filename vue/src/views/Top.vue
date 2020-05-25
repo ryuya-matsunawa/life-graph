@@ -54,7 +54,7 @@ export default {
   color: #353434;
   border-color: #a39d9d;
   position: absolute;
-  top: 232px;
+  top: 263px;
   left: 30px;
   font-size: 16px;
   cursor: pointer;
@@ -72,7 +72,6 @@ export default {
   position: absolute;
   cursor: pointer;
   font-size: 16px;
-  margin-left: 17px;
   top: 370px;
   left: 30px;
   width: 250px;

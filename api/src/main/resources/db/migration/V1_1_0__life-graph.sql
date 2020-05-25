@@ -26,8 +26,8 @@ INSERT INTO `roles` (
   `name`
 )VALUES
 ('ROLE_USER'),
-('ROLE_MODERATOR'),
-('ROLE_ADMIN');
+('ROLE_ADMIN'),
+('ROLE_OWNER');
 
 CREATE TABLE `parent_graphs` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -51,6 +51,3 @@ CREATE TABLE `child_graphs` (
   UNIQUE KEY `parent_id` (`parent_id`,`age`),
   CONSTRAINT `child_graphs_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `parent_graphs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-
-
