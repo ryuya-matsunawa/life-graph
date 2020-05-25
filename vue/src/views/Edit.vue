@@ -45,6 +45,9 @@
         >
           クリア
         </button>
+        <button v-if="activButton (editAge,editScore,editComment) == 3">
+          aaa
+        </button>
       </div>
     </div>
     <div v-if="editGraph" class="file">
@@ -58,7 +61,9 @@
             <td>{{ item.score }}</td>
             <td>{{ item.comment }}</td>
             <td>
-              <button @click="editData(item.id)">
+              <button
+                @click="editData(item.id)"
+              >
                 編集
               </button>
             </td>
@@ -103,21 +108,64 @@ export default {
       contents: [],
       editId: null,
       currentUserId: this.$store.state.account.account.id,
-      // storeにつなぐ代わりにここで値を管理
-      // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
       editComment: null,
       date: {
         created_at: '',
         updated_at: ''
-      }
+      },
+      isButton: null
     }
   },
   computed: {
     account () {
       return this.$store.state.account.account
+    },
+    activButton (age, score, comment) {
+      let bot = 0
+      if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
+        bot++
+        // this.isButton++
+      } else {
+        console.log('0-99')
+      }
+      if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
+        bot++
+        // this.isButton++
+      } else {
+        console.log('-100から100')
+      }
+      if (/^.{0,200}$/.test(comment)) {
+        bot++
+        // this.isButton++
+        console.log('0-200字')
+      } else {
+        console.log('200文字以下')
+      }
+      // console.log(this.isButton)
+      console.log(bot)
+      // this.isButton = -this.isButton
+      return bot
     }
+
+    // できたらここでボタンの表示をリアクティブに変えたい
+    // activButton (age, score, comment) {
+    //   if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
+    //     if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
+    //       if (/^.{0,200}$/.test(comment)) {
+    //         this.isButton = true
+    //       }else{
+    //         this.isButton = false
+    //       }
+    //     }else{
+    //       this.isButton = false
+    //     }
+    //   } else {
+    //     this.isButton = false
+    //   }
+    //   return this.isButton
+    // }
   },
   watch: {
     account (newAccount) {
@@ -195,10 +243,23 @@ export default {
       // https://techacademy.jp/magazine/32797
       if (confirm(age + '歳の情報を本当に削除してもよろしいですか?')) {
         this.$store.dispatch('chart/deleteItem', id)
-        // どうやら、配列を操作するものらしい。今回はいらないかな？
-        // this.filteredItems.splice(index, 1)
       }
     }
+    // activButton (age, score, comment) {
+    //   if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
+    //     if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
+    //       if (/^.{0,200}$/.test(comment)) {
+    //         console.log('OK')
+    //       } else {
+    //         console.log('200文字以下')
+    //       }
+    //     } else {
+    //       console.log('-100から100')
+    //     }
+    //   } else {
+    //     console.log('0-99')
+    //   }
+    // }
   }
 }
 </script>
