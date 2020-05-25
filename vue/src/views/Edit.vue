@@ -137,7 +137,6 @@ export default {
       this.$store.dispatch('chart/fetchGraph', userId)
     },
     loaded () {
-      debugger
       this.setContents()
     }
   },
