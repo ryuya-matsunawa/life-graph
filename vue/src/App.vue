@@ -1,36 +1,57 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/about">
-        About
-      </router-link>
-    </div>
     <router-view />
+    <head>
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    </head>
   </div>
 </template>
 
 <style>
-#app {
-  color: #2c3e50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+/* eslint-disable-next-line to ignore the next line. */
+@import url(https://fonts.googleapis.com/earlyaccess/hannari.css);
+/* eslint-disable-next-line to ignore the next line. */
+@import url(https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap);
+@media screen and (min-width:1024px) {
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif, Tahoma;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
+
+  .chart{
+    width: 600px;
+    margin: 50px auto;
+    border: 1px solid;
+    padding: 30px;
+    border-radius: 8px;
+    border-color: #c0c0c0;
+  }
+}
+@media only screen and (min-width:768px) and (max-width:1024px) {
+ #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
+
+  .chart{
+    width: 600px;
+    margin: 50px auto;
+    border: 1px solid;
+    padding: 30px;
+    border-radius: 5px;
+    border-bottom: solid 6px #c0c0c0;
+    box-shadow: 0 3px 5px gray;
+    border-radius: 8px;
+    border-color: #c0c0c0;
+  }
 }
 
-#nav {
-  padding: 30px;
+button:focus {
+  outline:0;
 }
 
-#nav a {
-  color: #2c3e50;
-  font-weight: bold;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

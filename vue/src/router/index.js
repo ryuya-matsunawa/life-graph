@@ -1,24 +1,42 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import Top from '../views/Top.vue'
+import Search from '../views/Search.vue'
+import Edit from '../views/Edit.vue'
+import Show from '../views/Show.vue'
+
+// 作業する時は下のコメントアウトしとくと良い、あと一番下のも
+import Store from '@/store/index.js'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/About.vue')
-    }
+    path: '/top',
+    name: 'Top',
+    component: Top
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: Edit
+  },
+  {
+    path: '/show/:userId',
+    name: 'Show',
+    component: Show,
+    props: true
   }
 ]
 
@@ -26,6 +44,17 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// authのstateのtokenが’’だったらログイン画面に遷移させる
+// // 作業する時は下全部コメントアウトしてStoreをインポートしているとこもコメントアウトして
+router.beforeEach((to, from, next) => {
+// ユーザー一覧ページへアクセスした時に/topへリダイレクトする例
+  if (to.path !== '/login' && Store.state.auth.token === '') {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

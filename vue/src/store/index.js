@@ -1,35 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import chart from './modules/chart.js'
+import account from './modules/account.js'
+import search from './modules/search.js'
+import createPersistedState from 'vuex-persistedstate'
+
+import auth from '@/store/modules/auth'
+import http from '@/store/modules/http'
 
 Vue.use(Vuex)
 
-const config = {
-  headers: {
-    'Access-Control-Allow-Origin': '*'
-  }
-}
-
 export default new Vuex.Store({
-  state: {
-    account: {
-      // TODO: delete because of test
-      login: 'ng'
-    }
+  modules: {
+    auth,
+    http,
+    chart,
+    account,
+    search
   },
-  mutations: {
-    // TODO: delete because of test
-    setLogin (state, payload) {
-      state.login = payload.login
-    }
-  },
-  actions: {
-    // TODO: delete because of test
-    fetchLogin ({ commit }) {
-      const url = '/api/auth/login'
-      axios.get(url, config).then((res) => {
-        commit('setLogin', res.data)
-      })
-    }
-  }
+  // localStorageにtokenを残し続ける
+  plugins: [createPersistedState({
+    key: 'example',
+    storage: window.sessionStorage
+  })]
 })
