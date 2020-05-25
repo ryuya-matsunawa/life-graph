@@ -12,22 +12,28 @@
     <div v-if="addGraph" class="file">
       <div class="formOut">
         <p>
-          <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
-            <label class="tag" for="editAge">年齢</label>
-            <input id="editAge" v-model="editAge" type="number" min="0" max="99">
-            <span>{{ errors[0] }}</span>
-          </validation-provider>
+          <!-- <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation"> -->
+          <label class="tag" for="editAge">年齢</label>
+          <input id="editAge" v-model="editAge" type="number" min="0" max="99">
+          <!-- <span>{{ errors[0] }}</span> -->
+          <!-- </validation-provider> -->
+          <br>
+          <span v-if="isErrorAge">年齢は0から99で入力してください</span>
         </p>
         <p>
-          <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation">
-            <label class="tag" for="editScore">スコア</label>
-            <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
-            <span>{{ errors[0] }}</span>
-          </validation-provider>
+          <!-- <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation"> -->
+          <label class="tag" for="editScore">スコア</label>
+          <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
+          <!-- <span>{{ errors[0] }}</span> -->
+          <!-- </validation-provider> -->
+          <br>
+          <span v-if="isErrorScore">スコアは-100から100で入力してください</span>
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
           <input id="editComment" v-model="editComment" type="text" maxlength="200">
+          <br>
+          <span v-if="isErrorComment">コメントは200文字以下で入力してください</span>
         </p>
         <p>登録日時 {{ date.created_at | moment }}</p>
         <p>更新日時 {{ date.updated_at | moment }}</p>
@@ -41,12 +47,9 @@
         <button
           class="graphClear"
           href="#!"
-          @click="click()"
+          @click="clear()"
         >
           クリア
-        </button>
-        <button v-if="activButton (editAge,editScore,editComment) == 3">
-          aaa
         </button>
       </div>
     </div>
@@ -115,56 +118,42 @@ export default {
         created_at: '',
         updated_at: ''
       },
-      isButton: null
+      isButton: null,
+      isErrorAge: false,
+      isErrorScore: false,
+      isErrorComment: false
     }
   },
   computed: {
     account () {
       return this.$store.state.account.account
-    },
-    activButton (age, score, comment) {
-      let bot = 0
-      if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
-        bot++
-        // this.isButton++
-      } else {
-        console.log('0-99')
-      }
-      if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
-        bot++
-        // this.isButton++
-      } else {
-        console.log('-100から100')
-      }
-      if (/^.{0,200}$/.test(comment)) {
-        bot++
-        // this.isButton++
-        console.log('0-200字')
-      } else {
-        console.log('200文字以下')
-      }
-      // console.log(this.isButton)
-      console.log(bot)
-      // this.isButton = -this.isButton
-      return bot
     }
-
-    // できたらここでボタンの表示をリアクティブに変えたい
+    // 本当は、computedでバリデーションを行ってリアルタイムで修正したい
     // activButton (age, score, comment) {
+    //   let bot = 0
     //   if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
-    //     if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
-    //       if (/^.{0,200}$/.test(comment)) {
-    //         this.isButton = true
-    //       }else{
-    //         this.isButton = false
-    //       }
-    //     }else{
-    //       this.isButton = false
-    //     }
+    //     bot++
+    //     // this.isButton++
     //   } else {
-    //     this.isButton = false
+    //     console.log('0-99')
     //   }
-    //   return this.isButton
+    //   if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
+    //     bot++
+    //     // this.isButton++
+    //   } else {
+    //     console.log('-100から100')
+    //   }
+    //   if (/^.{0,200}$/.test(comment)) {
+    //     bot++
+    //     // this.isButton++
+    //     console.log('0-200字')
+    //   } else {
+    //     console.log('200文字以下')
+    //   }
+    //   // console.log(this.isButton)
+    //   console.log(bot)
+    //   // this.isButton = -this.isButton
+    //   return bot
     // }
   },
   watch: {
@@ -178,6 +167,12 @@ export default {
     this.setDate()
   },
   methods: {
+    click () {
+      this.editId = null
+      this.editAge = null
+      this.editScore = null
+      this.editComment = null
+    },
     addChange () {
       this.addGraph = true
       this.editGraph = false
@@ -208,34 +203,82 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
+    activButton () {
+      // 全部のバリデーションが正常に動いているかチェックするため
+      // trueの数を数えるvalidationChech
+      let validationChech = 0
+      /**
+       * editAgeが10-99もしくは1-9であるかどうかの判定
+       * 決められた範囲ならtrue
+       */
+      if (/^([1-9][0-9]?|0[1-9]?)$/.test(this.editAge)) {
+        // 大丈夫なら+1
+        validationChech++
+        // エラーの表示off
+        this.isErrorAge = false
+      } else {
+        // エラーの表示on
+        this.isErrorAge = true
+        // console.log('0-99')
+      }
+      /**
+       * editAgeが+or-の,100もしくは0~99であるかどうかの判定
+       * 決められた範囲ならtrue
+       */
+      if (/^[+,-]?(100?|[0-9][0-9]?)$/.test(this.editScore)) {
+        // 大丈夫なら+1
+        validationChech++
+        // エラーの表示off
+        this.isErrorScore = false
+      } else {
+        // エラーの表示on
+        this.isErrorScore = true
+      }
+      /**
+       * コメントが200字以下であるかの判定
+       * 決められた範囲ならtrue
+       */
+      if (/^.{0,200}$/.test(this.editComment)) {
+        // 大丈夫なら+1
+        validationChech++
+        // エラーの表示on
+        this.isErrorComment = false
+      } else {
+        // エラーの表示on
+        this.isErrorComment = true
+      }
+      return validationChech
+    },
     updateGraphData () {
       const idList = this.contents.map(obj => obj.id)
       const indexId = idList.indexOf(this.editId)
       // if:まだ登録されていない年齢の場合
       // else:すでにある年齢を更新
-      if (indexId === -1) {
-        this.$store.dispatch('chart/register',
-          {
-            userId: this.$store.state.auth.userId,
-            age: parseInt(this.editAge),
-            score: parseInt(this.editScore),
-            comment: this.editComment
-          }
-        )
-      } else {
-        this.$store.dispatch('chart/register',
-          {
-            id: this.editId,
-            userId: this.$store.state.auth.userId,
-            age: this.editAge,
-            score: this.editScore,
-            comment: this.editComment
-          }
-        )
+      if (this.activButton() === 3) {
+        if (indexId === -1) {
+          this.$store.dispatch('chart/register',
+            {
+              userId: this.$store.state.auth.userId,
+              age: parseInt(this.editAge),
+              score: parseInt(this.editScore),
+              comment: this.editComment
+            }
+          )
+        } else {
+          this.$store.dispatch('chart/register',
+            {
+              id: this.editId,
+              userId: this.$store.state.auth.userId,
+              age: this.editAge,
+              score: this.editScore,
+              comment: this.editComment
+            }
+          )
+        }
+        this.editAge = null
+        this.editScore = null
+        this.editComment = null
       }
-      this.editAge = null
-      this.editScore = null
-      this.editComment = null
     },
     deleteItem (id, age) {
       // todo_あとで消す
@@ -245,21 +288,6 @@ export default {
         this.$store.dispatch('chart/deleteItem', id)
       }
     }
-    // activButton (age, score, comment) {
-    //   if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
-    //     if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
-    //       if (/^.{0,200}$/.test(comment)) {
-    //         console.log('OK')
-    //       } else {
-    //         console.log('200文字以下')
-    //       }
-    //     } else {
-    //       console.log('-100から100')
-    //     }
-    //   } else {
-    //     console.log('0-99')
-    //   }
-    // }
   }
 }
 </script>
