@@ -20,7 +20,7 @@ public class AccountRepository {
 
   public Account selectAccount(Integer id) {
     // 三つのテーブルくっつけてる。ユーザ名と権限名を取得するため
-    final String sql = "select users.id, username, name, created_at, updated_at from users \n"
+    final String sql = "select parent_graphs.id, username, name, created_at, updated_at from users \n"
         +
         "inner join user_roles on users.id = user_roles.user_id \n" +
         "inner join roles on roles.id = user_roles.role_id \n" +

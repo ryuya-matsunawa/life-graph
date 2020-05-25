@@ -17,7 +17,7 @@ INSERT INTO `parent_graphs` (
 INSERT INTO `child_graphs`
 (`parent_id`,`age`,`score`,`comment`)
 VALUE
-(1, 22, 50, "まあまあってとこですね");
+(2, 22, 50, "まあまあってとこですね");
 
 
 INSERT INTO `user_roles`(
