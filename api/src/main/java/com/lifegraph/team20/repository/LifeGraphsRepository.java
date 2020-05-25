@@ -34,22 +34,24 @@ public class LifeGraphsRepository {
   private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
   public List<LifeGraph> getGraph(Integer parent_id) {
-    //子グラフの中のparent_id, age, score, commentをparent_id = :idで照らし合わせて作る。
-    //まず、SQLに詰め込んどくイメージ
+    // 子グラフの中のparent_id, age, score, commentをparent_id = :idで照らし合わせて作る。
+    // まず、SQLに詰め込んどくイメージ
     final String sql = "SELECT id, parent_id, age, score, comment FROM child_graphs WHERE parent_id = :parent_id";
-    //addValueを使うことで上のSQLの:idに下の右のidを入れている
-    //param:idに数字を入れる役割、
+    // addValueを使うことで上のSQLの:idに下の右のidを入れている
+    // param:idに数字を入れる役割、
     SqlParameterSource param = new MapSqlParameterSource().addValue("parent_id", parent_id);
-    //実行そのものはjdbcTemplate.queryでしてる。RowMapperは呪文
+    // 実行そのものはjdbcTemplate.queryでしてる。RowMapperは呪文
     List<LifeGraph> result = namedParameterJdbcTemplate.query(sql, param, new RowMapper<LifeGraph>() {
-      //RowMappers使ったらmapRow使う呪文
+      // RowMappers使ったらmapRow使う呪文
       public LifeGraph mapRow(ResultSet rs, int rowNum) throws SQLException {
-        //LifeGraphに定義してある、コンストラクタに入ってるものを呼び出してくる。そして、それをresultに入れてる
+        // LifeGraphに定義してある、コンストラクタに入ってるものを呼び出してくる。そして、それをresultに入れてる
+
         return new LifeGraph(rs.getInt("id"), rs.getInt("parent_id"), rs.getInt("age"), rs.getInt("score"),
-            rs.getString("comment"));
+            rs.getString("comment").equals("null") ? null : rs.getString("comment"));
       }
-      //resultの定義終了
+      // resultの定義終了
     });
+
     return result;
   }
 }
