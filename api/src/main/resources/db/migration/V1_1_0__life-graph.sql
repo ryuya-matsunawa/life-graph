@@ -26,8 +26,8 @@ INSERT INTO `roles` (
   `name`
 )VALUES
 ('ROLE_USER'),
-('ROLE_MODERATOR'),
-('ROLE_ADMIN');
+('ROLE_ADMIN'),
+('ROLE_OWNER');
 
 CREATE TABLE `parent_graphs` (
   `id` bigint NOT NULL AUTO_INCREMENT,
