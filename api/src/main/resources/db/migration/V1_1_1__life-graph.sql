@@ -14,6 +14,12 @@ INSERT INTO `parent_graphs` (
 (1),
 (3);
 
+INSERT INTO `child_graphs`
+(`parent_id`,`age`,`score`,`comment`)
+VALUE
+(1, 22, 50, "まあまあってとこですね");
+
+
 INSERT INTO `user_roles`(
 `user_id`,
 `role_id`
