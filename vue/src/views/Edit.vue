@@ -135,33 +135,6 @@ export default {
     loaded () {
       return this.$store.state.chart.loaded
     }
-    // 本当は、computedでバリデーションを行ってリアルタイムで修正したい
-    // activButton (age, score, comment) {
-    //   let bot = 0
-    //   if (/^([1-9][0-9]?|0[1-9])$/.test(age)) {
-    //     bot++
-    //     // this.isButton++
-    //   } else {
-    //     console.log('0-99')
-    //   }
-    //   if (/^[+,-]?(100|[1-9][0-9]?|0)$/.test(score)) {
-    //     bot++
-    //     // this.isButton++
-    //   } else {
-    //     console.log('-100から100')
-    //   }
-    //   if (/^.{0,200}$/.test(comment)) {
-    //     bot++
-    //     // this.isButton++
-    //     console.log('0-200字')
-    //   } else {
-    //     console.log('200文字以下')
-    //   }
-    //   // console.log(this.isButton)
-    //   console.log(bot)
-    //   // this.isButton = -this.isButton
-    //   return bot
-    // }
   },
   watch: {
     account (newAccount) {
@@ -216,17 +189,17 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
-    activButton () {
+    activeButton () {
       // 全部のバリデーションが正常に動いているかチェックするため
       // trueの数を数えるvalidationChech
-      let validationChech = 0
+      let validationCheck = 0
       /**
        * editAgeが10-99もしくは1-9であるかどうかの判定
        * 決められた範囲ならtrue
        */
       if (/^([1-9][0-9]?|0[1-9]?)$/.test(this.editAge)) {
         // 大丈夫なら+1
-        validationChech++
+        validationCheck++
         // エラーの表示off
         this.isErrorAge = false
       } else {
@@ -240,7 +213,7 @@ export default {
        */
       if (/^[+,-]?(100?|[0-9][0-9]?)$/.test(this.editScore)) {
         // 大丈夫なら+1
-        validationChech++
+        validationCheck++
         // エラーの表示off
         this.isErrorScore = false
       } else {
@@ -253,14 +226,14 @@ export default {
        */
       if (/^.{0,200}$/.test(this.editComment)) {
         // 大丈夫なら+1
-        validationChech++
+        validationCheck++
         // エラーの表示on
         this.isErrorComment = false
       } else {
         // エラーの表示on
         this.isErrorComment = true
       }
-      return validationChech
+      return validationCheck
     },
     updateGraphData () {
       const idList = this.contents.map(obj => obj.id)
