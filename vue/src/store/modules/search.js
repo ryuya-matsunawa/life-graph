@@ -18,13 +18,21 @@ export default {
     }
   },
   actions: {
-    fetchItems ({ commit }) {
+    fetchItems ({ commit, rootState }) {
       const url = '/api/life-graphs'
-      axios.get(url).then(res => commit('setItems', res.data))
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${rootState.auth.token}`
+        }
+      }).then(res => commit('setItems', res.data))
     },
-    deleteGraphData ({ commit }, userId) {
+    deleteGraphData ({ commit, rootState }, userId) {
       const url = '/api/life-graphs/' + userId
-      axios.delete(url).then(res => commit('deleteGraphData', res.data))
+      axios.delete(url, {
+        headers: {
+          Authorization: `Bearer ${rootState.auth.token}`
+        }
+      }).then(res => commit('deleteGraphData', res.data))
     }
   }
 }
