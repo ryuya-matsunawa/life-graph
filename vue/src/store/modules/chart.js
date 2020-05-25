@@ -24,19 +24,31 @@ export default {
     }
   },
   actions: {
-    fetchGraph ({ commit }, userId) {
+    fetchGraph ({ commit, rootState }, userId) {
       const url = '/api/life-graphs/' + userId
-      axios.get(url).then(res => commit('setGraph', res.data))
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${rootState.auth.token}`
+        }
+      }).then(res => commit('setGraph', res.data))
         .catch(err => err)
     },
-    deleteItem ({ commit }, id) {
+    deleteItem ({ commit, rootState }, id) {
       const url = '/api/life-graphs/delete/' + id
-      axios.delete(url).then(res => commit('updateGraph', res.data))
+      axios.delete(url, {
+        headers: {
+          Authorization: `Bearer ${rootState.auth.token}`
+        }
+      }).then(res => commit('updateGraph', res.data))
         .catch(err => err)
     },
-    register ({ commit }, data) {
+    register ({ commit, rootState }, data) {
       const url = '/api/life-graphs'
-      axios.post(url, data).then(res => commit('updateGraph', res.data))
+      axios.post(url, data, {
+        headers: {
+          Authorization: `Bearer ${rootState.auth.token}`
+        }
+      }).then(res => commit('updateGraph', res.data))
         .catch(err => err)
     }
   }
