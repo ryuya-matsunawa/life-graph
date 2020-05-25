@@ -51,6 +51,3 @@ CREATE TABLE `child_graphs` (
   UNIQUE KEY `parent_id` (`parent_id`,`age`),
   CONSTRAINT `child_graphs_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `parent_graphs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-
-

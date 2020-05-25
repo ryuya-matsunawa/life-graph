@@ -12,22 +12,28 @@
     <div v-if="addGraph" class="file">
       <div class="formOut">
         <p>
-          <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation">
-            <label class="tag" for="editAge">年齢</label>
-            <input id="editAge" v-model="editAge" type="number" min="0" max="99">
-            <span>{{ errors[0] }}</span>
-          </validation-provider>
+          <!-- <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation"> -->
+          <label class="tag" for="editAge">年齢</label>
+          <input id="editAge" v-model="editAge" type="number" min="0" max="99">
+          <!-- <span>{{ errors[0] }}</span> -->
+          <!-- </validation-provider> -->
+          <br>
+          <span v-if="isErrorAge">年齢は0から99で入力してください</span>
         </p>
         <p>
-          <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation">
-            <label class="tag" for="editScore">スコア</label>
-            <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
-            <span>{{ errors[0] }}</span>
-          </validation-provider>
+          <!-- <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation"> -->
+          <label class="tag" for="editScore">スコア</label>
+          <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
+          <!-- <span>{{ errors[0] }}</span> -->
+          <!-- </validation-provider> -->
+          <br>
+          <span v-if="isErrorScore">スコアは-100から100で入力してください</span>
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
           <input id="editComment" v-model="editComment" type="text" maxlength="200">
+          <br>
+          <span v-if="isErrorComment">コメントは200文字以下で入力してください</span>
         </p>
         <p>登録日時 {{ date.created_at | moment }}</p>
         <p>更新日時 {{ date.updated_at | moment }}</p>
@@ -41,7 +47,7 @@
         <button
           class="graphRegister"
           href="#!"
-          @click="click()"
+          @click="clear()"
         >
           クリア
         </button>
@@ -106,15 +112,17 @@ export default {
       contents: [],
       editId: null,
       currentUserId: this.$store.state.account.account.id,
-      // storeにつなぐ代わりにここで値を管理
-      // intなので''ではなくnullにした
       editAge: null,
       editScore: null,
       editComment: null,
       date: {
         created_at: '',
         updated_at: ''
-      }
+      },
+      isButton: null,
+      isErrorAge: false,
+      isErrorScore: false,
+      isErrorComment: false
     }
   },
   computed: {
@@ -145,6 +153,12 @@ export default {
     this.setDate()
   },
   methods: {
+    clear () {
+      this.editId = null
+      this.editAge = null
+      this.editScore = null
+      this.editComment = null
+    },
     addChange () {
       this.addGraph = true
       this.editGraph = false
@@ -175,34 +189,82 @@ export default {
       this.date.created_at = this.$store.state.account.account.created_at
       this.date.updated_at = this.$store.state.account.account.updated_at
     },
+    activeButton () {
+      // 全部のバリデーションが正常に動いているかチェックするため
+      // trueの数を数えるvalidationChech
+      let validationCheck = 0
+      /**
+       * editAgeが10-99もしくは1-9であるかどうかの判定
+       * 決められた範囲ならtrue
+       */
+      if (/^([1-9][0-9]?|0[1-9]?)$/.test(this.editAge)) {
+        // 大丈夫なら+1
+        validationCheck++
+        // エラーの表示off
+        this.isErrorAge = false
+      } else {
+        // エラーの表示on
+        this.isErrorAge = true
+        // console.log('0-99')
+      }
+      /**
+       * editAgeが+or-の,100もしくは0~99であるかどうかの判定
+       * 決められた範囲ならtrue
+       */
+      if (/^[+,-]?(100?|[0-9][0-9]?)$/.test(this.editScore)) {
+        // 大丈夫なら+1
+        validationCheck++
+        // エラーの表示off
+        this.isErrorScore = false
+      } else {
+        // エラーの表示on
+        this.isErrorScore = true
+      }
+      /**
+       * コメントが200字以下であるかの判定
+       * 決められた範囲ならtrue
+       */
+      if (/^.{0,200}$/.test(this.editComment)) {
+        // 大丈夫なら+1
+        validationCheck++
+        // エラーの表示on
+        this.isErrorComment = false
+      } else {
+        // エラーの表示on
+        this.isErrorComment = true
+      }
+      return validationCheck
+    },
     updateGraphData () {
       const idList = this.contents.map(obj => obj.id)
       const indexId = idList.indexOf(this.editId)
       // if:まだ登録されていない年齢の場合
       // else:すでにある年齢を更新
-      if (indexId === -1) {
-        this.$store.dispatch('chart/register',
-          {
-            userId: this.$store.state.auth.userId,
-            age: parseInt(this.editAge),
-            score: parseInt(this.editScore),
-            comment: this.editComment
-          }
-        )
-      } else {
-        this.$store.dispatch('chart/register',
-          {
-            id: this.editId,
-            userId: this.$store.state.auth.userId,
-            age: this.editAge,
-            score: this.editScore,
-            comment: this.editComment
-          }
-        )
+      if (this.activeButton() === 3) {
+        if (indexId === -1) {
+          this.$store.dispatch('chart/register',
+            {
+              userId: this.$store.state.auth.userId,
+              age: parseInt(this.editAge),
+              score: parseInt(this.editScore),
+              comment: this.editComment
+            }
+          )
+        } else {
+          this.$store.dispatch('chart/register',
+            {
+              id: this.editId,
+              userId: this.$store.state.auth.userId,
+              age: this.editAge,
+              score: this.editScore,
+              comment: this.editComment
+            }
+          )
+        }
+        this.editAge = null
+        this.editScore = null
+        this.editComment = null
       }
-      this.editAge = null
-      this.editScore = null
-      this.editComment = null
     },
     deleteItem (id, age) {
       // todo_あとで消す
@@ -210,8 +272,6 @@ export default {
       // https://techacademy.jp/magazine/32797
       if (confirm(age + '歳の情報を本当に削除してもよろしいですか?')) {
         this.$store.dispatch('chart/deleteItem', id)
-        // どうやら、配列を操作するものらしい。今回はいらないかな？
-        // this.filteredItems.splice(index, 1)
       }
     }
   }
