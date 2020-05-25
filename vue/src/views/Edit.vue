@@ -3,12 +3,20 @@
     <div>
       <Header />
     </div>
-    <button @click="addChange()">
-      登録
-    </button>
-    <button @click="editChange()">
-      編集
-    </button>
+    <div class="topbuttons">
+      <button
+        class="graphRegister"
+        @click="addChange()"
+      >
+        登録
+      </button>
+      <button
+        class="graphRegister"
+        @click="editChange()"
+      >
+        編集
+      </button>
+    </div>
     <div v-if="addGraph" class="file">
       <div class="formOut">
         <p>
@@ -18,7 +26,7 @@
           <!-- <span>{{ errors[0] }}</span> -->
           <!-- </validation-provider> -->
           <br>
-          <span v-if="isErrorAge">年齢は0から99で入力してください</span>
+          <span v-if="isErrorAge" class="erroe">年齢は0から99で入力してください</span>
         </p>
         <p>
           <!-- <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation"> -->
@@ -27,16 +35,20 @@
           <!-- <span>{{ errors[0] }}</span> -->
           <!-- </validation-provider> -->
           <br>
-          <span v-if="isErrorScore">スコアは-100から100で入力してください</span>
+          <span v-if="isErrorScore" class="erroe">スコアは-100から100で入力してください</span>
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
           <input id="editComment" v-model="editComment" type="text" maxlength="200">
           <br>
-          <span v-if="isErrorComment">コメントは200文字以下で入力してください</span>
+          <span v-if="isErrorComment" class="erroe">コメントは200文字以下で入力してください</span>
         </p>
-        <p>登録日時 {{ date.created_at | moment }}</p>
-        <p>更新日時 {{ date.updated_at | moment }}</p>
+        <p class="tag">
+          登録日時 {{ date.created_at | moment }}
+        </p>
+        <p class="tag">
+          更新日時 {{ date.updated_at | moment }}
+        </p>
         <button
           class="graphRegister"
           href="#!"
@@ -56,13 +68,25 @@
     <div v-if="editGraph" class="file">
       <div class="formOut">
         <table class="table">
-          <th>年齢</th>
-          <th>スコア</th>
-          <th>コメント</th>
+          <th class="edittag">
+            年齢
+          </th>
+          <th class="edittag">
+            スコア
+          </th>
+          <th class="edittag">
+            コメント
+          </th>
           <tr v-for="item in contents" :key="item.id">
-            <td>{{ item.age }}</td>
-            <td>{{ item.score }}</td>
-            <td>{{ item.comment }}</td>
+            <td class="details">
+              {{ item.age }}
+            </td>
+            <td class="details">
+              {{ item.score }}
+            </td>
+            <td class="details">
+              {{ item.comment }}
+            </td>
             <td>
               <button
                 class="graphRegister"
@@ -72,7 +96,10 @@
               </button>
             </td>
             <td>
-              <button @click="deleteItem(item.id,item.age)">
+              <button
+                class="graphRegister"
+                @click="deleteItem(item.id,item.age)"
+              >
                 削除
               </button>
             </td>
@@ -261,6 +288,7 @@ export default {
             }
           )
         }
+        this.editId = null
         this.editAge = null
         this.editScore = null
         this.editComment = null
@@ -279,13 +307,36 @@ export default {
 </script>
 
 <style scoped>
-.validation{
+
+.topbuttons{
+  margin: 5px 0px 10px 0px;
+}
+
+.erroe{
   font-size: 10px;
   color: gray;
 }
+/* 使ってない ToDoあとで消す */
+/* .validation{
+  font-size: 10px;
+  color: gray;
+} */
 .tag{
-  font-size: 20px;
-  color:black;
+  font-size: 15px;
+  color:#333333;
+}
+
+.edittag{
+  width: 100px;
+  font-size: 15px;
+  color:#333333;
+  padding: 0px;
+}
+
+.details{
+  vertical-align: middle;
+  font-size: 12px;
+  color:#333333;
 }
 
 .edit {
@@ -299,7 +350,6 @@ export default {
 .file {
   width: 600px;
   margin: 0 auto;
-  margin-top: 30px;
   border: 1px solid;
   padding: 30px;
   border-radius: 8px;
@@ -311,7 +361,6 @@ export default {
 .formOut{
   display: inline-block;
   text-align: center;
-  width: 250px;
   font-weight: bold;
   font-size: 18px;
   font-family: 'Noto Serif JP', serif;
@@ -336,7 +385,6 @@ label{
   max-width:960px;
   text-align:center;
   position:relative;
-  margin-top:30px;
   cursor: pointer;
   font-family: 'Hannari', serif;
   border-radius: 8px;
@@ -354,7 +402,7 @@ label{
   max-width:960px;
   text-align:center;
   position:relative;
-  margin-top:30px;
+  /* margin-top:30px; */
   cursor: pointer;
   font-family: 'Hannari', serif;
   border-radius: 8px;
@@ -392,10 +440,13 @@ label{
 }
 
 .table th {
+  width: 1000px;
   padding: 10px 20px;
 }
 
 .table td {
+  height: 40px;
+  vertical-align: middle;
   padding: 10px;
 }
 
