@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lifegraph.team20.models.ChildGraphData;
-import com.lifegraph.team20.models.ParentGraphData;
 import com.lifegraph.team20.repository.ChildGraphRepository;
 import com.lifegraph.team20.repository.ChildRepository;
 import com.lifegraph.team20.repository.ParentGraphRepository;
@@ -42,7 +41,7 @@ public class LifeGraphsService {
     // exists parent by userId
     long parentId;
 
-    Optional<ParentGraphData> parent = parentRepository.findByUserId(userId);
+    Optional<ChildGraphData> parent = parentRepository.findByUserId(userId);
     if (parent.isPresent()) {
       // update
       parentId = parent.get().getUserId();

@@ -45,7 +45,7 @@
           更新
         </button>
         <button
-          class="graphClear"
+          class="graphRegister"
           href="#!"
           @click="click()"
         >
@@ -64,12 +64,18 @@
             <td>{{ item.score }}</td>
             <td>{{ item.comment }}</td>
             <td>
-              <button @click="editData(item.id)">
+              <button
+                class="graphRegister"
+                @click="editData(item.id)"
+              >
                 編集
               </button>
             </td>
             <td>
-              <button @click="deleteData()">
+              <button
+                class="graphRegister"
+                @click="deleteData()"
+              >
                 削除
               </button>
             </td>
@@ -123,11 +129,24 @@ export default {
   computed: {
     account () {
       return this.$store.state.account.account
+    },
+    update () {
+      return this.$store.state.chart.update
+    },
+    loaded () {
+      return this.$store.state.chart.loaded
     }
   },
   watch: {
     account (newAccount) {
       this.setDate()
+    },
+    update () {
+      const userId = this.$store.state.auth.userId
+      this.$store.dispatch('chart/fetchGraph', userId)
+    },
+    loaded () {
+      debugger
       this.setContents()
     }
   },
@@ -180,12 +199,9 @@ export default {
           }
         )
       } else {
-        // resultには入力した年齢があるインデックス番号が入っている
-        // そのインデックス番号にあるidを取得
-        const currentUserId = this.$store.state.chart.contents[indexId].id
         this.$store.dispatch('chart/register',
           {
-            id: currentUserId,
+            id: this.editId,
             userId: this.$store.state.auth.userId,
             age: this.editAge,
             score: this.editScore,
@@ -312,6 +328,14 @@ label{
   top: 200px;
   width: 230px;
   z-index: -1;
+}
+
+.table th {
+  padding: 10px 20px;
+}
+
+.table td {
+  padding: 10px;
 }
 
 .chart {

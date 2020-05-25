@@ -1,28 +1,62 @@
 <template>
-  <div class="loginSection">
-    <video id="video" src="../assets/login.mp4" autoplay loop muted />
-    <div class="comment">
-      あの頃も、思い返せば綺麗だった。
+  <div>
+    <div v-if="loginDialog" class="loginSection">
+      <video id="video" src="../assets/login.mp4" autoplay loop muted />
+      <div class="comment">
+        あの頃も、思い返せば綺麗だった。
+      </div>
+      <div class="form-item">
+        <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
+          <label for="email" />
+          <input v-model="email" type="email" placeholder="Email">
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
+        <br>
+        <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
+          <label for="password" />
+          <input v-model="password" type="password" required="required" placeholder="Password">
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
+      </div>
+      <button class="login" @click="login()">
+        ログイン
+      </button>
+      <div class="form-footer">
+        <p @click="signup()">
+          Create an account
+        </p>
+        <p><a href="#">Forgot password?</a></p>
+      </div>
     </div>
-    <div class="form-item">
-      <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
-        <label for="email" />
-        <input v-model="email" type="email" placeholder="Email">
-        <span>{{ errors[0] }}</span>
-      </validation-provider>
-      <br>
-      <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
-        <label for="password" />
-        <input v-model="password" type="password" required="required" placeholder="Password">
-        <span>{{ errors[0] }}</span>
-      </validation-provider>
-    </div>
-    <button class="login" @click="login()">
-      ログイン
-    </button>
-    <div class="form-footer">
-      <p><a href="#">Create an account</a></p>
-      <p><a href="#">Forgot password?</a></p>
+    <div v-if="signupDialog" class="file">
+      <div class="formOut">
+        <validation-provider v-slot="{ errors }" name="ユーザ名" rules="required" class="alert">
+          <label for="name" />
+          ユーザ名
+          <input v-model="username" type="text" placeholder="UserName">
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
+        <br>
+        <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
+          <label for="email" />
+          メールアドレス
+          <input v-model="email" type="email" placeholder="Email">
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
+        <br>
+        <validation-provider v-slot="{ errors }" name="パスワード" rules="required" class="alert">
+          <label for="password" />
+          パスワード
+          <input v-model="password" type="password" required="required" placeholder="Password">
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
+        <button
+          class="createButton"
+          @click="loginChange()"
+        >
+          Create an account
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -31,9 +65,12 @@
 export default {
   data () {
     return {
+      username: '',
       email: '',
       password: '',
-      isValid: false
+      isValid: false,
+      loginDialog: true,
+      signupDialog: false
     }
   },
   computed: {
@@ -69,8 +106,24 @@ export default {
           password: this.password
         }
       )
+    },
+    signup () {
+      this.loginDialog = false
+      this.signupDialog = true
+    },
+    loginChange () {
+      this.$store.dispatch(
+        'auth/signup',
+        {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          role: ['user']
+        }
+      )
+      this.loginDialog = true
+      this.signupDialog = false
     }
-
   }
 }
 
@@ -109,6 +162,50 @@ export default {
   0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
   100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
 
+}
+
+.file {
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 1px solid;
+  padding: 30px;
+  border-radius: 8px;
+  border-color: #c0c0c0;
+  width: 50%;
+  background-color:  #efeeee;
+}
+
+.formOut{
+  display: inline-block;
+  text-align: center;
+  width: 250px;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.formOut input {
+  margin: 20px 10px;
+}
+
+.createButton {
+  padding: 10px 20px;
+  color:#353434;
+  border-color:#a39d9d;
+  max-width:960px;
+  text-align:center;
+  position:relative;
+  margin-top:30px;
+  cursor: pointer;
+  font-family: 'Hannari', serif;
+  border-radius: 8px;
+}
+
+.createButton:hover{
+  color:#fff;
+  background-color:#a39d9d;
+  border-color:#a39d9d;
 }
 
 .form-item {
@@ -212,12 +309,13 @@ export default {
   line-height: 190%;
 }
 
-.form-footer a {
+.form-footer p {
+  cursor: pointer;
   color: #8c8c8c;
   text-decoration: none;
   transition: border-color 0.3s;
 }
-.form-footer a:hover {
+.form-footer p:hover {
   border-bottom: 1px dotted #8c8c8c;
 }
 </style>
