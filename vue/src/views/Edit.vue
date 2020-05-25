@@ -339,23 +339,6 @@ export default {
   color:#333333;
 }
 
-.graphRegister{
-  width: 60px;
-  position: fixed;
-  /* bottom: 30px; */
-  right: 0px;
-  padding: 2px 1px;
-  margin: 10px 5px 10px 5px;
-  border-radius: 8px;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: .15rem;
-  cursor: pointer;
-  background-color: #a39d9d;
-  font-family: 'Playfair Display', serif;
-}
-
 .edit {
   background-size: 20%;
   background-repeat: no-repeat;
