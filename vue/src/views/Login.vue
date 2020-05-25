@@ -18,10 +18,10 @@
           <span>{{ errors[0] }}</span>
         </validation-provider>
       </div>
-      <span v-if="errMessage">メールアドレスまたはパスワードが間違っています。</span>
       <button class="login" @click="login()">
         ログイン
       </button>
+      <span v-if="errMessage" class="loginArea">メールアドレスまたはパスワードが間違っています。</span>
       <div class="form-footer">
         <p @click="signup()">
           Create an account
@@ -51,6 +51,7 @@
           <input v-model="password" type="password" required="required" placeholder="Password">
           <span>{{ errors[0] }}</span>
         </validation-provider>
+        <span v-if="errMessage" class="loginArea">ユーザ名またはメールアドレスはすでに使われています。</span>
         <button
           class="createButton"
           @click="loginChange()"
@@ -88,6 +89,9 @@ export default {
     },
     err () {
       return this.$store.state.auth.message
+    },
+    success () {
+      return this.$store.state.auth.success
     }
   },
   watch: {
@@ -100,8 +104,13 @@ export default {
     account (newAccount) {
       this.$router.push('/top')
     },
-    err (newErr) {
+    err () {
       this.errMessage = true
+    },
+    success () {
+      this.loginDialog = true
+      this.signupDialog = false
+      this.errMessage = false
     }
   },
   methods: {
@@ -129,8 +138,6 @@ export default {
           role: ['user']
         }
       )
-      this.loginDialog = true
-      this.signupDialog = false
     }
   }
 }
@@ -204,7 +211,7 @@ export default {
   max-width:960px;
   text-align:center;
   position:relative;
-  margin-top:30px;
+  margin-top:10px;
   cursor: pointer;
   font-family: 'Hannari', serif;
   border-radius: 8px;
@@ -266,6 +273,13 @@ export default {
   -webkit-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   -moz-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: button .4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.loginArea {
+  color: red;
+  margin-top: 10px;
+  position: relative;
+  top: 100;
 }
 
 @-webkit-keyframes button {
