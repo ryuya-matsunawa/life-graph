@@ -36,10 +36,10 @@ public class ParentGraphRepository {
 
   public Optional<ChildGraphData> findByUserId(long userId) {
     final String sql = "select * from parent_graphs where user_id = " + userId;
-    //	    List<ParentGraphData> parentLifeGraphs = jdbcTemplate.queryForList(sql, ParentGraphData.class);
     RowMapper<ChildGraphData> mapper = new BeanPropertyRowMapper<ChildGraphData>(ChildGraphData.class);
     List<ChildGraphData> parentLifeGraphs = jdbcTemplate.query(sql, mapper);
     return CollectionUtils.isEmpty(parentLifeGraphs) ? Optional.empty() : Optional.of(parentLifeGraphs.get(0));
+
   }
 
   public long insert(long userId) {

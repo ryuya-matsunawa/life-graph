@@ -26,7 +26,7 @@ public class LifeGraphsService {
    */
   public void resister(ChildGraphData data) {
     // parent table
-    long parentId = resisterParent(data.getUserId());
+    final long parentId = resisterParent(data.getUserId());
     // child table
     registerChild(parentId, data);
   }
@@ -39,7 +39,7 @@ public class LifeGraphsService {
    */
   private long resisterParent(long userId) {
     // exists parent by userId
-    long parentId;
+    final long parentId;
 
     Optional<ChildGraphData> parent = parentRepository.findByUserId(userId);
     if (parent.isPresent()) {

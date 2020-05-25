@@ -29,6 +29,11 @@ export default {
       axios.get(url).then(res => commit('setGraph', res.data))
         .catch(err => err)
     },
+    deleteItem ({ commit }, id) {
+      const url = '/api/life-graphs/delete/' + id
+      axios.delete(url).then(res => commit('updateGraph', res.data))
+        .catch(err => err)
+    },
     register ({ commit }, data) {
       const url = '/api/life-graphs'
       axios.post(url, data).then(res => commit('updateGraph', res.data))
