@@ -125,10 +125,13 @@ export default {
       })
     },
     setComments () {
-      const comment = []
-      this.$store.state.chart.contents.map((content) => {
-        comment.push(content.comment)
+      const comments = this.$store.state.chart.contents.map((content) => {
+        return { age: content.age, comment: content.comment }
       })
+      // const comment = []
+      // this.$store.state.chart.contents.map((content) => {
+      //   comment.push(content.comment)
+      // })
       this.options.tooltips.custom = function (tooltipModel) {
         // ツールチップ要素
         var tooltipEl = document.getElementById('chartjs-tooltip')
@@ -158,12 +161,12 @@ export default {
         // テキストを設定する
         if (tooltipModel.body) {
           var titleLines = tooltipModel.title
-          var com = comment
+          // var com = comment
           var bodyLines = tooltipModel.body.map(getBody)
           var innerHtml = '<thead>'
           // x軸の値を返してくれる
           titleLines.forEach(function (age) {
-            var comNum = age - 1
+            var comment = comments.find(contents => parseInt(contents.age) === parseInt(age))
             // '<tr><th>'は多分太字にするやつ
             innerHtml += '<tr><th>' + 'Age ' + age + '</th></tr>'
             // innerHtml += '</thead><tbody>'
@@ -174,10 +177,15 @@ export default {
               style += '; border-width: 1px'
               var span = '<span style="' + style + '"></span>'
               // '<tr><td>' は多分改行
-              if (com[comNum] !== null) {
-                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
+              // if (com[comNum] !== null || com[comNum] !== undefined) {
+              //   innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>' + 'reason：' + com[comNum]
+              // } else {
+              //   innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
+              // }
+              if (comment.comment || !comment.comment === 'null') {
+                innerHtml += '<tr><td>' + span + 'score:' + body + '</td></tr>' + 'reason:' + comment.comment
               } else {
-                innerHtml += '<tr><td>' + span + 'score：' + body + '</td></tr>'
+                innerHtml += '<tr><td>' + span + 'score:' + body + '</td></tr>'
               }
             })
           })

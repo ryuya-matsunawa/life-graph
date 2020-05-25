@@ -11,7 +11,7 @@
         <span>{{ errors[0] }}</span>
       </validation-provider>
       <br>
-      <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
+      <validation-provider v-slot="{ errors }" name="パスワード" rules="required" class="alert">
         <label for="password" />
         <input v-model="password" type="password" required="required" placeholder="Password">
         <span>{{ errors[0] }}</span>
