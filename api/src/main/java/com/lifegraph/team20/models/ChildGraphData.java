@@ -18,15 +18,15 @@ public class ChildGraphData {
 
   @NotNull
   @Max(99)
-  @Min(1)
+  @Min(0)
   private int age;
 
   @NotNull
-  @Max(101)
-  @Min(-101)
+  @Max(100)
+  @Min(-100)
   private int score;
   //うちはここのNotNull制約、つけてなかったと思う。
   //  @NotNull
-  @Size(max = 201, min = 1)
+  @Size(max = 200, min = 1)
   private String comment;
 }

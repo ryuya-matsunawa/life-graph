@@ -240,7 +240,7 @@ export default {
       const indexId = idList.indexOf(this.editId)
       // if:まだ登録されていない年齢の場合
       // else:すでにある年齢を更新
-      if (this.activButton() === 3) {
+      if (this.activeButton() === 3) {
         if (indexId === -1) {
           this.$store.dispatch('chart/register',
             {
