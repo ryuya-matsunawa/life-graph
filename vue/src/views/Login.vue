@@ -18,6 +18,7 @@
           <span>{{ errors[0] }}</span>
         </validation-provider>
       </div>
+      <span v-if="errMessage">メールアドレスまたはパスワードが間違っています。</span>
       <button class="login" @click="login()">
         ログイン
       </button>
@@ -68,6 +69,7 @@ export default {
       username: '',
       email: '',
       password: '',
+      errMessage: false,
       isValid: false,
       loginDialog: true,
       signupDialog: false
@@ -83,6 +85,9 @@ export default {
     },
     account () {
       return this.$store.state.account.account
+    },
+    err () {
+      return this.$store.state.auth.message
     }
   },
   watch: {
@@ -94,6 +99,9 @@ export default {
     },
     account (newAccount) {
       this.$router.push('/top')
+    },
+    err (newErr) {
+      this.errMessage = true
     }
   },
   methods: {
