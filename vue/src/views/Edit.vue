@@ -126,9 +126,9 @@
 <script>
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
-// import moment from 'moment'
-import * as moment from 'moment-timezone'
-moment.tz.setDefault('Asia/Tokyo')
+import moment from 'moment'
+// import * as moment from 'moment-timezone'
+// moment.tz.setDefault('Asia/Tokyo')
 
 export default {
   name: 'Edit',
@@ -138,8 +138,9 @@ export default {
   },
   filters: {
     moment: function (date) {
-      return moment(date).format('YYYY/MM/DD HH:mm')
+      return moment(date).local.format('YYYY/MM/DD HH:mm')
     }
+
   },
   data () {
     return {
