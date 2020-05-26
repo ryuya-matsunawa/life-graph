@@ -118,8 +118,9 @@ export default {
 }
 
 .successMessage {
-  width: 80%;
-  margin: 0 auto;
+  width: 280px;
+  margin: 15px auto;
+  font-size: 14px;
 }
 
 </style>
