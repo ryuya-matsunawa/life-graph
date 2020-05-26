@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.lifegraph.team20.models.Account;
 
@@ -45,6 +46,9 @@ public class AccountRepository {
   }
 
   private LocalDateTime toLocalDateTime(String strTimestamp) {
+    if (StringUtils.isEmpty(strTimestamp)) {
+      return null;
+    }
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     sdf.setTimeZone(TimeZone.getTimeZone(ZONE_ID_UTC));
     Date formatDate = null;
