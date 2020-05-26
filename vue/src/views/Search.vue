@@ -45,7 +45,7 @@
               </router-link>
             </td>
             <td v-if="roleActive">
-              <button @click="deleteGraphData(index, item.id,item.username)">
+              <button @click="deleteGraphData(index, item.id, item.username)">
                 削除
               </button>
             </td>
