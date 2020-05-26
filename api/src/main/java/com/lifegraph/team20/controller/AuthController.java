@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lifegraph.team20.models.Account;
 import com.lifegraph.team20.models.ERole;
+import com.lifegraph.team20.models.Password;
 import com.lifegraph.team20.models.Role;
 import com.lifegraph.team20.models.User;
 import com.lifegraph.team20.payload.request.LoginRequest;
@@ -32,6 +33,7 @@ import com.lifegraph.team20.payload.request.SignupRequest;
 import com.lifegraph.team20.payload.response.JwtResponse;
 import com.lifegraph.team20.payload.response.MessageResponse;
 import com.lifegraph.team20.repository.AccountRepository;
+import com.lifegraph.team20.repository.PasswordRepository;
 import com.lifegraph.team20.repository.RoleRepository;
 import com.lifegraph.team20.repository.UserRepository;
 import com.lifegraph.team20.security.jwt.JwtUtils;
@@ -144,5 +146,20 @@ public class AuthController extends HttpServlet {
     Account account = accountRepository.selectAccount(id);
 
     return ResponseEntity.ok(account);
+  }
+
+  @Autowired
+  private PasswordRepository passwordRepository;
+
+  @PostMapping("/pass-change")
+  public ResponseEntity<?> password(@Valid @RequestBody Password password) {
+
+    Password user = new Password(password.getUserId(),
+        encoder.encode(password.getCurrentPassword()),
+        encoder.encode(password.getNewPassword()));
+
+    passwordRepository.changePassword(user);
+
+    return ResponseEntity.ok("OK");
   }
 }
