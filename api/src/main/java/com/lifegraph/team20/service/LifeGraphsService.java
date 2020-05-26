@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lifegraph.team20.models.ChildGraphData;
 import com.lifegraph.team20.repository.ChildGraphRepository;
@@ -84,6 +85,7 @@ public class LifeGraphsService {
   @Autowired
   private ChildRepository childGraphRepository;
 
+  @Transactional
   public void deleteChild(Integer parentId) {
     childGraphRepository.deleteByParentId(parentId);
   }
