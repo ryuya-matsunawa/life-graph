@@ -13,6 +13,9 @@
         </li>
       </ul>
       <div>
+        <router-link to="/passChange" class="changepass">
+          パスワード変更
+        </router-link>
         <span tag="button" class="logout" @click="logout()">
           ログアウト
         </span>
@@ -110,6 +113,23 @@ export default {
 
 .personalinfo{
   color: #fff;
+  font-family: 'Playfair Display', serif;
+}
+
+.changepass {
+  position: fixed;
+  bottom: 210px;
+  right: 30px;
+  padding: 20px 15px;
+  border-radius: 8px;
+  width: 100px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  cursor: pointer;
+  background-color: #a39d9d;
+  /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
 }
 
