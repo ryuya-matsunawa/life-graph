@@ -233,11 +233,8 @@ export default {
     returnLogin () {
       this.loginDialog = true
       this.signupDialog = false
-<<<<<<< HEAD
-=======
       this.isErrorEmail = false
       this.isErrorPassword = false
->>>>>>> develop
     }
   }
 }
