@@ -20,26 +20,20 @@
     <div v-if="addGraph" class="file">
       <div class="formOut">
         <p>
-          <!-- <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation"> -->
           <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" v-model="editAge" type="number" min="0" max="99">
-          <!-- <span>{{ errors[0] }}</span> -->
-          <!-- </validation-provider> -->
+          <input id="editAge" v-model="editAge" type="number" min="0" max="99" @keydown.69.prevent>
           <br>
           <span v-if="isErrorAge" class="erroe">年齢は0から99で入力してください</span>
         </p>
         <p>
-          <!-- <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation"> -->
           <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
-          <!-- <span>{{ errors[0] }}</span> -->
-          <!-- </validation-provider> -->
+          <input id="editScore" v-model="editScore" type="number" min="-100" max="100" @keydown.69.prevent>
           <br>
           <span v-if="isErrorScore" class="erroe">スコアは-100から100で入力してください</span>
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
-          <input id="editComment" v-model="editComment" type="text" maxlength="200">
+          <input id="editComment" v-model="editComment" type="text" maxlength="200" @keyup.enter="updateGraphData">
           <br>
           <span v-if="isErrorComment" class="erroe">コメントは200文字以下で入力してください</span>
         </p>
@@ -115,8 +109,6 @@
 </template>
 
 <script>
-// これを参考にしながらstoreとの連携かく
-// https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
 import moment from 'moment'

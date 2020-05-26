@@ -8,13 +8,13 @@
         <ul id="searchList">
           <li class="username">
             ユーザー名
-            <input v-model="searchWord" type="text">
+            <input v-model="searchWord" type="text" @keyup.enter="active">
           </li>
           <li class="update">
             更新日
-            <input v-model="updatedFrom" type="date">
+            <input v-model="updatedFrom" type="date" @keyup.enter="active">
             〜
-            <input v-model="updatedTo" type="date">
+            <input v-model="updatedTo" type="date" @keyup.enter="active">
           </li>
         </ul>
         <button @click="active()">
@@ -36,7 +36,7 @@
           <th v-show="filteredItems.length == 0">
             ---0件です---
           </th>
-          <tr v-for="item in filteredItems" :key="item.id">
+          <tr v-for="(item, index) in filteredItems" :key="item.id">
             <td>{{ item.username }}</td>
             <td>{{ item.updated_at | moment }}</td>
             <td>

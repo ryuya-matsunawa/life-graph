@@ -33,11 +33,11 @@ import com.lifegraph.team20.payload.request.SignupRequest;
 import com.lifegraph.team20.payload.response.JwtResponse;
 import com.lifegraph.team20.payload.response.MessageResponse;
 import com.lifegraph.team20.repository.AccountRepository;
-import com.lifegraph.team20.repository.PasswordRepository;
 import com.lifegraph.team20.repository.RoleRepository;
 import com.lifegraph.team20.repository.UserRepository;
 import com.lifegraph.team20.security.jwt.JwtUtils;
 import com.lifegraph.team20.security.services.UserDetailsImpl;
+import com.lifegraph.team20.service.PasswordService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -149,17 +149,17 @@ public class AuthController extends HttpServlet {
   }
 
   @Autowired
-  private PasswordRepository passwordRepository;
+  private PasswordService passwordService;
 
   @PostMapping("/pass-change")
   public ResponseEntity<?> password(@Valid @RequestBody Password password) {
 
     Password user = new Password(password.getUserId(),
-        encoder.encode(password.getCurrentPassword()),
         encoder.encode(password.getNewPassword()));
 
-    passwordRepository.changePassword(user);
+    passwordService.passChange(user);
 
     return ResponseEntity.ok("OK");
+
   }
 }

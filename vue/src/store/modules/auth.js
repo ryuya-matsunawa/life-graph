@@ -26,6 +26,9 @@ export default {
     },
     accountCreate (state) {
       state.success = !state.success
+    },
+    passChange (state) {
+      state.success = !state.success
     }
   },
   actions: {
@@ -38,6 +41,10 @@ export default {
       const url = '/api/auth/signup'
       axios.post(url, data).then(res => commit('accountCreate', res.data))
         .catch(err => commit('errMessage', err))
+    },
+    passChange ({ commit }, data) {
+      const url = '/api/auth/pass-change'
+      axios.post(url, data).then(res => commit('passChange', res.data))
     }
     // destroy ({ commit, dispatch }, data) {
     //   dispatch(

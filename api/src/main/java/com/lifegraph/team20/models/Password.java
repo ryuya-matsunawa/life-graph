@@ -9,7 +9,5 @@ public class Password {
 
   private int userId;
 
-  private String currentPassword;
-
   private String newPassword;
 }

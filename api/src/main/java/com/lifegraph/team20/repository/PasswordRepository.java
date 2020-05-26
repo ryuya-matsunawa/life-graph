@@ -12,6 +12,16 @@ public class PasswordRepository {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
+  public Boolean existByIdPassword(Password user) {
+    final String sql = "select count(*) from users where password = " + "(select password from users where id = 1)"
+        + " and id = "
+        + user.getUserId();
+
+    Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
+
+    return 1 <= count;
+  }
+
   public void changePassword(Password user) {
 
     jdbcTemplate.update("update users set password = '" + user.getNewPassword() + "' where id = "

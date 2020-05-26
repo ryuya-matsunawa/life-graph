@@ -13,7 +13,7 @@
         </li>
       </ul>
       <div>
-        <router-link to="/passChange" class="changepass">
+        <router-link to="/pass-change" class="changepass">
           パスワード変更
         </router-link>
         <span tag="button" class="logout" @click="logout()">
