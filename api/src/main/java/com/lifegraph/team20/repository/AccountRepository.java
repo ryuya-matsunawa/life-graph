@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,8 @@ public class AccountRepository {
     SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
     Account result = jdbcTemplate.queryForObject(sql, param, new RowMapper<Account>() {
       public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-        System.out.println(rs.getString("created_at"));
-        System.out.println(rs.getTimestamp("created_at"));
-        System.out.println(toLocalDateTime(rs.getString("created_at")));
         return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("name"),
-            rs.getTimestamp("created_at"), toLocalDateTime(rs.getString("updated_at")));
+            toLocalDateTime(rs.getString("created_at")), toLocalDateTime(rs.getString("updated_at")));
       }
     });
     return result;
@@ -51,6 +49,8 @@ public class AccountRepository {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    return LocalDateTime.ofInstant(formatDate.toInstant(), ZoneId.of("UTC"));
+    LocalDateTime def = LocalDateTime.ofInstant(formatDate.toInstant(), ZoneId.systemDefault());
+    ZonedDateTime jst = def.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("Asia/Tokyo"));
+    return jst.toOffsetDateTime().toLocalDateTime();
   }
 }

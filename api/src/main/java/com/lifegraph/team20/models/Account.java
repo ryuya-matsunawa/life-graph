@@ -1,6 +1,5 @@
 package com.lifegraph.team20.models;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Account {
   // rolesテーブルのname
   private String name;
 
-  private Timestamp created_at;
+  private LocalDateTime created_at;
 
   private LocalDateTime updated_at;
 
