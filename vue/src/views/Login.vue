@@ -8,13 +8,13 @@
       <div class="form-item">
         <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
           <label for="email" />
-          <input v-model="email" type="email" placeholder="Email">
+          <input v-model="email" type="email" placeholder="Email" @keypress.enter="login">
           <span>{{ errors[0] }}</span>
         </validation-provider>
         <br>
         <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
           <label for="password" />
-          <input v-model="password" type="password" required="required" placeholder="Password">
+          <input v-model="password" type="password" required="required" placeholder="Password" @keypress.enter="login">
           <span>{{ errors[0] }}</span>
         </validation-provider>
       </div>
@@ -26,7 +26,6 @@
         <p @click="signup()">
           Create an account
         </p>
-        <p><a href="#">Forgot password?</a></p>
       </div>
     </div>
     <div v-if="signupDialog" class="file">
@@ -52,12 +51,20 @@
           <span>{{ errors[0] }}</span>
         </validation-provider>
         <span v-if="errMessage" class="loginArea">ユーザ名またはメールアドレスはすでに使われています。</span>
-        <button
-          class="createButton"
-          @click="loginChange()"
-        >
-          Create an account
-        </button>
+        <div class="createform">
+          <button
+            class="createButton"
+            @click="loginChange()"
+          >
+            Create an account
+          </button>
+          <button
+            class="returnButton"
+            @click="returnLogin()"
+          >
+            Return
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -74,6 +81,7 @@ export default {
       isValid: false,
       loginDialog: true,
       signupDialog: false
+
     }
   },
   computed: {
@@ -138,6 +146,10 @@ export default {
           role: ['user']
         }
       )
+    },
+    returnLogin () {
+      this.loginDialog = true
+      this.signupDialog = false
     }
   }
 }
@@ -223,6 +235,30 @@ export default {
   border-color:#a39d9d;
 }
 
+.returnButton {
+  padding: 10px 20px;
+  color:#353434;
+  border-color:#a39d9d;
+  max-width:960px;
+  text-align:center;
+  position:relative;
+  margin-top:10px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-family: 'Hannari', serif;
+  border-radius: 8px;
+}
+
+.returnButton:hover{
+  color:#fff;
+  background-color:#a39d9d;
+  border-color:#a39d9d;
+}
+
+.createform {
+  display: flex;
+}
+
 .form-item {
   position: absolute;
   display: block;
@@ -240,7 +276,7 @@ export default {
   transition: border-color 0.3s;
   width: 280px;
   display: block;
-  margin-left: 180px;
+  margin-left: 210px;
   margin-top: 10px;
   text-align: center;
 }
@@ -256,7 +292,7 @@ export default {
 
 .login {
   display: block;
-  top: 70px;
+  top: 50px;
   left: 580px;
   width: 160px;
   text-align: center;
@@ -326,7 +362,7 @@ export default {
   width: 280px;
   display: block;
   margin-left: 520px;
-  margin-top: 110px;
+  margin-top: 97px;
   text-align: center;
   line-height: 190%;
 }
