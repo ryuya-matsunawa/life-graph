@@ -233,6 +233,8 @@ export default {
     returnLogin () {
       this.loginDialog = true
       this.signupDialog = false
+      this.isErrorEmail = false
+      this.isErrorPassword = false
     }
   }
 }
@@ -305,7 +307,7 @@ export default {
 
 .formOut input {
   width: 100px;
-  margin: 20px 0px 5px 0px;
+  margin: 0px 0px 5px 0px;
   display:inline-block;
   vertical-align: middle;
 }
