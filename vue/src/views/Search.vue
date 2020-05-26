@@ -36,7 +36,7 @@
           <th v-show="filteredItems.length == 0">
             ---0件です---
           </th>
-          <tr v-for="item in filteredItems" :key="item.id">
+          <tr v-for="(item, index) in filteredItems" :key="item.id">
             <td>{{ item.username }}</td>
             <td>{{ item.updated_at | moment }}</td>
             <td>

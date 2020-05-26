@@ -12,9 +12,6 @@ export default {
   mutations: {
     setItems (state, payload) {
       state.items = payload
-    },
-    deleteGraphData (state) {
-      state.items = ''
     }
   },
   actions: {
@@ -26,13 +23,13 @@ export default {
         }
       }).then(res => commit('setItems', res.data))
     },
-    deleteGraphData ({ commit, rootState }, userId) {
+    deleteGraphData ({ rootState }, userId) {
       const url = '/api/life-graphs/' + userId
       axios.delete(url, {
         headers: {
           Authorization: `Bearer ${rootState.auth.token}`
         }
-      }).then(res => commit('deleteGraphData', res.data))
+      })
     }
   }
 }
