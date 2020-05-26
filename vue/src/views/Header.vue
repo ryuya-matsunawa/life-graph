@@ -131,6 +131,7 @@ export default {
   background-color: #a39d9d;
   /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
+  text-decoration: none;
 }
 
 .logout {
@@ -164,5 +165,6 @@ export default {
   background-color: #a39d9d;
   /* eslint-disable-next-line to ignore the next line. */
   font-family: 'Playfair Display', serif;
+  text-decoration: none;
 }
 </style>
