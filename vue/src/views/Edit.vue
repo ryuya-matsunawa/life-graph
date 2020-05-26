@@ -21,19 +21,19 @@
       <div class="formOut">
         <p>
           <validation-provider v-slot="{ errors }" name="年齢" rules="required|between:0,99" class="erroe">
-          <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" v-model="editAge" type="number" min="0" max="99" @keydown.69.prevent>
-          <br>
-          <span v-if="!isErrorAge">{{ errors[0] }}</span>
+            <label class="tag" for="editAge">年齢</label>
+            <input id="editAge" v-model="editAge" type="number" min="0" max="99" @keydown.69.prevent>
+            <br>
+            <span v-if="!isErrorAge">{{ errors[0] }}</span>
           </validation-provider>
           <span v-if="isErrorAge" class="erroe">年齢は0から99の間でなければなりません</span>
         </p>
         <p>
           <validation-provider v-slot="{ errors }" name="スコア" rules="between:-100,100" class="erroe">
-          <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" v-model="editScore" type="number" min="-100" max="100" @keydown.69.prevent>
-          <br>
-          <span v-if="!isErrorScore">{{ errors[0] }}</span>
+            <label class="tag" for="editScore">スコア</label>
+            <input id="editScore" v-model="editScore" type="number" min="-100" max="100" @keydown.69.prevent>
+            <br>
+            <span v-if="!isErrorScore">{{ errors[0] }}</span>
           </validation-provider>
           <span v-if="isErrorScore" class="erroe">スコアは-100から100の間でなければなりません</span>
         </p>
