@@ -8,13 +8,13 @@
         <ul id="searchList">
           <li class="username">
             ユーザー名
-            <input v-model="searchWord" type="text">
+            <input v-model="searchWord" type="text" @keyup.enter="active">
           </li>
           <li class="update">
             更新日
-            <input v-model="updatedFrom" type="date">
+            <input v-model="updatedFrom" type="date" @keyup.enter="active">
             〜
-            <input v-model="updatedTo" type="date">
+            <input v-model="updatedTo" type="date" @keyup.enter="active">
           </li>
         </ul>
         <button @click="active()">
@@ -36,7 +36,7 @@
           <th v-show="filteredItems.length == 0">
             ---0件です---
           </th>
-          <tr v-for="item in filteredItems" :key="item.id">
+          <tr v-for="(item, index) in filteredItems" :key="item.id">
             <td>{{ item.username }}</td>
             <td>{{ item.updated_at | moment }}</td>
             <td>
@@ -45,7 +45,7 @@
               </router-link>
             </td>
             <td v-if="roleActive">
-              <button @click="deleteGraphData(index, item.id,item.username)">
+              <button @click="deleteGraphData(index, item.id, item.username)">
                 削除
               </button>
             </td>
@@ -53,7 +53,16 @@
         </table>
       </div>
     </div>
-    <img src="../assets/top.png" class="sakura">
+    <div class="home__b">
+      <div class="home__b1" />
+      <div class="home__b2" />
+      <div class="home__b3" />
+      <div class="home__b4" />
+      <div class="home__b5" />
+      <div class="home__b6" />
+      <div class="home__b7" />
+    </div>
+    <img src="../assets/search.jpg" class="build">
   </div>
 </template>
 
@@ -215,6 +224,16 @@ export default {
   border-radius: 8px;
   background-color: #efeeee;
 }
+
+.build {
+  position: absolute;
+  top: 250px;
+  left: 0;
+  z-index: -2;
+  opacity: 0.8;
+  width: 500px;
+}
+
 /* 上部 */
 #search{
   text-align: center;
@@ -284,5 +303,75 @@ td{
   left: 0;
   top: 80px;
   z-index: -1;
+}
+
+.home__b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.home__b1 {
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    background-color: #90b0b4;
+    width: 110px;
+    height: 110px;
+    border-radius: 110px;
+}
+
+.home__b2 {
+    position: absolute;
+    top: 0;
+    left: 800px;
+    background-color: #a97f76;
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+}
+
+.home__b4 {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    background-color: darkgray;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+}
+
+.home__b5 {
+    position: absolute;
+    top: 30%;
+    left: 80%;
+    background-color: darkgray;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.home__b6 {
+    position: absolute;
+    top: 70%;
+    left: 10%;
+    background-color: #a97f76;
+    width: 110px;
+    height: 110px;
+    border-radius: 110px;
+}
+
+.home__b7 {
+    position: absolute;
+    top: 70%;
+    left: 80%;
+    background-color: #90b0b4;
+    width: 270px;
+    height: 270px;
+    border-radius: 270px;
 }
 </style>
