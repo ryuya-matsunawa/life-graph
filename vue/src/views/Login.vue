@@ -6,7 +6,7 @@
         あの頃も、思い返せば綺麗だった。
       </div>
       <div class="form-item">
-        <span v-if="!errMessage" class="loginNoAlert"></span>
+        <span v-if="!errMessage" class="loginNoAlert" />
         <span v-if="errMessage" class="loginAlert">メールアドレスまたはパスワードが間違っています</span>
         <!-- <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert"> -->
         <label for="email" />
@@ -139,10 +139,8 @@ export default {
         // 大丈夫なら+1
         singupValidationCheck++
         // エラーの表示off
-        console.log('usernameOK')
         this.isErrorUsername = false
       } else {
-        console.log('usernameNG')
         // エラーの表示on
         this.isErrorUsername = true
       }
@@ -154,13 +152,10 @@ export default {
         // 大丈夫なら+1
         singupValidationCheck++
         // エラーの表示off
-        console.log('emailOK')
         this.isErrorEmail = false
       } else {
-        console.log('emailNG')
         // エラーの表示on
         this.isErrorEmail = true
-        // console.log('0-99')
       }
       /**
        * 英数１文字以上入っているか
@@ -169,10 +164,8 @@ export default {
       if (this.passwordValidation.test(this.password)) {
         // 大丈夫なら+1
         singupValidationCheck++
-        console.log('passOK') // エラーの表示off
         this.isErrorPassword = false
       } else {
-        console.log('passNG')
         // エラーの表示on
         this.isErrorPassword = true
       }
@@ -194,13 +187,10 @@ export default {
         // 大丈夫なら+1
         loginValidationCheck++
         // エラーの表示off
-        console.log('emailOK')
         this.isErrorEmail = false
       } else {
-        console.log('emailNG')
         // エラーの表示on
         this.isErrorEmail = true
-        // console.log('0-99')
       }
       /**
        * editAgeが+or-の,100もしくは0~99であるかどうかの判定
@@ -209,10 +199,9 @@ export default {
       if (this.passwordValidation.test(this.password)) {
         // 大丈夫なら+1
         loginValidationCheck++
-        console.log('passOK') // エラーの表示off
+        // エラーの表示off
         this.isErrorPassword = false
       } else {
-        console.log('passNG')
         // エラーの表示on
         this.isErrorPassword = true
       }
