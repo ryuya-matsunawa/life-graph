@@ -6,22 +6,26 @@
         あの頃も、思い返せば綺麗だった。
       </div>
       <div class="form-item">
-        <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
-          <label for="email" />
-          <input v-model="email" type="email" placeholder="Email">
-          <span>{{ errors[0] }}</span>
-        </validation-provider>
-        <br>
-        <validation-provider v-slot="{ errors }" name="パスワード" rules="required">
-          <label for="password" />
-          <input v-model="password" type="password" required="required" placeholder="Password">
-          <span>{{ errors[0] }}</span>
-        </validation-provider>
+        <span v-if="!errMessage" class="loginNoAlert" />
+        <span v-if="errMessage" class="loginAlert">メールアドレスまたはパスワードが間違っています</span>
+        <!-- <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert"> -->
+        <label for="email" />
+        <input v-model="email" type="email" placeholder="Email">
+        <!-- <span>{{ errors[0] }}</span> -->
+        <!-- </validation-provider> -->
+        <span v-if="!isErrorEmail" class="loginNoAlert" />
+        <span v-if="isErrorEmail" class="loginAlert">emailアドレスを入力してください</span>
+        <!-- <validation-provider v-slot="{ errors }" name="パスワード" rules="required"> -->
+        <label for="password" />
+        <input v-model="password" type="password" required="required" placeholder="Password">
+        <!-- <span>{{ errors[0] }}</span> -->
+        <!-- </validation-provider> -->
+        <span v-if="!isErrorEmail" class="loginNoAlert" />
+        <span v-if="isErrorPassword" class="loginAlert">パスワードを入力してください</span>
       </div>
       <button class="login" @click="login()">
         ログイン
       </button>
-      <span v-if="errMessage" class="loginArea">メールアドレスまたはパスワードが間違っています。</span>
       <div class="form-footer">
         <p @click="signup()">
           Create an account
@@ -31,27 +35,31 @@
     </div>
     <div v-if="signupDialog" class="file">
       <div class="formOut">
-        <validation-provider v-slot="{ errors }" name="ユーザ名" rules="required" class="alert">
-          <label for="name" />
-          ユーザ名
-          <input v-model="username" type="text" placeholder="UserName">
-          <span>{{ errors[0] }}</span>
-        </validation-provider>
-        <br>
-        <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert">
-          <label for="email" />
-          メールアドレス
-          <input v-model="email" type="email" placeholder="Email">
-          <span>{{ errors[0] }}</span>
-        </validation-provider>
-        <br>
-        <validation-provider v-slot="{ errors }" name="パスワード" rules="required" class="alert">
-          <label for="password" />
-          パスワード
-          <input v-model="password" type="password" required="required" placeholder="Password">
-          <span>{{ errors[0] }}</span>
-        </validation-provider>
-        <span v-if="errMessage" class="loginArea">ユーザ名またはメールアドレスはすでに使われています。</span>
+        <!-- <validation-provider v-slot="{ errors }" name="ユーザ名" rules="required" class="alert"> -->
+        <label for="name" />
+        ユーザ名
+        <input v-model="username" type="text" placeholder="UserName">
+        <!-- <span>{{ errors[0] }}</span> -->
+        <!-- </validation-provider> -->
+        <span v-if="!isErrorUsername" class="loginNoAlert" />
+        <span v-if="isErrorUsername" class="loginAlert">ユーザー名を入力してください</span>
+        <!-- <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert"> -->
+        <label for="email" />
+        メールアドレス
+        <input v-model="email" type="email" placeholder="Email">
+        <!-- <span>{{ errors[0] }}</span> -->
+        <!-- </validation-provider> -->
+        <span v-if="!isErrorUsername" class="loginNoAlert" />
+        <span v-if="isErrorEmail" class="loginAlert">メールアドレスを入力してきださい</span>
+        <!-- <validation-provider v-slot="{ errors }" name="パスワード" rules="required" class="alert"> -->
+        <label for="password" />
+        パスワード
+        <input v-model="password" type="password" required="required" placeholder="Password">
+        <!-- <span>{{ errors[0] }}</span> -->
+        <!-- </validation-provider> -->
+        <span v-if="!isErrorUsername" class="loginNoAlert" />
+        <span v-if="isErrorPassword" class="loginAlert">パスワードを入力してください</span>
+        <span v-if="errMessage" class="loginAlert">ユーザ名またはメールアドレスはすでに使われています。</span>
         <button
           class="createButton"
           @click="loginChange()"
@@ -73,7 +81,15 @@ export default {
       errMessage: false,
       isValid: false,
       loginDialog: true,
-      signupDialog: false
+      signupDialog: false,
+      // バリデーションエラー
+      isErrorUsername: false,
+      isErrorPassword: false,
+      isErrorEmail: false,
+      // バリデーション用の正規表現
+      usernameValidation: /^.{1,}$/,
+      emailValidation: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/,
+      passwordValidation: /^[A-Za-z0-9]{1,}$/
     }
   },
   computed: {
@@ -114,30 +130,119 @@ export default {
     }
   },
   methods: {
+    activeSingup () {
+      // 全部のバリデーションが正常に動いているかチェックするため
+      // trueの数を数えるvalidationChech
+      let singupValidationCheck = 0
+
+      if (this.usernameValidation.test(this.username)) {
+        // 大丈夫なら+1
+        singupValidationCheck++
+        // エラーの表示off
+        this.isErrorUsername = false
+      } else {
+        // エラーの表示on
+        this.isErrorUsername = true
+      }
+      /**
+       * "@""."を挟んだ文字列である
+       * 決められた範囲ならtrue
+       */
+      if (this.emailValidation.test(this.email)) {
+        // 大丈夫なら+1
+        singupValidationCheck++
+        // エラーの表示off
+        this.isErrorEmail = false
+      } else {
+        // エラーの表示on
+        this.isErrorEmail = true
+      }
+      /**
+       * 英数１文字以上入っているか
+       * 決められた範囲ならtrue
+       */
+      if (this.passwordValidation.test(this.password)) {
+        // 大丈夫なら+1
+        singupValidationCheck++
+        this.isErrorPassword = false
+      } else {
+        // エラーの表示on
+        this.isErrorPassword = true
+      }
+      /**
+       * コメントが200字以下であるかの判定
+       * 決められた範囲ならtrue
+       */
+      return singupValidationCheck
+    },
+    activeLogin () {
+      // 全部のバリデーションが正常に動いているかチェックするため
+      // trueの数を数えるvalidationChech
+      let loginValidationCheck = 0
+      /**
+       * "@"を挟んだ文字列である
+       * 決められた範囲ならtrue
+       */
+      if (this.emailValidation.test(this.email)) {
+        // 大丈夫なら+1
+        loginValidationCheck++
+        // エラーの表示off
+        this.isErrorEmail = false
+      } else {
+        // エラーの表示on
+        this.isErrorEmail = true
+      }
+      /**
+       * editAgeが+or-の,100もしくは0~99であるかどうかの判定
+       * 決められた範囲ならtrue
+       */
+      if (this.passwordValidation.test(this.password)) {
+        // 大丈夫なら+1
+        loginValidationCheck++
+        // エラーの表示off
+        this.isErrorPassword = false
+      } else {
+        // エラーの表示on
+        this.isErrorPassword = true
+      }
+      /**
+       * コメントが200字以下であるかの判定
+       * 決められた範囲ならtrue
+       */
+      return loginValidationCheck
+    },
     login () {
+      this.errMessage = false
+      if (this.activeLogin() === 2) {
       // ログイン画面で入力したusrnameとpasswordをAPIに渡す
-      this.$store.dispatch(
-        'auth/create',
-        {
-          email: this.email,
-          password: this.password
-        }
-      )
+        this.$store.dispatch(
+          'auth/create',
+          {
+            email: this.email,
+            password: this.password
+          }
+        )
+      }
     },
     signup () {
       this.loginDialog = false
       this.signupDialog = true
+      this.isErrorUsername = false
+      this.isErrorPassword = false
+      this.isErrorEmail = false
     },
     loginChange () {
-      this.$store.dispatch(
-        'auth/signup',
-        {
-          username: this.username,
-          email: this.email,
-          password: this.password,
-          role: ['user']
-        }
-      )
+      if (this.activeSingup() === 3) {
+        this.$store.dispatch(
+          'auth/signup',
+          {
+            username: this.username,
+            email: this.email,
+            password: this.password,
+            role: ['user']
+          }
+        )
+      }
     }
   }
 }
@@ -159,6 +264,7 @@ export default {
   position: absolute;
   color: #fff;
   font-size: 40px;
+  width: 640px;
   top: 300px;
   left: 350px;
   z-index: 1;
@@ -193,15 +299,27 @@ export default {
 
 .formOut{
   display: inline-block;
-  text-align: center;
-  width: 250px;
+  /* text-align: center; */
+  width: 300px;
+  margin: 5px 0px 5px 0px;
   font-weight: bold;
   font-size: 18px;
   font-family: 'Noto Serif JP', serif;
 }
 
+.formOut label{
+  width: 30px;
+  height: 30px;
+  margin: 20px 0px 5px 0px;
+  vertical-align: middle;
+  display:inline-block;
+}
+
 .formOut input {
-  margin: 20px 10px;
+  width: 100px;
+  margin: 20px 0px 5px 0px;
+  display:inline-block;
+  vertical-align: middle;
 }
 
 .createButton {
@@ -227,6 +345,7 @@ export default {
   position: absolute;
   display: block;
   margin-top: 5px;
+  margin-left: 180px;
 }
 
 .form-item input {
@@ -240,9 +359,32 @@ export default {
   transition: border-color 0.3s;
   width: 280px;
   display: block;
-  margin-left: 180px;
-  margin-top: 10px;
+  margin: 10px 0px 4px 0px;
   text-align: center;
+}
+
+.loginNoAlert{
+  display: block;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+  height: 16px;
+}
+
+.loginAlert{
+  background-color: #FADBDA;
+  border: none;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  height: 16px;
+  transition: border-color 0.3s;
+  width: 280px;
+  display: inline-block;
+  text-align: center;
+  /* vertical-align: middle; */
+  padding: 4px 0px 0px 0px;
+  /* margin: 8px 0px 0px 0px; */
+  border-radius:0px;
 }
 
 .form-item input:focus {
@@ -259,6 +401,7 @@ export default {
   top: 70px;
   left: 580px;
   width: 160px;
+  font-size: 12px;
   text-align: center;
   color: #1B1B1B;
   background: #fff;
@@ -273,13 +416,6 @@ export default {
   -webkit-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   -moz-animation: button 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: button .4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-.loginArea {
-  color: red;
-  margin-top: 10px;
-  position: relative;
-  top: 100;
 }
 
 @-webkit-keyframes button {
