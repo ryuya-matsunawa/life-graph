@@ -22,7 +22,7 @@
         <p>
           <!-- <validation-provider v-slot="{ errors }" name="年齢" rules="required" class="validation"> -->
           <label class="tag" for="editAge">年齢</label>
-          <input id="editAge" v-model="editAge" type="number" min="0" max="99">
+          <input id="editAge" v-model="editAge" type="number" min="0" max="99" @keydown.69.prevent>
           <!-- <span>{{ errors[0] }}</span> -->
           <!-- </validation-provider> -->
           <br>
@@ -31,7 +31,7 @@
         <p>
           <!-- <validation-provider v-slot="{ errors }" name="スコア" rules="required" class="validation"> -->
           <label class="tag" for="editScore">スコア</label>
-          <input id="editScore" v-model="editScore" type="number" min="-100" max="100">
+          <input id="editScore" v-model="editScore" type="number" min="-100" max="100" @keydown.69.prevent>
           <!-- <span>{{ errors[0] }}</span> -->
           <!-- </validation-provider> -->
           <br>
