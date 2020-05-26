@@ -138,9 +138,8 @@ export default {
   },
   filters: {
     moment: function (date) {
-      return moment(date).local.format('YYYY/MM/DD HH:mm')
+      return moment(date).format('YYYY/MM/DD HH:mm')
     }
-
   },
   data () {
     return {
