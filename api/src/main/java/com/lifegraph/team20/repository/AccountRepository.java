@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,6 +21,9 @@ import com.lifegraph.team20.models.Account;
 
 @Repository
 public class AccountRepository {
+
+  private static final ZoneId ZONE_ID_UTC = ZoneId.of("UTC");
+  private static final ZoneId ZONE_ID_JST = ZoneId.of("Asia/Tokyo");
 
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
@@ -42,6 +46,7 @@ public class AccountRepository {
 
   private LocalDateTime toLocalDateTime(String strTimestamp) {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    sdf.setTimeZone(TimeZone.getTimeZone(ZONE_ID_UTC));
     Date formatDate = null;
     try {
       formatDate = sdf.parse(strTimestamp);
@@ -49,8 +54,8 @@ public class AccountRepository {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    LocalDateTime def = LocalDateTime.ofInstant(formatDate.toInstant(), ZoneId.systemDefault());
-    ZonedDateTime jst = def.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("Asia/Tokyo"));
+    LocalDateTime def = LocalDateTime.ofInstant(formatDate.toInstant(), ZONE_ID_UTC);
+    ZonedDateTime jst = def.atZone(ZONE_ID_UTC).withZoneSameInstant(ZONE_ID_JST);
     return jst.toOffsetDateTime().toLocalDateTime();
   }
 }
