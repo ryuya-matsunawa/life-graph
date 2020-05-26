@@ -358,7 +358,6 @@ export default {
 .form-item {
   position: absolute;
   display: block;
-  margin-top: 5px;
   margin-left: 180px;
 }
 
@@ -375,6 +374,11 @@ export default {
   display: block;
   margin-left: 30px;
   text-align: center;
+}
+
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
 }
 
 .loginNoAlert{
@@ -397,11 +401,6 @@ export default {
   text-align: center;
   padding: 4px 0px 0px 0px;
   border-radius:0px;
-}
-
-.form-item input:focus {
-  border-bottom: 2px solid #c0c0c0;
-  outline: none;
 }
 
 .alert {
@@ -474,7 +473,7 @@ export default {
   width: 280px;
   display: block;
   margin-left: 520px;
-  margin-top: 97px;
+  margin-top: 87px;
   text-align: center;
   line-height: 190%;
 }
