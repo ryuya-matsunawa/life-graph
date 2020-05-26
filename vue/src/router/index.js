@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
+import PassWord from '../views/Passchange.vue'
 import Top from '../views/Top.vue'
 import Search from '../views/Search.vue'
 import Edit from '../views/Edit.vue'
@@ -16,6 +17,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/pass-change',
+    name: 'Pass-change',
+    component: PassWord
   },
   {
     path: '/top',

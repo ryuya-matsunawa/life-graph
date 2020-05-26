@@ -39,7 +39,7 @@
         </p>
         <p>
           <label class="tag" for="editComment">コメント</label>
-          <input id="editComment" v-model="editComment" type="text" maxlength="200">
+          <input id="editComment" v-model="editComment" type="text" maxlength="200" @keyup.enter="updateGraphData">
           <br>
           <span v-if="isErrorComment" class="erroe">コメントは200文字以下で入力してください</span>
         </p>
@@ -115,8 +115,6 @@
 </template>
 
 <script>
-// これを参考にしながらstoreとの連携かく
-// https://qiita.com/Takoyaki9/items/b6638fa1aec41464fdd1
 import Chart from '../views/Chart.vue'
 import Header from '../views/Header.vue'
 import moment from 'moment'

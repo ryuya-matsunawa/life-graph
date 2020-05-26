@@ -8,18 +8,12 @@
       <div class="form-item">
         <span v-if="!errMessage" class="loginNoAlert" />
         <span v-if="errMessage" class="loginAlert">メールアドレスまたはパスワードが間違っています</span>
-        <!-- <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert"> -->
         <label for="email" />
-        <input v-model="email" type="email" placeholder="Email">
-        <!-- <span>{{ errors[0] }}</span> -->
-        <!-- </validation-provider> -->
+        <input v-model="email" type="email" placeholder="Email" @keypress.enter="login">
         <span v-if="!isErrorEmail" class="loginNoAlert" />
         <span v-if="isErrorEmail" class="loginAlert">emailアドレスを入力してください</span>
-        <!-- <validation-provider v-slot="{ errors }" name="パスワード" rules="required"> -->
         <label for="password" />
-        <input v-model="password" type="password" required="required" placeholder="Password">
-        <!-- <span>{{ errors[0] }}</span> -->
-        <!-- </validation-provider> -->
+        <input v-model="password" type="password" required="required" placeholder="Password" @keypress.enter="login">
         <span v-if="!isErrorEmail" class="loginNoAlert" />
         <span v-if="isErrorPassword" class="loginAlert">パスワードを入力してください</span>
       </div>
@@ -30,33 +24,23 @@
         <p @click="signup()">
           Create an account
         </p>
-        <p><a href="#">Forgot password?</a></p>
       </div>
     </div>
     <div v-if="signupDialog" class="file">
       <div class="formOut">
-        <!-- <validation-provider v-slot="{ errors }" name="ユーザ名" rules="required" class="alert"> -->
         <label for="name" />
         ユーザ名
         <input v-model="username" type="text" placeholder="UserName">
-        <!-- <span>{{ errors[0] }}</span> -->
-        <!-- </validation-provider> -->
         <span v-if="!isErrorUsername" class="loginNoAlert" />
         <span v-if="isErrorUsername" class="loginAlert">ユーザー名を入力してください</span>
-        <!-- <validation-provider v-slot="{ errors }" name="メールアドレス" rules="required" class="alert"> -->
         <label for="email" />
         メールアドレス
         <input v-model="email" type="email" placeholder="Email">
-        <!-- <span>{{ errors[0] }}</span> -->
-        <!-- </validation-provider> -->
         <span v-if="!isErrorUsername" class="loginNoAlert" />
         <span v-if="isErrorEmail" class="loginAlert">メールアドレスを入力してきださい</span>
-        <!-- <validation-provider v-slot="{ errors }" name="パスワード" rules="required" class="alert"> -->
         <label for="password" />
         パスワード
         <input v-model="password" type="password" required="required" placeholder="Password">
-        <!-- <span>{{ errors[0] }}</span> -->
-        <!-- </validation-provider> -->
         <span v-if="!isErrorUsername" class="loginNoAlert" />
         <span v-if="isErrorPassword" class="loginAlert">パスワードを入力してください</span>
         <span v-if="errMessage" class="loginAlert">ユーザ名またはメールアドレスはすでに使われています。</span>
@@ -65,6 +49,12 @@
           @click="loginChange()"
         >
           Create an account
+        </button>
+        <button
+          class="returnButton"
+          @click="returnLogin()"
+        >
+          Return
         </button>
       </div>
     </div>
@@ -93,10 +83,6 @@ export default {
     }
   },
   computed: {
-    // isValidated () {
-    //   return Object.keys(this.fields).every(k => this.fields[k].validated) &&
-    //     Object.keys(this.fields).every(k => this.fields[k].valid)
-    // },
     token () {
       return this.$store.state.auth.token
     },
@@ -243,6 +229,10 @@ export default {
           }
         )
       }
+    },
+    returnLogin () {
+      this.loginDialog = true
+      this.signupDialog = false
     }
   }
 }
@@ -268,7 +258,6 @@ export default {
   top: 300px;
   left: 350px;
   z-index: 1;
-  /* eslint-disable-next-line to ignore the next line. */
   font-family: "Hannari", serif;
   animation-name: fadeIn;
   animation-duration: 6s;
@@ -299,7 +288,6 @@ export default {
 
 .formOut{
   display: inline-block;
-  /* text-align: center; */
   width: 300px;
   margin: 5px 0px 5px 0px;
   font-weight: bold;
@@ -341,6 +329,30 @@ export default {
   border-color:#a39d9d;
 }
 
+.returnButton {
+  padding: 10px 20px;
+  color:#353434;
+  border-color:#a39d9d;
+  max-width:960px;
+  text-align:center;
+  position:relative;
+  margin-top:10px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-family: 'Hannari', serif;
+  border-radius: 8px;
+}
+
+.returnButton:hover{
+  color:#fff;
+  background-color:#a39d9d;
+  border-color:#a39d9d;
+}
+
+.createform {
+  display: flex;
+}
+
 .form-item {
   position: absolute;
   display: block;
@@ -359,7 +371,7 @@ export default {
   transition: border-color 0.3s;
   width: 280px;
   display: block;
-  margin: 10px 0px 4px 0px;
+  margin-left: 30px;
   text-align: center;
 }
 
@@ -381,9 +393,7 @@ export default {
   width: 280px;
   display: inline-block;
   text-align: center;
-  /* vertical-align: middle; */
   padding: 4px 0px 0px 0px;
-  /* margin: 8px 0px 0px 0px; */
   border-radius:0px;
 }
 
@@ -398,7 +408,7 @@ export default {
 
 .login {
   display: block;
-  top: 70px;
+  top: 50px;
   left: 580px;
   width: 160px;
   font-size: 12px;
@@ -462,7 +472,7 @@ export default {
   width: 280px;
   display: block;
   margin-left: 520px;
-  margin-top: 110px;
+  margin-top: 97px;
   text-align: center;
   line-height: 190%;
 }
