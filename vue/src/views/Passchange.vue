@@ -2,21 +2,53 @@
   <div id="passchange">
     <div class="file">
       <div class="formOut">
-        <li class="current">
-          現在のPassword
-          <input type="text">
-        </li>
         <li class="newpass">
           新しいパスワード
-          <input type="text">
+          <input v-model="newPassword" type="text">
         </li>
-        <button class="createButton">
+        <button class="createButton" @click="passwordChange()">
           変更
         </button>
+        <p v-if="successMessage" class="successMessage">
+          パスワードが変更されました！
+        </p>
+        <router-link class="createButton" tag="button" to="/top">
+          Topに戻る
+        </router-link>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      newPassword: '',
+      successMessage: false
+    }
+  },
+  computed: {
+    success () {
+      return this.$store.state.auth.success
+    }
+  },
+  watch: {
+    success () {
+      this.successMessage = true
+    }
+  },
+  methods: {
+    passwordChange () {
+      this.$store.dispatch('auth/passChange',
+        {
+          userId: this.$store.state.auth.userId,
+          newPassword: this.newPassword
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 .file {
@@ -83,6 +115,11 @@
 .form-item input:focus {
   border-bottom: 2px solid #c0c0c0;
   outline: none;
+}
+
+.successMessage {
+  width: 80%;
+  margin: 0 auto;
 }
 
 </style>
