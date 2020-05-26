@@ -1,6 +1,7 @@
 package com.lifegraph.team20.models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +28,6 @@ public class Account {
 
   private Timestamp created_at;
 
-  private Timestamp updated_at;
+  private LocalDateTime updated_at;
 
 }
