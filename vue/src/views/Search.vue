@@ -77,7 +77,7 @@ export default {
   },
   filters: {
     moment: function (date) {
-      return moment(date).format('YYYY/MM/DD')
+      return moment(date).format('YYYY/MM/DD HH:mm')
     }
   },
   data () {
@@ -175,13 +175,8 @@ export default {
       this.isActive = true
     },
     sortItems () {
-      this.filteredItems.sort(this.compareFunc)
-    },
-    compareFunc (a, b) {
-      const day1 = parseInt(a.updated_at.split('-', 3).join(''))
-      const day2 = parseInt(b.updated_at.split('-', 3).join(''))
-      // ? true:左 false:右
-      return this.sortDesc ? (day2 - day1) : (day1 - day2)
+      this.filteredItems.sort((a, b) => moment(b.updated_at).diff(a.updated_at))
+      if (!this.sortDesc) this.filteredItems.reverse()
     },
     toggleSort () {
       this.sortDesc = !this.sortDesc
@@ -207,171 +202,184 @@ export default {
 
 <style scoped>
 .searchvue {
-  background-size: 20%;
-  background-repeat: no-repeat;
   background-position: 4% 30%;
   background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: 20%;
   padding-top: 100px;
 }
 
 .file {
-  width: 600px;
-  margin: 0 auto;
-  margin-top: 20px;
+  background-color: #efeeee;
   border: 1px solid;
-  padding: 30px;
   border-color: #c0c0c0;
   border-radius: 8px;
-  background-color: #efeeee;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 30px;
+  width: 600px;
 }
 
 .build {
+  left: 0;
+  opacity: 0.8;
   position: absolute;
   top: 250px;
-  left: 0;
-  z-index: -2;
-  opacity: 0.8;
   width: 500px;
+  z-index: -2;
 }
 
 /* 上部 */
-#search{
-  text-align: center;
-  padding: 0.5em 1em;
+
+#search {
+  display: inline-block;
+
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: 'Noto Serif JP', serif;
   font-size: 18px;
   font-weight: bold;
-  width: 80%;
   height: auto;
-  display: inline-block;
-  /* eslint-disable-next-line to ignore the next line. */
-  font-family: 'Noto Serif JP', serif;
-}
-#searchList{
+  padding: 0.5em 1em;
   text-align: center;
-  list-style-type: none;
-}
-.username{
-  margin: 30px;
-}
-.update{
-  margin: 56px 30px;
-}
-.view{
-  margin: 40px;
-}
-/* 下部 */
-button {
-  color:#353434;
-  border-color:#a39d9d;
-  width:100px;
-  text-align:center;
-  position:relative;
-  margin-top:30px;
-  cursor: pointer;
-  margin-left: 15px;
-  font-size: 15px;
-  /* eslint-disable-next-line to ignore the next line. */
-  font-family: 'Noto Serif JP', serif;
-  border-radius: 8px;
-  padding: 20px 15px;
+  width: 80%;
 }
 
-.viewButton{
+#searchList {
+  list-style-type: none;
+  text-align: center;
+}
+
+.username {
+  margin: 30px;
+}
+
+.update {
+  margin: 56px 30px;
+}
+
+.view {
+  margin: 40px;
+}
+
+/* 下部 */
+
+button {
+  border-color: #a39d9d;
+  border-radius: 8px;
+  color: #353434;
+  cursor: pointer;
+
+  /* eslint-disable-next-line to ignore the next line. */
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  margin-left: 15px;
+  margin-top: 30px;
+  padding: 20px 15px;
+  position: relative;
+  text-align: center;
+  width: 100px;
+}
+
+.viewButton {
   display: block;
   text-decoration: none;
 }
-table{
-  margin-top: 58px;
+
+table {
   margin-left: 90px;
+  margin-top: 58px;
   width: 65%;
 }
-td{
+
+td {
   width: 75%;
 }
+
 .arrow {
-  transform: rotate(180deg);
   height: 16px;
   margin-left: 4px;
+  transform: rotate(180deg);
 }
+
 .arrow.desc {
   transform: rotate(0deg);
 }
 
 .sakura {
-  position: absolute;
-  width: 300px;
   left: 0;
+  position: absolute;
   top: 80px;
+  width: 300px;
   z-index: -1;
 }
 
 .home__b {
+  height: 100vh;
+  left: 0;
+  opacity: 0.2;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100vh;
-  opacity: 0.2;
   z-index: -1;
 }
 
 .home__b1 {
-    position: absolute;
-    top: 70px;
-    left: 70px;
-    background-color: #90b0b4;
-    width: 110px;
-    height: 110px;
-    border-radius: 110px;
+  background-color: #90b0b4;
+  border-radius: 110px;
+  height: 110px;
+  left: 70px;
+  position: absolute;
+  top: 70px;
+  width: 110px;
 }
 
 .home__b2 {
-    position: absolute;
-    top: 0;
-    left: 800px;
-    background-color: #a97f76;
-    width: 200px;
-    height: 200px;
-    border-radius: 200px;
+  background-color: #a97f76;
+  border-radius: 200px;
+  height: 200px;
+  left: 800px;
+  position: absolute;
+  top: 0;
+  width: 200px;
 }
 
 .home__b4 {
-    position: absolute;
-    top: 20%;
-    left: 40%;
-    background-color: darkgray;
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
+  background-color: darkgray;
+  border-radius: 60px;
+  height: 60px;
+  left: 40%;
+  position: absolute;
+  top: 20%;
+  width: 60px;
 }
 
 .home__b5 {
-    position: absolute;
-    top: 30%;
-    left: 80%;
-    background-color: darkgray;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
+  background-color: darkgray;
+  border-radius: 20px;
+  height: 40px;
+  left: 80%;
+  position: absolute;
+  top: 30%;
+  width: 40px;
 }
 
 .home__b6 {
-    position: absolute;
-    top: 70%;
-    left: 10%;
-    background-color: #a97f76;
-    width: 110px;
-    height: 110px;
-    border-radius: 110px;
+  background-color: #a97f76;
+  border-radius: 110px;
+  height: 110px;
+  left: 10%;
+  position: absolute;
+  top: 70%;
+  width: 110px;
 }
 
 .home__b7 {
-    position: absolute;
-    top: 70%;
-    left: 80%;
-    background-color: #90b0b4;
-    width: 270px;
-    height: 270px;
-    border-radius: 270px;
+  background-color: #90b0b4;
+  border-radius: 270px;
+  height: 270px;
+  left: 80%;
+  position: absolute;
+  top: 70%;
+  width: 270px;
 }
 </style>
