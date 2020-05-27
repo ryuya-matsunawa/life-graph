@@ -13,8 +13,9 @@ public class PasswordRepository {
   private JdbcTemplate jdbcTemplate;
 
   public Boolean existByIdPassword(Password user) {
-    final String sql = "select count(*) from users where password = " + "(select password from users where id = 1)"
-        + " and id = "
+    final String sql = "select count(*) from users where password = " + "(select password from users where id = "
+        + user.getUserId()
+        + ") and id = "
         + user.getUserId();
 
     Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
