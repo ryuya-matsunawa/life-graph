@@ -1,16 +1,18 @@
 package com.lifegraph.team20.models;
 
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class UserData {
-	int id;
-	String username;
-	java.sql.Timestamp updated_at;
 
-	public UserData(int id, String username, java.sql.Timestamp updated_at) {
-		this.id = id;
-		this.username = username;
-		this.updated_at = updated_at;
-	}
+  private int id;
+
+  private String username;
+
+  private LocalDateTime updated_at;
+
 }
